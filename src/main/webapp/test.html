@@ -1,167 +1,137 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en" dir="ltr">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cupcake homepage</title>
-    <style>
+    <style> @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
-        body {
-            background-color: rgb(70, 22, 110);
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
 
-        .navpanel {
-            background-color: #E3E3E3;
-            font-size: 20px;
-        }
+    body {
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(115deg, rgb(34, 6, 55) 10%, rgb(62, 19, 96) 90%);
 
-        .home{
-            padding-left: 20px;
-        }
-        .ordrer{
-            padding-left: 30px;
-        }
+    }
+    .center{
+        margin: auto;
 
-        .Log{
-            margin-left: 1400px;
-        }
+    }
+    .container {
+        margin: auto;
+        display: block;
+        background: #fff;
+        width: 410px;
+        padding: 30px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .basket{
-            margin-left: 200px;
-        }
+    .container .text {
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+    }
 
-        .container {
-            background-color: #E3E3E3;
-            padding-bottom: 100px;
+    .container form {
+        margin-top: -20px;
+    }
 
-        }
+    .container form .data {
+        height: 45px;
+        width: 100%;
+        margin: 40px 0;
+    }
 
-        .header {
-            position: relative;
-            left: 70px;
-        }
-
-        .header2 {
-            position: relative;
-            top: -20px;
-        }
-
-        .bund {
-            position: relative; left: 70px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .dropdown-single {
-            float: left;
-            width: 33.33%;
-            padding: 10px;
-        }
-
-        .dropdowns::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        .button{
-            background-color: rgb(70, 22, 110);
-            margin-left: 1265px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 20px;
-            display: inline-block;
-            cursor: pointer;
-            padding: 5px 10px;
-            border: none;
-            color: #E3E3E3;
-        }
+    form .data label {
+        font-size: 18px;
+    }
+    form .forgot-pass {
+        margin-top: -12px;
+    }
+    form .data input {
+        height: 100%;
+        width: 100%;
+        padding-left: 10px;
+        font-size: 18px;
+        border: 1px solid silver;
+    }
 
 
+    form .forgot-pass a {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    form .btn {
+        margin: 30px 0;
+        height: 45px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    form .error-text{
+        text-align: center;
+        color: #bf1717;
+    }
+    form .btn button {
+        height: 100%;
+        width: 100%;
+        background: none;
+        border: 5px solid;
+        color: #420745;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+    form .btn .inner{
+        position: absolute;
+        left: -100%;
+        z-index: -1;
+        background: -webkit-linear-gradient(rgb(62, 19, 96), rgb(143, 0, 255));
+    }
+
+
+    form .signup-link {
+        text-align: center;
+    }
+
+    form .signup-link a {
+        color: #3498db;
+        text-decoration: none;
+    }
     </style>
-
+    <meta charset="utf-8">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
-<!-- Banner logo i top" /-->
-<div>
-    <img src="Images/olskercupcakes.png" alt="logo cupcakes" style="width:1900px;height:430px"/>
-</div>
-<!-- Banner logo i top slutter /-->
-
-<!-- Navigationpanel starter /-->
-<nav class="navpanel">
-    <a class="home" href="index.html">Home</a>
-    <a class ="ordrer" href="index.html">Ordrer</a>
-    <a class ="Log ind" href="index.html">Log ind</a>
-    <a class ="Basket" href="index.html">basket</a>
-</nav>
-<!-- Navigationpanel slutter/-->
-
-
-<div class="container">
-    <!-- headers/tekst starter-->
-    <div class="header">
-        <h1><strong>Velkommen ombord.</strong></h1>
-        <h2 class="header2"><strong>Øens bedste cupcakes, vælg og bestil her</strong></h2>
-    </div>
-    <!-- headers/tekst slutter-->
-    <div class="dropdowns">
-        <!--Dropdown mneu bund-->
-        <div class="dropdown-single">
-            <div class="bund">
-                <p><strong>Vælg bund</strong></p>
-                <form>
-                    <label for="bund"></label>
-                    <select id="bund" name="bund">
-                        <option value="Chocolate">Chocolate 5 DKK.</option>
-                        <option value="Vanilla">Vanilla 5 DKK.</option>
-                        <option value="Nutmeg">Nutmeg 5 DKK.</option>
-                        <option value="Pistacio">Pistacio 6 DKK.</option>
-                        <option value="Almond">Almond 7 DKK.</option>
-                    </select>
-                </form>
+<div class="center">
+    <div class="container">
+        <div class="text">
+            Nulstil kodeord
+        </div>
+        <form action="FrontController" name="login" method="post" >
+            <input type="hidden" name="target" value="login">
+            <div class="data">
+                <label>Email:</label>
+                <input type="text" value="dinEmail@mail.dk" name="email" required>
             </div>
-        </div>
-        <!--Dropdown mneu bund slutter-->
-
-        <!--Dropdown mneu topping-->
-        <div class="dropdown-single">
-            <p><strong>Vælg topping</strong></p>
-            <form>
-                <label for="topping"></label>
-                <select id="topping" name="topping">
-                    <option value="Chocolate">Chocolate 5 DKK.</option>
-                    <option value="Blueberry">Blueberry 5 DKK.</option>
-                    <option value="Rasberry">Rasberry 5 DKK.</option>
-                    <option value="Crispy">Crispy 6 DKK.</option>
-                    <option value="Strawberry">Strawberry 6 DKK.</option>
-                    <option value="Rum/Raisin">Rum/Raisin 7 DKK.</option>
-                    <option value="Orange">Orange 8 DKK.</option>
-                    <option value="Lemon">Lemon 8 DKK.</option>
-                    <option value="Blue cheese">Blue cheese 9 DKK.</option>
-                </select>
-            </form>
-        </div>
-        <!--Dropdown mneu topping slutter-->
-
-        <!--Dropdown mneu antal-->
-        <div class="dropdown-single">
-            <p><strong>Vælg antal</strong></p>
-            <form>
-                <label for="topping"></label>
-                <input type="number" min="1" max="30">
-            </form>
-        </div>
-        <!--Dropdown mneu antal slutter-->
+            <div>
+                <button type="submit">reset</button>
+            </div>
+            <div class="signup-link">
+                login <a href="index.jsp">login in</a></div>
+            <div class="error-text"> <c:if test="${requestScope.error!= null}">
+                ${requestScope.error}
+            </c:if></div>
+        </form>
     </div>
-    <!-- "bestil ordre" button /-->
-    <div class="bestil">
-        <a href="receivedOrder.html" target="_blank"><input class="button" type="button" value="Bestil ordre"></a>
-    </div>
-    <!-- "bestil ordre" button slutter/-->
 </div>
-
 </body>
 </html>

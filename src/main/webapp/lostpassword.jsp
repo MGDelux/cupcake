@@ -11,13 +11,13 @@
         <div class="text">
             Nulstille kodeord
         </div>
-        <form action="FrontController" name="login" method="post" >
-            <input type="hidden" name="target" value="login">
+        <form action="FrontController" name="passwordReset" method="post" >
+            <input type="hidden" name="target" value="passwordReset">
             <div class="data">
                 <label>Email:</label>
                 <input type="text" value="dinEmail@mail.dk" name="email" required>
             </div>
-            <div>
+            <div class="inner">
                 <button type="submit">reset</button>
             </div>
             <div class="signup-link">
