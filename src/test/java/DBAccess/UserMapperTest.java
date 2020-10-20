@@ -55,33 +55,5 @@ public class UserMapperTest {
         assertNotNull( testConnection );
     }
 
-    @Test
-    public void testLogin01() throws LoginSampleException {
-        // Can we log in
-        User user = UserMapper.login( "jens@somewhere.com", "jensen" );
-        assertTrue( user != null );
-    }
 
-    @Test( expected = LoginSampleException.class )
-    public void testLogin02() throws LoginSampleException {
-        // We should get an exception if we use the wrong password
-        User user = UserMapper.login( "jens@somewhere.com", "larsen" );
-    }
-
-    @Test
-    public void testLogin03() throws LoginSampleException {
-        // Jens is supposed to be a customer
-        User user = UserMapper.login( "jens@somewhere.com", "jensen" );
-        assertEquals( "customer", user.getRole() );
-    }
-
-    @Test
-    public void testCreateUser01() throws LoginSampleException {
-        // Can we create a new user - Notice, if login fails, this will fail
-        // but so would login01, so this is OK
-        User original = new User( "king@kong.com", "uhahvorhemmeligt", "konge" );
-        UserMapper.createUser( original );
-        User retrieved = UserMapper.login( "king@kong.com", "uhahvorhemmeligt" );
-        assertEquals( "konge", retrieved.getRole() );
-    }
 }

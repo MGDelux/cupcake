@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import DBAccess.UserMapper;
 import FunctionLayer.LoginSampleException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

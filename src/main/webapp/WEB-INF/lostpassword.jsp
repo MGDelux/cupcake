@@ -9,7 +9,7 @@
 <div class="center">
     <div class="container">
         <div class="text">
-            login
+            Nulstille kodeord
         </div>
         <form action="FrontController" name="login" method="post" >
             <input type="hidden" name="target" value="login">
@@ -17,16 +17,8 @@
                 <label>Email:</label>
                 <input type="text" value="dinEmail@mail.dk" name="email" required>
             </div>
-            <div class="data">
-                <label>Password:</label>
-                <input type="password" name="password" value="password" required>
-            </div>
-            <div class="forgot-pass">
-                <a href="lostpassword.jsp">fucked Password?</a></div>
-            <div class="btn">
-                <div class="inner">
-                </div>
-                <button type="submit">login</button>
+            <div>
+                <button type="submit">reset</button>
             </div>
             <div class="signup-link">
                 Ny Bruger? <a href="register.jsp">opret dig nu!</a></div>
