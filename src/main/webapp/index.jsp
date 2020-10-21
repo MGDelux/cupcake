@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <style> <jsp:include page="css/style.css"/></style>
+
+    <!--@author Mathias .css snips from: CodingNepal -->
+    <title>CupCAKES lohin</title>
+    <style> <jsp:include page="css/Loginstyle.css"/></style>
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
@@ -18,18 +21,18 @@
                 <input type="text" value="dinEmail@mail.dk" name="email" required>
             </div>
             <div class="data">
-                <label>Password:</label>
+                <label>Kodeord:</label>
                 <input type="password" name="password" value="password" required>
             </div>
             <div class="forgot-pass">
-                <a href="lostpassword.jsp">fucked Password?</a></div>
+                <a href="lostpassword.jsp">Glemt dit kodeord?</a></div>
             <div class="btn">
                 <div class="inner">
                 </div>
                 <button type="submit">login</button>
             </div>
             <div class="signup-link">
-                Ny Bruger? <a href="register.jsp">opret dig nu!</a></div>
+                Ny Bruger? <a href="register.jsp">opret en bruger nu!</a></div>
             <div class="error-text"> <c:if test="${requestScope.error!= null}">
                 ${requestScope.error}
             </c:if></div>

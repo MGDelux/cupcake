@@ -2,9 +2,7 @@ package DBAccess;
 
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
-import FunctionLayer.UserRepo;
 import PresentationLayer.UserExists;
-import PresentationLayer.UserNotFound;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +16,7 @@ import java.util.NoSuchElementException;
  *
  * @author kasper
  */
-public class UserMapper implements UserRepo {
+public class UserMapper  {
 
     public static void createUser(User user) throws LoginSampleException {
         try {
@@ -57,7 +55,7 @@ public class UserMapper implements UserRepo {
                     return user;
                 } else throw new LoginSampleException("PASSWORD OR EMAIL INCORRECT ");
             } else {
-                throw new LoginSampleException("ERR0R");
+                throw new LoginSampleException("login error");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
@@ -78,7 +76,7 @@ public class UserMapper implements UserRepo {
             Connection conn = Connector.connection();
             PreparedStatement ps = conn.prepareStatement("DELETE FROM kunde WHERE email = ?");
             ps.setString(1, email);
-            ps.executeQuery();
+            ps.execute();
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -89,7 +87,6 @@ public class UserMapper implements UserRepo {
         }
     }
 
-    @Override
     public User findUser(String email) throws NoSuchElementException {
         try {
             Connection conn = Connector.connection();
@@ -107,16 +104,6 @@ public class UserMapper implements UserRepo {
         } catch (ClassNotFoundException e) {
             return null;
         }
-    }
-
-    @Override
-    public Iterable<User> findAllUsers() {
-        return null;
-    }
-
-    @Override
-    public User createUser(String userName, byte[] salt, byte[] secret) throws UserExists {
-        return null;
     }
 
     public static boolean checkMail(String email) {

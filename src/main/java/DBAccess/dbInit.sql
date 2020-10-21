@@ -2,25 +2,60 @@
 
 -- noinspection SqlNoDataSourceInspectionForFile
 
-CREATE DATABASE  IF NOT EXISTS `useradmin`;
+-- noinspection SqlDialectInspectionForFile
 
+-- noinspection SqlNoDataSourceInspectionForFile
 
-USE `useradmin`;
+-- V0 PROTOTYPE, TEAM JUMBO SNEGL
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(90) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `role` varchar(20) NOT NULL DEFAULT 'customer',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS cupcake;
+create database cupcake;
+create user cupcake@localhost;
+grant all privileges on cupcake.* to cupcake@localhost;
+USE cupcake;
 
-LOCK TABLES `users` WRITE;
-INSERT INTO `users` VALUES 
-(1,'jens@somewhere.com','jensen','customer'),
-(2,'ken@somewhere.com','kensen','customer'),
-(3,'robin@somewhere.com','batman','employee');
-UNLOCK TABLES;
+CREATE TABLE cupcake.kunde (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(45) NOT NULL,
+  role VARCHAR(45) NOT NULL,
+  salt BINARY(16) NOT NULL,
+  secret BINARY(32) NOT NULL,
+  PRIMARY KEY (`id`));
 
+CREATE TABLE cupcake.ordre (
+  ordre_id INT NOT NULL AUTO_INCREMENT,
+  date DATETIME NOT NULL,
+  PRIMARY KEY (ordre_id));
+
+CREATE TABLE cupcake.orderline (
+  id_orderline INT NOT NULL AUTO_INCREMENT,
+  idodre INT NOT NULL,
+  amount INT NOT NULL,
+  sum DOUBLE NOT NULL,
+  toping_id INT NOT NULL,
+  buttom_id INT NOT NULL,
+  PRIMARY KEY (idodre),
+  UNIQUE INDEX id_orderline_UNIQUE (id_orderline ASC) VISIBLE,
+  CONSTRAINT idOrdre
+    FOREIGN KEY (idodre)
+    REFERENCES cupcake.ordre (idOrdre)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE cupcake.toppings (
+  topping_id INT NOT NULL,
+  navn VARCHAR(45) NOT NULL,
+  pris DOUBLE NOT NULL,
+  PRIMARY KEY (topping_id));
+
+CREATE TABLE cupcake.buttoms (
+  bottom_id INT NOT NULL,
+  navn VARCHAR(45) NOT NULL,
+  pris DOUBLE NOT NULL,
+  PRIMARY KEY (bottom_id));
+
+CREATE TABLE cupcake.properties (
+    name VARCHAR(255) PRIMARY KEY,
+    value VARCHAR(255) NOT NULL
+);
+INSERT INTO cupcake.properties (name, value) VALUES ("version", "0");
