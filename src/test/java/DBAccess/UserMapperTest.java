@@ -1,7 +1,5 @@
 package DBAccess;
 
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

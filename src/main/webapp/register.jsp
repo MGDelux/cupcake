@@ -20,7 +20,7 @@
             <input type="hidden" name="target" value="register">
             <div class="data">
                 <label>Email:</label>
-                <input type="text" value="dinEmail@mail.dk" name="email1" required>
+                <input type="email" value="dinEmail@mail.dk" name="email1" required>
             </div>
             <div class="data">
                 <label>Kodeord:</label>

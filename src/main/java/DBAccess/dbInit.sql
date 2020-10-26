@@ -38,7 +38,7 @@ CREATE TABLE cupcake.orderline (
   UNIQUE INDEX id_orderline_UNIQUE (id_orderline ASC) VISIBLE,
   CONSTRAINT idOrdre
     FOREIGN KEY (idodre)
-    REFERENCES cupcake.ordre (idOrdre)
+    REFERENCES cupcake.ordre (ordre_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -59,3 +59,19 @@ CREATE TABLE cupcake.properties (
     value VARCHAR(255) NOT NULL
 );
 INSERT INTO cupcake.properties (name, value) VALUES ("version", "0");
+INSERT INTO buttoms (navn,pris) VALUES ("Chocolate",5.00);
+INSERT INTO buttoms (navn,pris) VALUES ("Vanilla",5.00);
+INSERT INTO buttoms (navn,pris) VALUES ("Nutmeg",5.00);
+INSERT INTO buttoms (navn,pris) VALUES ("Pistacio",6.00);
+INSERT INTO buttoms (navn,pris) VALUES ("Almond",7.00);
+
+INSERT INTO toppings (navn,pris) VALUES ("Chocolate",5.00);
+INSERT INTO toppings (navn,pris) VALUES ("Blueberry",5.00);
+INSERT INTO toppings (navn,pris) VALUES ("Rasberry",5.00);
+INSERT INTO toppings (navn,pris) VALUES ("Crispy",5.00);
+INSERT INTO toppings (navn,pris) VALUES ("Strawberry",6.00);
+INSERT INTO toppings (navn,pris) VALUES ("Rum/Raisin",7.00);
+INSERT INTO toppings (navn,pris) VALUES ("Orange",8.00);
+INSERT INTO toppings (navn,pris) VALUES ("Lemon",8.00);
+INSERT INTO toppings (navn,pris) VALUES ("Blue cheese",9.00);
+

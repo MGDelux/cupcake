@@ -1,9 +1,6 @@
 package DBAccess;
-
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.User;
-import PresentationLayer.UserExists;
-
+import domain.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

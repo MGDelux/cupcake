@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="da">
+<meta charset="utf-8">
 <head>
+    <style> <jsp:include page="WEB-INF/css/style.css"/></style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cupcake homepage</title>
