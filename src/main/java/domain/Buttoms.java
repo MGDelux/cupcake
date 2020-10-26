@@ -34,4 +34,13 @@ public class Buttoms {
     public void setPris(double pris) {
         this.pris = pris;
     }
+
+    @Override
+    public String toString() {
+        return "Buttoms{" +
+                "id=" + id +
+                ", navn='" + navn + '\'' +
+                ", pris=" + pris +
+                '}';
+    }
 }

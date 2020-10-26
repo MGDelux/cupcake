@@ -17,12 +17,12 @@ public class Servlet extends HttpServlet {
         api = loadCupcakes();
     }
 
-  private static cupcake  loadCupcakes() {
+  private static cupcake loadCupcakes() {
         Database db = new Database();
         return new cupcake(new DBCupcakeRepository(db),new DBCupcakeRepository(db));
     }
 
-    protected void setUp(HttpServletRequest req,HttpServlet resp) throws IOException{
+    protected void setUp(HttpServletRequest req,HttpServletResponse resp) throws IOException{
         req.setCharacterEncoding("UTF-8");
     }
     protected void render(String title, String content, HttpServletRequest req, HttpServletResponse resp)
@@ -30,7 +30,7 @@ public class Servlet extends HttpServlet {
         req.setAttribute("version", cupcake.getVer());
         req.setAttribute("title", title);
         req.setAttribute("content", content);
-        req.getRequestDispatcher("/WEB-INF/base.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
     protected void log(HttpServletRequest req, String message) {
         System.err.println("(" + LocalDateTime.now() + ") " + this.getClass().getCanonicalName() + " \"" + req.getRequestURI() + "\": " + message);

@@ -2,13 +2,10 @@ package infrastructure;
 
 import domain.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
-public class DBCupcakeRepository implements TopsRepo,ButRepo {
+public class DBCupcakeRepository implements TopsRepo,ButRepo  {
     private final Database db;
 
     public DBCupcakeRepository(Database db) {
@@ -138,5 +135,48 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo {
     @Override
     public Toppings createToppings(String navn, Double pris) {
         return null;
+    }
+    public void createUser(User user) throws LoginError {
+        try {
+            Connection conn = db.connect();
+            String SQL = "INSERT INTO kunde (email, role, salt,secret) VALUES (?, ?, ?,?)";
+            PreparedStatement ps = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getRole());
+            ps.setBytes(3, user.getSalt());
+            ps.setBytes(4, user.getSecret());
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            user.setId(id);
+        } catch (SQLException ex) {
+            throw new LoginError(ex.getMessage());
+        }
+    }
+    public User login(String email, String password) throws LoginError {
+        try {
+            Connection conn = db.connect();
+            String SQL = "SELECT * FROM kunde " + "WHERE email=?";
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String role = rs.getString("role");
+                int id = rs.getInt("id");
+                byte[] salt = rs.getBytes("salt");
+                byte[] secret = rs.getBytes("secret");
+                User user = new User(email, role, salt, secret);
+                user.setId(id);
+                if (user.isPasswordCorrect("password")) {
+                    return user;
+                } else throw new LoginError("PASSWORD OR EMAIL INCORRECT ");
+            } else {
+                throw new LoginError("login error");
+            }
+        } catch (SQLException ex) {
+            throw new LoginError(ex.getMessage());
+        }
+
     }
 }

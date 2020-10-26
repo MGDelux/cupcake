@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 <head>
     <title>CupCAKES register</title>
-    <style> <jsp:include page="css/Loginstyle.css"/></style>
+    <style> <jsp:include page="../css/Loginstyle.css"/></style>
     <meta charset="utf-8">
     <!-- Somehow I got an error, so I comment the title, just uncomment to show -->
     <!-- <title>Popup Login Form Design | CodingNepal</title> -->
@@ -36,7 +36,7 @@
                 <button type="submit">Register</button>
             </div>
             <div class="signup-link">
-                Allerede en bruger? <a href="index.jsp">klik her.</a></div>
+                Allerede en bruger? <a href="WEB-INF/index.jsp">klik her.</a></div>
             <div class="error-text"> <c:if x="${requestScope.error!= null}">
                 ${requestScope.error}
             </c:if></div>

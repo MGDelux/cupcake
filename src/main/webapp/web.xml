@@ -10,6 +10,6 @@
 </session-config>
   <error-page>
     <error-code>404</error-code>
-    <location>/WEB-INF/test.jsp</location>
+    <location>/pages/login.jsp</location>
   </error-page>
 </web-app>

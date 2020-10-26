@@ -34,4 +34,13 @@ public class Toppings {
     public void setPris(double pris) {
         this.pris = pris;
     }
+
+    @Override
+    public String toString() {
+        return "Toppings{" +
+                "id=" + id +
+                ", navn='" + navn + '\'' +
+                ", pris=" + pris +
+                '}';
+    }
 }
