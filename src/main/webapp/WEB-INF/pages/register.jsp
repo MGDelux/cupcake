@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 <head>
     <title>CupCAKES register</title>
-    <style> <jsp:include page="../css/Loginstyle.css"/></style>
+    <style> <jsp:include page="../../css/Loginstyle.css"/></style>
     <meta charset="utf-8">
     <!-- Somehow I got an error, so I comment the title, just uncomment to show -->
     <!-- <title>Popup Login Form Design | CodingNepal</title> -->

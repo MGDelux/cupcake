@@ -11,21 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-
-@WebServlet({"/lists", "/lists/*"})
-public class CustomerPage extends Servlet {
+@WebServlet("")
+public class Index extends Servlet {
     private static ArrayList<Toppings> currentToppings = new ArrayList<>();
     private static ArrayList<Buttoms> currentButtoms = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        System.out.println(req.getPathInfo());
         setUp(req, resp);
-        if (req.getPathInfo() == null) {
-            render("CustomerTest", "/WEB-INF/pages/CustomerPage.jsp", req, resp);
-            log("looad customertest");
+        if (req.getPathInfo().equals("/")) {
+            render("index test", "/WEB-INF/pages/index.jsp", req, resp);
+            log("load index");
         } else {
             try {
+                log("loading cakes");
                 Iterable<Toppings> tops = api.findAllTop();
                 for (Toppings toppings : tops) {
                     currentToppings.add(toppings);
@@ -37,7 +38,8 @@ public class CustomerPage extends Servlet {
                     req.setAttribute("but", currentButtoms);
                 }
             } catch (NoCupcake noCupcake) {
-                resp.sendError(404, "ERROR IN GETTING CUPCAKES");
+                resp.sendError(500, "ERROR IN GETTING CUPCAKES");
+                log("error loading cakes");
             }
         }
     }

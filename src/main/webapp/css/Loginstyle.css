@@ -38,6 +38,7 @@ body {
 }
 
 .container form .data {
+   margin: auto;
    height: 45px;
    width: 100%;
    margin: 40px 0;
@@ -56,7 +57,6 @@ form .data input {
    font-size: 18px;
    border: 1px solid silver;
 }
-
 
 form .forgot-pass a {
    color: #3498db;

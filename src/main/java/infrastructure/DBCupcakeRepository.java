@@ -16,17 +16,16 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
     public Iterable<Toppings> findAllTops() throws NoCupcake {
         ArrayList<Toppings> toppings = new ArrayList<>();
         try (Connection conn = db.connect()) {
-            String SQL = "SELECT * FROM toppings";
-            var smt = conn.prepareStatement(SQL);
-            ResultSet set = smt.getResultSet();
-            smt.executeQuery();
-            while (set.next()) {
-                toppings.add(ParseTops(set));
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM toppings;");
+            ResultSet get = ps.executeQuery();
+            while (get.next()) {
+                toppings.add(ParseTops(get));
+
             }
             return toppings;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new NoCupcake();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return toppings;
         }
     }
 
@@ -34,17 +33,16 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
     public Iterable<Buttoms> findALlbuttoms() throws NoCupcake {
         ArrayList<Buttoms> buttoms = new ArrayList<>();
         try (Connection conn = db.connect()) {
-            String SQL = "SELECT * FROM buttoms";
-            var smt = conn.prepareStatement(SQL);
-            ResultSet set = smt.getResultSet();
-            smt.executeQuery();
-            while (set.next()) {
-                buttoms.add(ParseButs(set));
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM buttoms;");
+            ResultSet get = ps.executeQuery();
+            while (get.next()) {
+                buttoms.add(ParseButs(get));
+
             }
             return buttoms;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new NoCupcake();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return buttoms;
         }
     }
 
@@ -168,15 +166,15 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
                 byte[] secret = rs.getBytes("secret");
                 User user = new User(email, role, salt, secret);
                 user.setId(id);
-                if (user.isPasswordCorrect("password")) {
+                if (user.isPasswordCorrect(password)) {
                     return user;
                 } else throw new LoginError("PASSWORD OR EMAIL INCORRECT ");
             } else {
-                throw new LoginError("login error");
+                throw new LoginError("big login error");
             }
-        } catch (SQLException ex) {
-            throw new LoginError(ex.getMessage());
+        } catch (SQLException e) {
+            throw new LoginError("Error: " + e);
         }
-
     }
 }
+
