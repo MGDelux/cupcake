@@ -1,6 +1,7 @@
-# Skabelon til Java webprojekter
+# Cupcake
 
-Denne skabelon anvendes på 2. semester på datamatikeruddannelsen i Lyngby og på Bornholm. Den er baseret på et command pattern.
+#by gruppe Jumbo Snegl 
+<Emil,Janus,Mathias>
 
 ## Dokumentation
 
