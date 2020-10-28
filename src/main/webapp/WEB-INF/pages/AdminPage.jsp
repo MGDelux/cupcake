@@ -15,11 +15,21 @@
     <style>
         <jsp:include page="../../css/adminPage.css"/>
     </style>
+    <div class="topnav">
+        <a class="active" href="${pageContext.request.contextPath}/products/">Product page</a>
+        <a href="#${pageContext.request.contextPath}">Index</a>
+        <a href="#signout">Log ud</a>
+        <a><c:if test="${sessionScope.user.email !=null}">
+            ${sessionScope.user.email}
+        </c:if> </a>
+    </div>
+
 </head>
 <body>
 <div align="center">
     <!-- table  Buttom laves/-->
-        <h2>Buttoms</h2>
+    <h1>Admin page</h1>
+        <h3>Buttoms</h3>
         <table id="buttom" border="1" title="">
             <thead>
             <!-- table rows id,name og pris laves/-->
@@ -52,8 +62,8 @@
         </div>
         </form>
         <!-- Hele table Buttoms slutter/-->
-        <h2>Toppings+
-        </h2>
+        <h3>Toppings+
+        </h3>
         <table border="1">
             <thead>
             <tr>
@@ -81,8 +91,8 @@
             <button type="submit" class="remove-button">Remove toppings</button>
         </div>
             </form>
-        <h2>Kunder+
-        </h2>
+        <h3>Kunder+
+        </h3>
         <table border="1">
             <thead>
             <tr>

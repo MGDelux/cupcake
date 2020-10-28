@@ -1,13 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-image: url("https://images8.alphacoders.com/421/thumb-1920-421304.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h1{
+    color: white;
+    text-shadow: -1px -1px 0 #000000, 5px -1px 0 #000, -1px 1px 0 #000, 5px 1px 0 #000;
+
+}
+h3{
+    color: white;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
+}
+
+button {
+    background-color: rgba(255, 255, 255, .4);
+    color: #000000;
+    text-align: center;
+    font-size: 15px;
+
+}
+input{
+    background-color: rgba(255, 255, 255, .7);
+}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
+    background-color: rgba(7, 7, 7, 0.2);
     width: 80%;
 }
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+tr:nth-child(uneven) {
+    background-color: rgba(0, 0, 0, 0.4);
 }
 td, th {
-    border: 1px solid #5e0e6d;
+
     text-align: left;
     padding: 8px;
+    color: white;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.topnav {
+    border: 1px solid #000000;
+    background-color: rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+}
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.topnav p{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 2.5px 16px;
+    text-decoration: none;
+    font-size: 14px;
 }

@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
     <title>Cupcake homepage</title>
     <style>
-        <jsp:include page="../../css/index.css"/>
+        <jsp:include page="../../css/Productpage.css"/>
     </style>
     <p><c:if test="${sessionScope.user.email != null}">
         ${requestScope.user.email}
@@ -26,10 +26,10 @@
     <!-- Create menu in tab /-->
     <a href="${pageContext.request.contextPath}">TEST</a>
     <a class href="${pageContext.request.contextPath}/AdminPage/">Profil</a>
+    <a href="${pageContext.request.contextPath}/login/">Login</a>
     <a class="fas fa-shopping-cart" data-fa-transform="down-6" href="index.html"></a>
 </nav>
 <!-- Navigationpanel slutter/-->
-
 
 <div class="container" align="center">
     <!-- headers/tekst starter-->
