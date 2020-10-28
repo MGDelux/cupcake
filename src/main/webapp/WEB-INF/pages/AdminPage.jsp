@@ -45,10 +45,10 @@
         </table>
         <form method="post">
         <div class="buttons-buttom">
-            <input>
-            <input>
-            <button name="add-button" class="add-button">Add buttom</button>
-            <button name="remove-buttom" class="remove-button">Remove buttom</button>
+            <input name="" type="">
+            <input name="" type="">
+            <button type="submit" name="add-button" class="add-button">Add buttom</button>
+            <button type="submit" name="remove-buttom" class="remove-button">Remove buttom</button>
         </div>
         </form>
         <!-- Hele table Buttoms slutter/-->
@@ -104,8 +104,8 @@
         </table>
     <form method="post">
         <div  class="kunder">
-            <input name="kunder" type="text">
-            <input name="kunder" type="number">
+            <input name="kunder" type="">
+            <input name="kunder" type="">
             <button type="submit" class="add-button">Add toppings</button>
             <button type="submit" class="remove-button">Remove toppings</button>
         </div>

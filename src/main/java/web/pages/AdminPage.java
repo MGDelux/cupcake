@@ -56,6 +56,7 @@ public class AdminPage extends Servlet {
             cupcake cupcake = loadCupcakes();
             double nyprisCheck = Double.parseDouble(nypris);
             cupcake.createTopsList(nytop, nyprisCheck);
+            resp.sendRedirect(req.getContextPath()+"/AdminPage");
         } catch (NumberFormatException e) {
            req.setAttribute("error", e.getMessage());
             System.out.println("error"+ e.getMessage());
