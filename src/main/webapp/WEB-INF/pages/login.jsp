@@ -18,7 +18,7 @@
             <input type="hidden" name="target" value="login">
             <div class="data">
                 <label>Email:</label>
-                <input type="text" value="dinEmail@mail.dk" name="email" required>
+                <input type="email" value="EMail" name="email" required>
             </div>
             <div class="data">
                 <label>Kodeord:</label>
@@ -32,8 +32,8 @@
                 <button type="submit">login</button>
             </div>
             <div class="signup-link">
-                Ny Bruger? <a href="register.jsp">opret en bruger nu!</a></div>
-            <div class="error-text"> <c:if test="${requestScope.error!= null}">
+                Ny Bruger? <a href="${pageContext.request.contextPath}/register/">opret en bruger nu!</a></div>
+            <div class="error-text"> <c:if test="${requestScope.error != null}">
                 ${requestScope.error}
             </c:if></div>
         </form>

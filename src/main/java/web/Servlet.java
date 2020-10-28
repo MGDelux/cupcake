@@ -21,7 +21,7 @@ public class Servlet extends HttpServlet {
         api = loadCupcakes();
     }
 
-    private static cupcake loadCupcakes() {
+    public static cupcake loadCupcakes() {
         Database db = new Database();
         return new cupcake(new DBCupcakeRepository(db), new DBCupcakeRepository(db));
 
@@ -33,6 +33,8 @@ public class Servlet extends HttpServlet {
 
     protected void render(String title, String content, HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        req.setAttribute("logout","log ud");
+        req.setAttribute("login","log in ");
         req.setAttribute("version", cupcake.getVer());
         req.setAttribute("title", title);
         req.setAttribute("content", content);

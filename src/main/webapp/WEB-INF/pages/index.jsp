@@ -6,96 +6,13 @@
     <%@ page contentType="text/html; charset=UTF-8" %>
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
     <title>Cupcake homepage</title>
-    <style>
-
-        body {
-            background: linear-gradient(to bottom right, #6C00D8 80%, rgb(131, 33, 208) 20%);
-            overflow-x: hidden;
-        }
-
-        .navpanel {
-            background-color: #E3E3E3;
-            font-size: 20px;
-        }
-
-        .fas{
-            padding-left: 20px;
-            color: #030303;
-            text-decoration: none;
-        }
-
-        .fas:hover{
-            color: blueviolet;
-        }
-
-        .ordrer{
-            padding-left: 30px;
-        }
-
-        .Log{
-            margin-left: 1400px;
-        }
-
-        .fa-shopping-basket{
-            margin-left: 200px;
-        }
-
-        .container {
-            background-color: #E3E3E3;
-            padding-bottom: 100px;
-            border-radius: 15px;
-        }
-
-        .header {
-            position: relative;
-            left: 70px;
-        }
-
-        .header2 {
-            position: relative;
-            top: -20px;
-        }
-
-        .bund {
-            position: relative; left: 70px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .dropdown-single {
-            float: left;
-            width: 33.33%;
-            padding: 10px;
-        }
-
-        .dropdowns::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        .button{
-            background-color: rgb(70, 22, 110);
-            margin-left: 1265px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 20px;
-            display: inline-block;
-            cursor: pointer;
-            padding: 5px 10px;
-            border: none;
-            color: #E3E3E3;
-        }
-
-
-    </style>
+    <style> <jsp:include page="../../css/index.css"/></style>
 
 </head>
 <body>
 <!-- Banner logo i top" /-->
 <div>
+    <img src="../../images/olskercupcakes.png" alt="logo cupcakes" title="cupcake" style="width: 100%">
 </div>
 <!-- Banner logo i top slutter /-->
 
@@ -103,9 +20,11 @@
 <nav class="navpanel">
     <!-- Create menu in tab /-->
     <a class="fas fa-home" href="${pageContext.request.contextPath}" ></a>
-    <a class ="ordrer" href="${pageContext.request.contextPath}/order/">Ordrer</a>
-    <a class ="Log ind" href="${pageContext.request.contextPath}/login/">Log ind</a>
+    <a class ="ordrer" href="${pageContext.request.contextPath}/AdminPage/">Ordrer</a>
+    <a class ="Log ind" href="${pageContext.request.contextPath}/login/"><c:if z = "${sessionScope.user !=null}">log ind</c:if></a>
+    <a class ="useremail" href="profile-html"><c:if x = "${sessionScope.user !=null}">${sessionScope.user.email}</c:if></a>
     <a class="fas fa-shopping-basket" href="index.html"></a>
+
 </nav>
 <!-- Navigationpanel slutter/-->
 
@@ -114,9 +33,6 @@
     <!-- headers/tekst starter-->
     <div class="header">
         <h1><strong>Velkommen ombord.</strong></h1>
-        <p>Hello <c:if t ="${sessionScope.email != null}">
-            ${sessionScope.email}
-        </c:if></p>
         <h2 class="header2"><strong>Øens bedste cupcakes, vælg og bestil her</strong></h2>
     </div>
     <!-- headers/tekst slutter-->

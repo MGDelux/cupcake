@@ -5,7 +5,7 @@ import domain.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBCupcakeRepository implements TopsRepo,ButRepo  {
+public class DBCupcakeRepository implements TopsRepo, ButRepo {
     private final Database db;
 
     public DBCupcakeRepository(Database db) {
@@ -66,6 +66,30 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
     }
 
     @Override
+    public Toppings createTop(String navn, double pris) {
+        int topid;
+        try (Connection conn = db.connect()) {
+            String sql = "INSERT INTO toppings (navn, pris) VALUES (?, ?)";
+            var smt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            smt.setString(1, navn);
+            smt.setDouble(2, pris);
+            smt.executeUpdate();
+            ResultSet set = smt.getGeneratedKeys();
+            if (set.next()) {
+                topid = set.getInt(1);
+            } else {
+                throw new RuntimeException("DB ERROR");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL E ERROR");
+        }
+        try {
+            return findTop(topid);
+        } catch (NoCupcake noCupcake) {
+            throw new RuntimeException("ARRG DB ERROR");
+        }
+    }
+    @Override
     public Buttoms findBut(int id) throws NoCupcake {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM buttoms where id = ?";
@@ -84,6 +108,20 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
         }
     }
 
+    public boolean checkMail(String email) {
+        try {
+            Connection conn = db.connect();
+            PreparedStatement ps = conn.prepareStatement("select * from kunde WHERE email = ?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else return false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
 
 
     @Override
@@ -134,6 +172,7 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
     public Toppings createToppings(String navn, Double pris) {
         return null;
     }
+
     public void createUser(User user) throws LoginError {
         try {
             Connection conn = db.connect();
@@ -152,6 +191,7 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
             throw new LoginError(ex.getMessage());
         }
     }
+
     public User login(String email, String password) throws LoginError {
         try {
             Connection conn = db.connect();
@@ -164,7 +204,7 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
                 int id = rs.getInt("id");
                 byte[] salt = rs.getBytes("salt");
                 byte[] secret = rs.getBytes("secret");
-                User user = new User(email, role, salt, secret);
+                User user = new User(0,email, role, salt, secret);
                 user.setId(id);
                 if (user.isPasswordCorrect(password)) {
                     return user;
@@ -175,6 +215,32 @@ public class DBCupcakeRepository implements TopsRepo,ButRepo  {
         } catch (SQLException e) {
             throw new LoginError("Error: " + e);
         }
+    }
+
+    public ArrayList<User> findAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        try (Connection conn = db.connect()) {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM kunde;",Statement.RETURN_GENERATED_KEYS);
+            ResultSet get = ps.executeQuery();
+            while (get.next()) {
+                users.add(loadUser(get));
+
+            }
+            return users;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return users;
+        }
+    }
+
+
+    private User loadUser(ResultSet rs) throws SQLException {
+        return new User(
+                rs.getInt("id"),
+                rs.getString("email"),
+                rs.getString("role"),
+                rs.getBytes("salt"),
+                rs.getBytes("secret"));
     }
 }
 

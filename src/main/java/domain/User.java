@@ -28,14 +28,15 @@ public class User {
         PASSWORD_FACTORY = factory;
     }
 
-    public User(String email, String role, byte[] salt, byte[] secret) {
+    public User(int id,String email, String role, byte[] salt, byte[] secret) {
+        this.id = id;
         this.email = email;
         this.role = role;
         this.salt = salt;
         this.secret = secret;
     }
 
-    private int id; // just used to demo retrieval of autogen keys in UserMapper
+    private int id;
     private String email;
     private String role;
     private byte[] salt;
@@ -104,12 +105,15 @@ public class User {
     public  boolean isPasswordCorrect(String password) {
         return Arrays.equals(this.secret, calculateSecret(salt, password));
     }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", salt=" + byteArrayToHex(salt) +
-                ", secret=" + byteArrayToHex(secret) +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", salt=" + Arrays.toString(salt) +
+                ", secret=" + Arrays.toString(secret) +
                 '}';
     }
 }

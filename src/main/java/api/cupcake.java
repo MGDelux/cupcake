@@ -16,9 +16,9 @@ public class cupcake {
         return ver;
     }
 
-    public Toppings createToppingsList(String name, Double pris) {
-        return topList.createToppings(name, pris);
-    }
+  public Toppings createTopsList(String name,double pris){
+        return topList.createTop(name, pris);
+  }
 
     public Buttoms createButtomsList(String name, double pris) {
         return butList.CreateBut(name, pris);
@@ -32,6 +32,11 @@ public class cupcake {
         return butList.findALlbuttoms();
     }
 
-
-
+    @Override
+    public String toString() {
+        return "cupcake{" +
+                "topList=" + topList +
+                ", butList=" + butList +
+                '}';
+    }
 }

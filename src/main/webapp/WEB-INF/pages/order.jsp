@@ -89,7 +89,6 @@
     <a class="fas fa-home" href="index.html" ></a>
     <a class ="ordrer" href="index.html">Ordrer</a>
     <a class ="Log ud" href="index.html">Log ud</a>
-    <a class ="useremail" href="profile-html">Hello ${sessionScope.email}</a>
     <a class="fas fa-shopping-basket" href="index.html"></a>
 </nav>
 <!-- Navigationpanel slutter/-->
