@@ -1,10 +1,7 @@
 package web;
 
 import api.cupcake;
-import domain.ButFactory;
-import domain.ButRepo;
-import domain.Toppings;
-import infrastructure.DBCupcakeRepository;
+import infrastructure.DBCupcake;
 import infrastructure.Database;
 
 import javax.servlet.ServletException;
@@ -23,7 +20,7 @@ public class Servlet extends HttpServlet {
 
     public static cupcake loadCupcakes() {
         Database db = new Database();
-        return new cupcake(new DBCupcakeRepository(db), new DBCupcakeRepository(db));
+        return new cupcake(new DBCupcake(db), new DBCupcake(db));
 
     }
 
@@ -40,6 +37,7 @@ public class Servlet extends HttpServlet {
         req.setAttribute("content", content);
         req.getRequestDispatcher(content).forward(req, resp);
         log(req, "loaded");
+
 
     }
 

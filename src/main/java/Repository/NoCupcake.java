@@ -1,4 +1,4 @@
-package domain;
+package Repository;
 
 public class NoCupcake extends Exception {
     public NoCupcake() {

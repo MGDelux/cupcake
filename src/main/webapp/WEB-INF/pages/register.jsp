@@ -16,7 +16,7 @@
         <div class="text">
             Register
         </div>
-        <form action="FrontController" name="register" method="post" >
+        <form method="post" >
             <input type="hidden" name="target" value="register">
             <div class="data">
                 <label>Email:</label>
