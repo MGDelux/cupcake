@@ -38,5 +38,31 @@ public class Products extends Servlet {
             cupcake.printStackTrace();
         }
     }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        if (req.getParameter("sumbitTopsTilKurv") != null) {
+            System.out.println("HELLO");
+            sumitTopsTilKurv(req,resp);
+        }
+        if (req.getParameter("sumbitBotsTilKurv") != null) {
+            System.out.println("HELLO2");
+            sumitBotsTilKurv(req,resp);
+        }
+        resp.sendRedirect(req.getContextPath() + "/products/");
+    }
+
+    private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("xd");
+        String top = req.getParameter("BotToKurv");
+        System.out.println(top);
+return;
+    }
+
+    private void sumitTopsTilKurv(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("xd");
+        String top = req.getParameter("BotToKurv");
+        System.out.println(top);
+        return;
+    }
 }
 

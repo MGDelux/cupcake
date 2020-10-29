@@ -33,7 +33,7 @@ public class Register extends Servlet {
         password = req.getParameter("password1");
         password1 = req.getParameter("password2"); //redudant
         try {
-            user = loginFacade.createUser(email,password);
+            user = loginFacade.createUser(email,password,"customer",0);
             req.getSession().setAttribute("user",user);
             resp.sendRedirect(req.getContextPath()+"");
             log(req,"New user registered "+ user.getEmail());

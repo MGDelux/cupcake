@@ -93,6 +93,7 @@ public class DBCupcake implements TopsRepo, ButRepo {
             throw new RuntimeException("ARRG DB ERROR");
         }
     }
+
     @Override
     public Buttoms findBut(int id) throws NoCupcake {
         try (Connection conn = db.connect()) {
@@ -173,9 +174,40 @@ public class DBCupcake implements TopsRepo, ButRepo {
     }
 
     @Override
+    public Buttoms deleteBut(int id) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "DELETE FROM buttoms WHERE id = ?";
+            var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            smt.setInt(1, id);
+            smt.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return findBut(id);
+    }
+
+
+    @Override
+    public Toppings deleteTop(int id) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "DELETE FROM toppings WHERE id = ?";
+            var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            smt.setInt(1, id);
+            smt.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return findTop(id);
+    }
+
+    @Override
     public Toppings createToppings(String navn, Double pris) {
         return null;
     }
+
+
 }
 
 

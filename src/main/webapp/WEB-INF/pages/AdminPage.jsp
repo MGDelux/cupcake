@@ -20,7 +20,7 @@
         <a href="#${pageContext.request.contextPath}">Index</a>
         <a href="#signout">Log ud</a>
         <a><c:if test="${sessionScope.user.email !=null}">
-            ${sessionScope.user.email}
+            ${sessionScope.user.email} - ${sessionScope.user.role}
         </c:if> </a>
     </div>
 
@@ -55,12 +55,18 @@
         </table>
         <form method="post">
         <div class="buttons-buttom">
-            <input name="" type="">
-            <input name="" type="">
+            <input name="buttomName" type="text" value="Buttom navn" required>
+            <input name="buttomPris" type="number" value="0" required>
             <button type="submit" name="add-button" class="add-button">Add buttom</button>
-            <button type="submit" name="remove-buttom" class="remove-button">Remove buttom</button>
         </div>
         </form>
+    <form method="post">
+        <div class="buttons-buttom" align="center">
+            <label>ID: </label>
+            <input name="removeButId" type="number" value="0" required >
+            <button type="submit" name="removeBut" class="remove-button">Remove buttom</button>
+        </div>
+    </form>
         <!-- Hele table Buttoms slutter/-->
         <h3>Toppings+
         </h3>
@@ -70,7 +76,6 @@
                 <th>id</th>
                 <th>name</th>
                 <th>pris</th>
-
             </tr>
             </thead>
             <tbody>
@@ -85,39 +90,71 @@
         </table>
             <form method="post">
         <div  class="buttons-toppings">
-            <input name="topping" type="text">
-            <input name="toppingPris" type="number">
-            <button type="submit" class="add-button">Add toppings</button>
-            <button type="submit" class="remove-button">Remove toppings</button>
+            <input name="topping" type="text" required value="Topping navn">
+            <input name="toppingPris" type="number" required value="0">
+            <button name="addtoppingbutton" type="submit" class="add-button">Add topping</button>
         </div>
             </form>
-        <h3>Kunder+
+    <form method="post">
+        <div class="buttons-toppings">
+            <label>ID: </label>
+            <input name="removeToppingid" type="number" value="0"  required>
+            <button  name="removetoppingidbutton"type="submit" class="remove-button">Remove topping</button>
+        </div>
+    </form>
+        <h3>Kunder
         </h3>
-        <table border="1">
-            <thead>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>role</th>
+            <th>kredit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${users}" var="user">
             <tr>
-                <th>id</th>
-                <th>email</th>
-                <th>role</th>
+                <td>${user.id}</td>
+                <td>${user.email}</td>
+                <td>${user.role}</td>
+                <td>${user.kredit} kr.</td>
             </tr>
-
-            <tbody>
-            <c:forEach items="${users}" var="kunder">
-            <tr>
-                <td>${kunder.id}</td>
-                <td>${kunder.email}</td>
-                <td>${kunder.role}</td>
-            </tr>
-            </c:forEach>
-            </thead>
-            </tbody>
-        </table>
+        </c:forEach>
+        </tbody>
+    </table>
     <form method="post">
         <div  class="kunder">
-            <input name="kunder" type="">
-            <input name="kunder" type="">
-            <button type="submit" class="add-button">Add toppings</button>
-            <button type="submit" class="remove-button">Remove toppings</button>
+            <label>email:</label>
+            <input name="kunderEmail"value="email" type="email"required>
+            <label>role:</label>
+            <select name="kundeRole" required>
+                <option>customer</option>
+                <option>admin</option>
+            </select>
+            <label>password:</label>
+            <input name="kunderPassword" value="password" type="password"required>
+            <label>kredit:</label>
+            <input name="kunderKredt" type="number" value="0" required>
+            <button name="createNewUser" type="submit" class="add-button">Add new user</button>
+        </div>
+    </form>
+    <form method="post">
+        <div  class="kunder">
+            <label>KUNDE EMAIL:</label>
+            <input name="kunderID" type="text" value="email" required>
+            <label>KREDIT:</label>
+            <input name="KreditToAdd" type="number" value="0" required>
+            <button name="addKredit" type="submit" class="remove-button">Tilføj kredit</button>
+
+        </div>
+    </form>
+    <form method="post">
+        <div  class="kunder">
+            <input name="kunderIDToDelete" type="text" value="email" required>
+            <button name="deleteUser" type="submit" class="remove-button">Remove User by id</button>
+
         </div>
     </form>
 </div>

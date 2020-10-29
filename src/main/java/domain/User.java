@@ -28,12 +28,13 @@ public class User {
         PASSWORD_FACTORY = factory;
     }
 
-    public User(int id,String email, String role, byte[] salt, byte[] secret) {
+    public User(int id,String email, String role, byte[] salt, byte[] secret, double kredit) {
         this.id = id;
         this.email = email;
         this.role = role;
         this.salt = salt;
         this.secret = secret;
+        this.kredit = kredit;
     }
 
     private int id;
@@ -41,6 +42,7 @@ public class User {
     private String role;
     private byte[] salt;
     private byte[] secret;
+    private double kredit;
 
     public byte[] getSalt() {
         return salt;
@@ -107,13 +109,16 @@ public class User {
     }
 
     @Override
-    public String toString() {
+    public String   toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
-                ", salt=" + Arrays.toString(salt) +
-                ", secret=" + Arrays.toString(secret) +
+                ", kredit=" + kredit +
                 '}';
+    }
+
+    public double getKredit() {
+        return kredit;
     }
 }

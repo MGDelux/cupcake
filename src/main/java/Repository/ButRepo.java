@@ -1,6 +1,7 @@
 package Repository;
 
 import domain.Buttoms;
+import domain.Toppings;
 
 public interface ButRepo extends ButFactory{
     Iterable<Buttoms> findALlbuttoms() throws NoCupcake;

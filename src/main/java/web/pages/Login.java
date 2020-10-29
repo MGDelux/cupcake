@@ -32,7 +32,9 @@ public class Login extends Servlet {
       try {
           user = loginFacade.login(email, password);
           req.getSession().setAttribute("user",user);
-          resp.sendRedirect(req.getContextPath()+"");
+          req.getSession().setAttribute("role",user.getRole());
+          req.getSession().setAttribute("loggedIn",true);
+              resp.sendRedirect(req.getContextPath()+"");
           return;
       } catch (LoginError | SQLException loginError) {
           req.setAttribute("error", loginError.getMessage());

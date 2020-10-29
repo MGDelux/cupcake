@@ -22,7 +22,12 @@ public class cupcake {
   public Toppings createTopsList(String name,double pris){
         return topList.createTop(name, pris);
   }
-
+public Toppings removeTopping(int id) throws NoCupcake {
+       return topList.deleteTop( id);
+}
+    public Buttoms removeButtom(int id) throws NoCupcake {
+         return butList.deleteBut( id);
+    }
     public Buttoms createButtomsList(String name, double pris) {
         return butList.CreateBut(name, pris);
     }

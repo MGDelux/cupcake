@@ -10,9 +10,6 @@
     <style>
         <jsp:include page="../../css/Productpage.css"/>
     </style>
-    <p><c:if test="${sessionScope.user.email != null}">
-        ${requestScope.user.email}
-    </c:if></p>
     <div class="headerimage">
     </div>
 </head>
@@ -24,10 +21,12 @@
 <!-- Navigationpanel starter /-->
 <nav class="navpanel">
     <!-- Create menu in tab /-->
-    <a href="${pageContext.request.contextPath}">TEST</a>
-    <a class href="${pageContext.request.contextPath}/AdminPage/">Profil</a>
-    <a href="${pageContext.request.contextPath}/login/">Login</a>
-    <a class="fas fa-shopping-cart" data-fa-transform="down-6" href="index.html"></a>
+    <c:forEach items="${requestScope.navbar.GetNavBarLink()}" var="navLink">
+  <a href="<c:url value="${navLink.url}"/>">${navLink.name} <c:if test="${navLink.active}"></c:if> </a>
+    </c:forEach>
+    <a class="userMail"><c:if test="${sessionScope.loggedIn == true}">
+        ${sessionScope.user.email}
+    </c:if></a>
 </nav>
 <!-- Navigationpanel slutter/-->
 
@@ -41,30 +40,31 @@
 <div class="streng"></div>
 <div class="wrapper">
     <div class="bestillingTOP">
+        <form method="post">
         <img class="topimage" src="../images/toppings.jpg" alt="error">
         <h1>Toppings</h1>
         <p>Vælg:</p>
-        <select id="topping" name="topping">
+        <select id="TopToKurv" name="TopToKurv" required>
             <c:forEach items="${toppings}" var="tops">
                 <option>${tops.navn} ${tops.pris} DKK.</option>
             </c:forEach>
         </select>
-        <button>Tilføj til kurv</button>
+        <button name="sumbitTopsTilKurv" type="submit">Tilføj til kurv</button>
+            </form>
     </div>
-
-
     <div class="bestillingBUT">
+        <form method="post">
         <img class="topimage" src="../images/lowers.jpg" alt="error">
         <h1>Buttoms</h1>
         <p>Vælg:</p>
-        <select id="bund" name="bund">
+        <select name="BotToKurv" required>
           <c:forEach items="${currentButtoms}" var="buts">
               <option>${buts.navn} ${buts.pris} DKK.</option>
           </c:forEach>
         </select>
-        <button>Tilføj til kurv</button>
+        <button  name="sumbitBotsTilKurv" type="submit">Tilføj til kurv</button>
+        </form>
     </div>
-
 </div>
 <!-- "bestil ordre" button /-->
 
