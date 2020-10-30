@@ -62,6 +62,7 @@ public class Products extends Servlet {
 return;
     }
 
+
     private void sumitTopsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
         String top = req.getParameter("TopToKurv");
         String[] split = top.split(" ");
