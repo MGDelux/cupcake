@@ -25,7 +25,6 @@
 <body>
 <article>
     <section>
-
         <h1> Profile </h1>
         <p>This is the profile section. </p>
         <p>You can see your credits and orders here. </p>
