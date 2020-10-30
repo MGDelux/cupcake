@@ -62,6 +62,7 @@
         </select>
         <button name="AddCupcakeToKurv" type="submit">Tilføj til kurv</button>
 
+
     </div>
 </form>
 </div>
