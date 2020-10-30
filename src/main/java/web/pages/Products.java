@@ -20,6 +20,16 @@ import java.util.HashSet;
 
 @WebServlet({"/products", "/products/*"})
 public class Products extends Servlet {
+    protected static final Cart api;
+
+    static {
+        api = cart();
+    }
+
+    private static Cart cart() {
+        Database db = new Database();
+        return new Cart(new DBCupcake(db), new DBCupcake(db));
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -44,9 +54,9 @@ public class Products extends Servlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (req.getParameter("sumbitBotsTilKurv") != null) {
+        if (req.getParameter("AddCupcakeToKurv") != null) {
             try {
-                sumitBotsTilKurv(req,resp);
+                sumitBotsTilKurv(req, resp);
             } catch (NoCupcake noCupcake) {
                 noCupcake.printStackTrace();
             }
@@ -55,21 +65,15 @@ public class Products extends Servlet {
     }
 
     private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
-        String bots = req.getParameter("BotToKurv");
-        String[] split = bots.split(" ");
-        System.out.println(0+ "," +split[0]);
-
-return;
-    }
-
-
-    private void sumitTopsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
         String top = req.getParameter("TopToKurv");
-        String[] split = top.split(" ");
-        System.out.println(split[0]);
-
-
+        String[] splittop = top.split(" ");
+        String bots = req.getParameter("BotToKurv");
+        String[] splitbot = bots.split(" ");
+        System.out.println(splittop[0] + splitbot[0]);
+        api.testAdd(splittop[0],splitbot[0]);
         return;
     }
+
+
 }
 
