@@ -49,7 +49,6 @@
                 <option>${tops.navn} ${tops.pris} DKK.</option>
             </c:forEach>
         </select>
-        <button name="sumbitTopsTilKurv" type="submit">Tilføj til kurv</button>
 
     </div>
     <div class="bestillingBUT">
@@ -61,7 +60,7 @@
               <option>${buts.navn} ${buts.pris} DKK.</option>
           </c:forEach>
         </select>
-        <button name="sumbitBotsTilKurv" type="submit">Tilføj til kurv</button>
+        <button name="AddCupcakeToKurv" type="submit">Tilføj til kurv</button>
 
     </div>
 </form>

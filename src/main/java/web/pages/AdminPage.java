@@ -1,9 +1,9 @@
 package web.pages;
-
 import Repository.User.LoginError;
 import Repository.Cupcakes.NoCupcake;
 import domain.Bottoms.Bottoms;
 import domain.Toppings.Toppings;
+import domain.User.LoginFacade;
 import domain.User.User;
 import web.Servlet;
 import api.*;

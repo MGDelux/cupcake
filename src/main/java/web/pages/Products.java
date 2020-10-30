@@ -1,8 +1,13 @@
 package web.pages;
 
+import Repository.Cart.CartRepo;
+import api.Cart;
 import domain.Bottoms.Bottoms;
 import Repository.Cupcakes.NoCupcake;
 import domain.Toppings.Toppings;
+import infrastructure.DBCupcake;
+import infrastructure.DBOrders;
+import infrastructure.Database;
 import web.Servlet;
 
 import javax.servlet.ServletException;
@@ -15,7 +20,7 @@ import java.util.HashSet;
 
 @WebServlet({"/products", "/products/*"})
 public class Products extends Servlet {
-private HashSet<String> order = new HashSet<>();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -39,29 +44,29 @@ private HashSet<String> order = new HashSet<>();
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (req.getParameter("sumbitTopsTilKurv") != null) {
-            sumitTopsTilKurv(req,resp);
-        }
         if (req.getParameter("sumbitBotsTilKurv") != null) {
-            sumitBotsTilKurv(req,resp);
+            try {
+                sumitBotsTilKurv(req,resp);
+            } catch (NoCupcake noCupcake) {
+                noCupcake.printStackTrace();
+            }
         }
         resp.sendRedirect(req.getContextPath() + "/products/");
     }
 
-    private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) {
+    private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
         String bots = req.getParameter("BotToKurv");
         String[] split = bots.split(" ");
         System.out.println(0+ "," +split[0]);
 
-        order.add(split[0]);
 return;
     }
 
-    private void sumitTopsTilKurv(HttpServletRequest req, HttpServletResponse resp) {
+    private void sumitTopsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
         String top = req.getParameter("TopToKurv");
         String[] split = top.split(" ");
         System.out.println(split[0]);
-        order.add(1+ "," +split[0]);
+
 
         return;
     }

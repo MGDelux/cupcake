@@ -9,5 +9,5 @@ import domain.Toppings.Toppings;
  * CREATED BY mathi @ 30-10-2020 - 09:14
  **/
 public interface CartFactory {
-    Item_cart addToppingToFactory(String tops, String bots);
+    Item_cart GetShoppingCarts(Toppings tops, Bottoms bots);
 }

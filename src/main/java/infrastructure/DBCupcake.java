@@ -51,7 +51,26 @@ public class DBCupcake implements TopsRepo, BotRepo {
     }
 
     @Override
-    public Toppings findTop(int id) throws NoCupcake {
+    public Toppings findTop(String id) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "SELECT * FROM toppings where navn = ?";
+            var smt = conn.prepareStatement(SQL);
+            smt.setString(1, id);
+            smt.executeQuery();
+            ResultSet set = smt.getResultSet();
+            if (set.next()) {
+                return ParseTops(set);
+            } else {
+                throw new NoCupcake();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new NoCupcake();
+        }
+    }
+
+    @Override
+    public Toppings findtopByiD(int id) throws NoCupcake {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM toppings where id = ?";
             var smt = conn.prepareStatement(SQL);
@@ -67,6 +86,7 @@ public class DBCupcake implements TopsRepo, BotRepo {
             e.printStackTrace();
             throw new NoCupcake();
         }
+
     }
 
     @Override
@@ -88,7 +108,7 @@ public class DBCupcake implements TopsRepo, BotRepo {
             throw new RuntimeException("SQL E ERROR");
         }
         try {
-            return findTop(topid);
+            return findtopByiD(topid);
         } catch (NoCupcake noCupcake) {
             throw new RuntimeException("ARRG DB ERROR");
         }
@@ -108,6 +128,25 @@ public class DBCupcake implements TopsRepo, BotRepo {
                 throw new NoCupcake();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+            throw new NoCupcake();
+        }
+    }
+
+    @Override
+    public Bottoms findBot(String navn) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "SELECT * FROM buttoms where navn = ?";
+            var smt = conn.prepareStatement(SQL);
+            smt.setString(1, navn);
+            smt.executeQuery();
+            ResultSet set = smt.getResultSet();
+            if (set.next()) {
+                return ParseButs(set);
+            } else {
+                throw new NoCupcake();
+            }
+        } catch (SQLException | NoCupcake e) {
             e.printStackTrace();
             throw new NoCupcake();
         }
@@ -199,7 +238,7 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return findTop(id);
+        return findtopByiD(id);
     }
 
     @Override
