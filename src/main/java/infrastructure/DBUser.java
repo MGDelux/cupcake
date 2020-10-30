@@ -1,7 +1,7 @@
 package infrastructure;
 
-import Repository.LoginError;
-import domain.User;
+import Repository.User.LoginError;
+import domain.User.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class DBUser {
     public DBUser(Database db) throws LoginError, SQLException {
         this.db = db;
     }
+
     public boolean checkMail(String email) {
         try {
             Connection conn = db.connect();
@@ -26,6 +27,7 @@ public class DBUser {
             return false;
         }
     }
+
     public User login(String email, String password) throws LoginError {
         try {
             Connection conn = db.connect();
@@ -38,7 +40,8 @@ public class DBUser {
                 int id = rs.getInt("id");
                 byte[] salt = rs.getBytes("salt");
                 byte[] secret = rs.getBytes("secret");
-                User user = new User(0,email, role, salt, secret);
+                double kredit = rs.getDouble("kredit");
+                User user = new User(0, email, role, salt, secret, kredit);
                 user.setId(id);
                 if (user.isPasswordCorrect(password)) {
                     return user;
@@ -50,15 +53,17 @@ public class DBUser {
             throw new LoginError("Error: " + e);
         }
     }
+
     public void createUser(User user) throws LoginError {
         try {
             Connection conn = db.connect();
-            String SQL = "INSERT INTO kunde (email, role, salt,secret) VALUES (?, ?, ?,?)";
+            String SQL = "INSERT INTO kunde (email, role, salt,secret, kredit) VALUES (?, ?, ?,?,?)";
             PreparedStatement ps = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getRole());
             ps.setBytes(3, user.getSalt());
             ps.setBytes(4, user.getSecret());
+            ps.setDouble(5, user.getKredit());
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -68,6 +73,7 @@ public class DBUser {
             throw new LoginError(ex.getMessage());
         }
     }
+
     public ArrayList<User> findAllUsers() {
         ArrayList<User> users = new ArrayList<>();
         try (Connection conn = db.connect()) {
@@ -91,6 +97,33 @@ public class DBUser {
                 rs.getString("email"),
                 rs.getString("role"),
                 rs.getBytes("salt"),
-                rs.getBytes("secret"));
+                rs.getBytes("secret"),
+                rs.getDouble("kredit"));
+    }
+
+    public void addKredit(String id, double kredit) {
+        try {
+            Connection conn = db.connect();
+            String SQL = "UPDATE kunde SET kredit = (?) WHERE email = (?)";
+            PreparedStatement ps = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setDouble(1, kredit);
+            ps.setString(2, id);
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+            throwables.printStackTrace();
+        }
+    }
+
+    public void DeleteUser(String email) {
+        try (Connection conn = db.connect()) {
+            String SQL = "DELETE FROM kunde WHERE email = ?";
+            var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            smt.setString(1, email);
+            smt.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

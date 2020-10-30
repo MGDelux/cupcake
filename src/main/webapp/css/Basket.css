@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 * {
-font-family: Poppins;
-overflow: hidden;
+    font-family: Poppins;
+    overflow-x: hidden;
 }
 .headerimage {
     background: url('../images/olskercupcakes.png') no-repeat  center;;
     background-size: 100%;
     height: 430px;
-    overflow: hidden;
     width: 100%;
     line-height: 25.6000003814697px
 }
@@ -19,11 +18,11 @@ body {
     width: 100%;
     background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #8e2de2, #4a00e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    overflow-x: hidden;
+
 }
 
-.useremail .a{
-    float: right;
+.useremail {
+    position: relative;
     text-decoration: none;
 }
 
@@ -40,12 +39,8 @@ body {
     background: #8e2de2; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #8e2de2, #4a00e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    overflow: hidden;
     width: 100%;
 
-}
-.navpanel .userMail{
-    float: right;
 }
 
 .navpanel a {
@@ -69,83 +64,6 @@ body {
 .headers{
     float: top;
 }
-.wrapper{
-    width: 800px;
-    height: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-.bestillingBUT{
-    display: inline-block;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    max-width: 320px;
-    text-align: center;
-    background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #8e2de2, #4a00e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-.bestillingBUT .topimage {
-    width: 100%;
-    height: 150%;
-    background: url('images/topping.jpg') no-repeat center;;
-}
-.bestillingBUT button{
-    border: none;
-    color: white;
-    background-color: rgba(0, 0, 0, 10);
-    padding: 12px;
-    width: 100%;
-    text-align: center;
-    font-size: 17px;
-}
-.bestillingBUT button:hover {
-    color: #6C00D8;
-    background: white;
-}
-.bestillingBUT select{
-    border: none;
-    padding: 12px;
-    width: 100%;
-    font-size: 14px;
-}
-.bestillingBUT   p{
-    font-size: 21px;
-}
-.bestillingTOP{
-    display: inline-block;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    max-width: 320px;
-    text-align: center;
-    background: -webkit-linear-gradient(to left, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #8e2de2, #4a00e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-.bestillingTOP .topimage{
-    width: 100%;
-    height: 150%;
-    background: url('images/topping.jpg') no-repeat  center;;
-
-}
-.bestillingTOP button{
-    border: none;
-    color: white;
-    background-color: rgba(0, 0, 0, 10);
-    padding: 12px;
-    width: 100%;
-    text-align: center;
-    font-size: 17px;
-}
-.bestillingTOP button:hover {
-   color: #6C00D8;
-    background: white;
-}
-.bestillingTOP select{
-    border: none;
-    padding: 12px;
-    width: 100%;
-    font-size: 14px;
-}
-.bestillingTOP p{
-    font-size: 21px;
-}
 
 .streng {
     margin: auto;
@@ -164,23 +82,30 @@ body {
     top: -20px;
 }
 
-.bund {
-    position: relative;
-    left: 70px;
-}
 .container{
     text-align: center;
 }
-
-.dropdown-single {
+.container2{
+    border-style: solid;
+    border-color: black;
+    background: -webkit-linear-gradient(to top, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #8e2de2, #4a00e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    position: relative;
+    margin-left: 400px;
+    width: 60%;
+    color: white;
+}
+.container2 p{
     float: left;
-    padding-bottom: 500px;
+    padding: 4px 4px;
+    color: #f2f2f2;
+    text-decoration: none;
+    text-align: left;
+    font-size: 17px;
 }
 
-.dropdowns::after {
-    content: "";
-    clear: both;
-    display: table;
+.ordredetalje{
+    position: center;
 }
 
 .button {
