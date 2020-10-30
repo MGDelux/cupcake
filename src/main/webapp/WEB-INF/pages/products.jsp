@@ -53,17 +53,20 @@
     </div>
     <div class="bestillingBUT">
         <img class="topimage" src="../images/lowers.jpg" alt="error">
-        <h1>Buttoms</h1>
+        <h1 class="text">Buttoms</h1>
         <p>Vælg:</p>
         <select name="BotToKurv" required>
           <c:forEach items="${currentButtoms}" var="buts">
               <option>${buts.navn} ${buts.pris} DKK.</option>
           </c:forEach>
         </select>
-        <button name="AddCupcakeToKurv" type="submit">Tilføj til kurv</button>
+
 
 
     </div>
+        <div class="Addcupcake">
+            <button name="AddCupcakeToKurv" type="submit">Tilføj til kurv</button>
+        </div>
 </form>
 </div>
 <!-- "bestil ordre" button /-->
