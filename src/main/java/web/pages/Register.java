@@ -1,8 +1,8 @@
 package web.pages;
 
-import Repository.LoginError;
-import domain.LoginFacade;
-import domain.User;
+import Repository.User.LoginError;
+import domain.User.LoginFacade;
+import domain.User.User;
 import web.Servlet;
 
 import javax.servlet.ServletException;
@@ -16,7 +16,6 @@ import java.sql.SQLException;
 public class Register extends Servlet {
     private String email;
     private String password;
-    private String password1;
     private LoginFacade loginFacade = new LoginFacade();
     private User user;
 
@@ -31,9 +30,8 @@ public class Register extends Servlet {
             throws IOException, ServletException {
         email = req.getParameter("email1");
         password = req.getParameter("password1");
-        password1 = req.getParameter("password2"); //redudant
         try {
-            user = loginFacade.createUser(email,password);
+            user = loginFacade.createUser(email,password,"customer",0);
             req.getSession().setAttribute("user",user);
             resp.sendRedirect(req.getContextPath()+"");
             log(req,"New user registered "+ user.getEmail());

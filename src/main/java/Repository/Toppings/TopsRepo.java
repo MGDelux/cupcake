@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Toppings;
 
-import domain.Toppings;
+import Repository.Cupcakes.NoCupcake;
+import domain.Toppings.Toppings;
 
 public interface TopsRepo extends TopFactory {
     Iterable<Toppings> findAllTops() throws NoCupcake;

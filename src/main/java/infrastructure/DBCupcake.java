@@ -1,15 +1,15 @@
 package infrastructure;
 
-import Repository.ButRepo;
-import Repository.LoginError;
-import Repository.NoCupcake;
-import Repository.TopsRepo;
-import domain.*;
+import Repository.Bottoms.BotRepo;
+import Repository.Cupcakes.NoCupcake;
+import Repository.Toppings.TopsRepo;
+import domain.Bottoms.Bottoms;
+import domain.Toppings.Toppings;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBCupcake implements TopsRepo, ButRepo {
+public class DBCupcake implements TopsRepo, BotRepo {
     private final Database db;
 
     public DBCupcake(Database db) {
@@ -34,8 +34,8 @@ public class DBCupcake implements TopsRepo, ButRepo {
     }
 
     @Override
-    public Iterable<Buttoms> findALlbuttoms() throws NoCupcake {
-        ArrayList<Buttoms> buttoms = new ArrayList<>();
+    public Iterable<Bottoms> findALlbuttoms() throws NoCupcake {
+        ArrayList<Bottoms> buttoms = new ArrayList<>();
         try (Connection conn = db.connect()) {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM buttoms;");
             ResultSet get = ps.executeQuery();
@@ -93,8 +93,9 @@ public class DBCupcake implements TopsRepo, ButRepo {
             throw new RuntimeException("ARRG DB ERROR");
         }
     }
+
     @Override
-    public Buttoms findBut(int id) throws NoCupcake {
+    public Bottoms findBut(int id) throws NoCupcake {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM buttoms where id = ?";
             var smt = conn.prepareStatement(SQL);
@@ -129,7 +130,7 @@ public class DBCupcake implements TopsRepo, ButRepo {
 
 
     @Override
-    public Buttoms CreateBut(String navn, double pris) {
+    public Bottoms CreateBut(String navn, double pris) {
         int newid;
         try (Connection conn = db.connect()) {
             String sql = "INSERT INTO buttoms (navn, pris) VALUES (?, ?)";
@@ -160,22 +161,53 @@ public class DBCupcake implements TopsRepo, ButRepo {
                 set.getDouble("toppings.pris"));
     }
 
-    private Buttoms ParseButs(ResultSet set) throws SQLException {  //update til kun en metode
-        return new Buttoms(
+    private Bottoms ParseButs(ResultSet set) throws SQLException {  //update til kun en metode
+        return new Bottoms(
                 set.getInt("buttoms.id"),
                 set.getString("buttoms.navn"),
                 set.getDouble("buttoms.pris"));
     }
 
     @Override
-    public Buttoms createButtom(String navn, Double pris) {
+    public Bottoms createButtom(String navn, Double pris) {
         return null;
+    }
+
+    @Override
+    public Bottoms deleteBut(int id) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "DELETE FROM buttoms WHERE id = ?";
+            var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            smt.setInt(1, id);
+            smt.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return findBut(id);
+    }
+
+
+    @Override
+    public Toppings deleteTop(int id) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "DELETE FROM toppings WHERE id = ?";
+            var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            smt.setInt(1, id);
+            smt.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return findTop(id);
     }
 
     @Override
     public Toppings createToppings(String navn, Double pris) {
         return null;
     }
+
+
 }
 
 

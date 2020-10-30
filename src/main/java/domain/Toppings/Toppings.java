@@ -1,11 +1,11 @@
-package domain;
+package domain.Toppings;
 
-public class Buttoms {
+public class Toppings {
     int id;
     String navn;
     double pris;
 
-    public Buttoms(int id, String navn, double pris) {
+    public Toppings(int id, String navn, double pris) {
         this.id = id;
         this.navn = navn;
         this.pris = pris;
@@ -37,7 +37,7 @@ public class Buttoms {
 
     @Override
     public String toString() {
-        return "Buttoms{" +
+        return "Toppings{" +
                 "id=" + id +
                 ", navn='" + navn + '\'' +
                 ", pris=" + pris +
