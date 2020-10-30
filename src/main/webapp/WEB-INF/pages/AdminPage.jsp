@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="domain.Toppings" %>
+<%@ page import="domain.Toppings.Toppings" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--

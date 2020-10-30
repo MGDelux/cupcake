@@ -15,16 +15,27 @@
     </c:if></p>
     <div class="headerimage">
     </div>
+    <script type="text/javascript">
+        function changeImage(){
+            if (document.getElementById("Choko").src == "https://www.amo.dk/siteassets/2.-opskrifter/chokolade-cupcake.jpg?maxwidth=1440")
+
+                document.getElementById("Choko").src == "https://www.amo.dk/siteassets/2.-opskrifter/chokolade-cupcake.jpg?maxwidth=1440";
+
+            else {
+                document.getElementById("Choko").src == "https://cdn.discordapp.com/attachments/676385980340502529/771149601356382218/image0.jpg";
+            }
+        }
+    </script>
 </head>
 <body>
 
+<!-- Navigationpanel starter /-->
 <nav class="navpanel">
-    <c:forEach items="${requestScope.indexNavbar.GetNavBarLink()}" var="navLink">
-        <a href="<c:url value="${navLink.url}"/>">${navLink.name} <c:if test="${navLink.active}"></c:if> </a>
-    </c:forEach>
-    <a><c:if test="${sessionScope.loggedIn == true}">
-        ${sessionScope.user.email}
-    </c:if></a>
+    <!-- Create menu in tab /-->
+    <a href="${pageContext.request.contextPath}">TEST</a>
+    <a class href="${pageContext.request.contextPath}/AdminPage/">Profil</a>
+    <a href="${pageContext.request.contextPath}/login/">Login</a>
+    <a class="fas fa-shopping-cart" data-fa-transform="down-6" href="${pageContext.request.contextPath}/basket/"></a>
 </nav>
 <!-- Navigationpanel slutter/-->
 

@@ -1,16 +1,17 @@
 package api;
 
-import Repository.ButRepo;
-import Repository.NoCupcake;
-import Repository.TopsRepo;
-import domain.*;
+import Repository.Bottoms.BotRepo;
+import Repository.Cupcakes.NoCupcake;
+import Repository.Toppings.TopsRepo;
+import domain.Bottoms.Bottoms;
+import domain.Toppings.Toppings;
 
-public class cupcake {
+public class Cupcake {
     private static String ver = "0.0";
     private final TopsRepo topList;
-    private final ButRepo butList;
+    private final BotRepo butList;
 
-    public cupcake(TopsRepo topList, ButRepo butList) {
+    public Cupcake(TopsRepo topList, BotRepo butList) {
         this.topList = topList;
         this.butList = butList;
     }
@@ -19,16 +20,16 @@ public class cupcake {
         return ver;
     }
 
-  public Toppings createTopsList(String name,double pris){
+  public Toppings createTopsList(String name, double pris){
         return topList.createTop(name, pris);
   }
 public Toppings removeTopping(int id) throws NoCupcake {
        return topList.deleteTop( id);
 }
-    public Buttoms removeButtom(int id) throws NoCupcake {
+    public Bottoms removeButtom(int id) throws NoCupcake {
          return butList.deleteBut( id);
     }
-    public Buttoms createButtomsList(String name, double pris) {
+    public Bottoms createButtomsList(String name, double pris) {
         return butList.CreateBut(name, pris);
     }
 
@@ -36,7 +37,7 @@ public Toppings removeTopping(int id) throws NoCupcake {
         return topList.findAllTops();
     }
 
-    public Iterable<Buttoms> findAllBut() throws NoCupcake {
+    public Iterable<Bottoms> findAllBut() throws NoCupcake {
         return butList.findALlbuttoms();
     }
 

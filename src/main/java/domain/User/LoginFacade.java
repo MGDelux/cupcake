@@ -1,11 +1,9 @@
-package domain;
+package domain.User;
 
-import Repository.LoginError;
-import infrastructure.DBCupcake;
+import Repository.User.LoginError;
 import infrastructure.DBUser;
 import infrastructure.Database;
 
-import javax.enterprise.inject.New;
 import java.sql.SQLException;
 
 public class LoginFacade {
@@ -31,11 +29,7 @@ public void addKredit(String id,double kredit) throws LoginError, SQLException {
         }else {
             new DBUser(db).addKredit(id,kredit);
         }
-
-
-
 }
-
     public String deleteUser(String email) throws LoginError, SQLException {
         if (new DBUser(db).checkMail(email)) {
             new DBUser(db).DeleteUser(email);

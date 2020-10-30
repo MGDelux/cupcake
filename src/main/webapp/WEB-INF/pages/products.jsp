@@ -39,8 +39,8 @@
 </div>
 <div class="streng"></div>
 <div class="wrapper">
+    <form method="post">
     <div class="bestillingTOP">
-        <form method="post">
         <img class="topimage" src="../images/toppings.jpg" alt="error">
         <h1>Toppings</h1>
         <p>Vælg:</p>
@@ -50,10 +50,9 @@
             </c:forEach>
         </select>
         <button name="sumbitTopsTilKurv" type="submit">Tilføj til kurv</button>
-            </form>
+
     </div>
     <div class="bestillingBUT">
-        <form method="post">
         <img class="topimage" src="../images/lowers.jpg" alt="error">
         <h1>Buttoms</h1>
         <p>Vælg:</p>
@@ -62,9 +61,10 @@
               <option>${buts.navn} ${buts.pris} DKK.</option>
           </c:forEach>
         </select>
-        <button  name="sumbitBotsTilKurv" type="submit">Tilføj til kurv</button>
-        </form>
+        <button name="sumbitBotsTilKurv" type="submit">Tilføj til kurv</button>
+
     </div>
+</form>
 </div>
 <!-- "bestil ordre" button /-->
 

@@ -1,6 +1,6 @@
 package web;
 
-import api.cupcake;
+import api.Cupcake;
 import infrastructure.DBCupcake;
 import infrastructure.Database;
 import web.widget.IndexNav;
@@ -14,15 +14,16 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Servlet extends HttpServlet {
-    protected static final cupcake api;
-
+    protected static final Cupcake api;
     static {
         api = loadCupcakes();
     }
 
-    public static cupcake loadCupcakes() {
+
+
+    public static Cupcake loadCupcakes() {
         Database db = new Database();
-        return new cupcake(new DBCupcake(db), new DBCupcake(db));
+        return new Cupcake(new DBCupcake(db), new DBCupcake(db));
 
     }
 
@@ -34,7 +35,7 @@ public class Servlet extends HttpServlet {
             throws ServletException, IOException {
         req.setAttribute("indexNavbar",new IndexNav(req));
         req.setAttribute("navbar",new Navbar(req));
-        req.setAttribute("version", cupcake.getVer());
+        req.setAttribute("version", Cupcake.getVer());
         req.setAttribute("title", title);
         req.setAttribute("content", content);
         req.getRequestDispatcher(content).forward(req, resp);

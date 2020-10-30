@@ -1,7 +1,7 @@
 package web.pages;
 
-import domain.LoginFacade;
-import domain.User;
+import domain.User.LoginFacade;
+import domain.User.User;
 import web.Servlet;
 
 import javax.servlet.ServletException;

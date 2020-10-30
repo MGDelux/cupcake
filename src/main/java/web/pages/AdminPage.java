@@ -1,12 +1,13 @@
 package web.pages;
 
-import Repository.LoginError;
-import Repository.NoCupcake;
-import domain.*;
+import Repository.User.LoginError;
+import Repository.Cupcakes.NoCupcake;
+import domain.Bottoms.Bottoms;
+import domain.Toppings.Toppings;
+import domain.User.User;
 import web.Servlet;
 import api.*;
 
-import javax.print.DocFlavor;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,21 +18,21 @@ import java.util.ArrayList;
 
 @WebServlet({"/AdminPage", "/AdminPage/*"})
 public class AdminPage extends Servlet {
-    cupcake cupcake = loadCupcakes();
+    Cupcake cupcake = loadCupcakes();
     LoginFacade loginFacade = new LoginFacade();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         LoginFacade loginFacade = new LoginFacade();
         ArrayList<Toppings> toppings = new ArrayList<>();
-        ArrayList<Buttoms> buttoms = new ArrayList<>();
+        ArrayList<Bottoms> buttoms = new ArrayList<>();
         ArrayList<User> users = new ArrayList<>();
         setUp(req, resp);
         try {
             for (Toppings tops : cupcake.findAllTop()) {
                 toppings.add(tops);
             }
-            for (Buttoms buts : cupcake.findAllBut()) {
+            for (Bottoms buts : cupcake.findAllBut()) {
                 buttoms.add(buts);
             }
             for (User u : loginFacade.getAllUsers()) {
@@ -128,7 +129,7 @@ public class AdminPage extends Servlet {
         String nytop = req.getParameter("topping");
         String nypris = req.getParameter("toppingPris");
         try {
-            cupcake cupcake = loadCupcakes();
+            Cupcake cupcake = loadCupcakes();
             double nyprisCheck = Double.parseDouble(nypris);
             cupcake.createTopsList(nytop, nyprisCheck);
         } catch (NumberFormatException e) {
@@ -144,7 +145,7 @@ public class AdminPage extends Servlet {
         String nytop = req.getParameter("buttomName");
         String nypris = req.getParameter("buttomPris");
         try {
-            cupcake cupcake = loadCupcakes();
+            Cupcake cupcake = loadCupcakes();
             double nyprisCheck = Double.parseDouble(nypris);
             cupcake.createButtomsList(nytop, nyprisCheck);
         } catch (NumberFormatException e) {
@@ -160,7 +161,7 @@ public class AdminPage extends Servlet {
         String nytop = req.getParameter("removeToppingid");
         int parseInt = Integer.parseInt(nytop);
         try {
-            cupcake cupcake = loadCupcakes();
+            Cupcake cupcake = loadCupcakes();
             cupcake.removeTopping(parseInt);
         } catch (NoCupcake noCupcake) {
             noCupcake.printStackTrace();
@@ -174,7 +175,7 @@ public class AdminPage extends Servlet {
         try {
 
 
-            cupcake cupcake = loadCupcakes();
+            Cupcake cupcake = loadCupcakes();
             cupcake.removeButtom(parseInt);
         } catch (NoCupcake noCupcake) {
             noCupcake.printStackTrace();

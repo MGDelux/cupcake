@@ -1,8 +1,8 @@
 package web.pages;
 
-import Repository.LoginError;
-import domain.LoginFacade;
-import domain.User;
+import Repository.User.LoginError;
+import domain.User.LoginFacade;
+import domain.User.User;
 import web.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,7 +1,7 @@
 package infrastructure;
 
-import Repository.LoginError;
-import domain.User;
+import Repository.User.LoginError;
+import domain.User.User;
 
 import java.sql.*;
 import java.util.ArrayList;

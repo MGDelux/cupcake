@@ -1,4 +1,4 @@
-package domain;
+package domain.User;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
