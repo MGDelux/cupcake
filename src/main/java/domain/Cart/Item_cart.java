@@ -10,13 +10,11 @@ public class Item_cart {
     int cartItem;
     Toppings toppings;
     Bottoms bottoms;
-    double sum;
 
-    public Item_cart(int cartItem, Toppings toppings, Bottoms bottoms, double sum) {
+    public Item_cart(int cartItem, Toppings toppings, Bottoms bottoms) {
         this.cartItem = cartItem;
         this.toppings = toppings;
         this.bottoms = bottoms;
-        this.sum = sum;
     }
 
     public int getCartItem() {
@@ -42,22 +40,14 @@ public class Item_cart {
     public void setBottoms(Bottoms bottoms) {
         this.bottoms = bottoms;
     }
-
-    public double getSum() {
-        return sum;
-    }
-
-    public void setSum(double sum) {
-        this.sum = sum;
-    }
+    //add sum
 
     @Override
     public String toString() {
         return "Item_cart{" +
                 "cartItem=" + cartItem +
                 ", toppings=" + toppings +
-                ", bottoms=" + bottoms +
-                ", sum=" + sum +
-                '}';
+                ", bottoms=" + bottoms;
+
     }
 }

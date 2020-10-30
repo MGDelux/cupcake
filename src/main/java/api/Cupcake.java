@@ -20,15 +20,18 @@ public class Cupcake {
         return ver;
     }
 
-  public Toppings createTopsList(String name, double pris){
+    public Toppings createTopsList(String name, double pris) {
         return topList.createTop(name, pris);
-  }
-public Toppings removeTopping(int id) throws NoCupcake {
-       return topList.deleteTop( id);
-}
-    public Bottoms removeButtom(int id) throws NoCupcake {
-         return butList.deleteBut( id);
     }
+
+    public Toppings removeTopping(int id) throws NoCupcake {
+        return topList.deleteTop(id);
+    }
+
+    public Bottoms removeButtom(int id) throws NoCupcake {
+        return butList.deleteBut(id);
+    }
+
     public Bottoms createButtomsList(String name, double pris) {
         return butList.CreateBut(name, pris);
     }
