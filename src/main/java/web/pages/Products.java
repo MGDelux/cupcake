@@ -21,14 +21,12 @@ import java.util.HashSet;
 @WebServlet({"/products", "/products/*"})
 public class Products extends Servlet {
     protected static final Cart api;
-
     static {
         api = cart();
     }
 
     private static Cart cart() {
-        Database db = new Database();
-        return new Cart(new DBCupcake(db), new DBCupcake(db));
+        return new Cart(Servlet.loadCupcakes());
     }
 
     @Override
@@ -66,10 +64,10 @@ public class Products extends Servlet {
 
     private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
         String top = req.getParameter("TopToKurv");
-        String[] splittop = top.split(" ");
+        String[] splittop = top.split(",");
         String bots = req.getParameter("BotToKurv");
-        String[] splitbot = bots.split(" ");
-        System.out.println(splittop[0] + splitbot[0]);
+        String[] splitbot = bots.split(",");
+        System.out.println(">"+splittop[0] + "< >" +splitbot[0]+"<");
         api.testAdd(splittop[0],splitbot[0]);
         return;
     }

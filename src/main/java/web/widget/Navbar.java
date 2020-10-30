@@ -1,7 +1,4 @@
 package web.widget;
-
-import web.pages.Products;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;

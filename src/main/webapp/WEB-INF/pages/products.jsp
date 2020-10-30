@@ -32,7 +32,7 @@
 
 <div class="container" align="center">
     <!-- headers/tekst starter-->
-    <div class="headers">
+    <div class="headers" align="">
         <h1><strong>Velkommen ombord.</strong></h1>
         <h2 class="header2"><strong>Øens bedste cupcakes, vælg og bestil her</strong></h2>
     </div>
@@ -46,7 +46,7 @@
         <p>Vælg:</p>
         <select id="TopToKurv" name="TopToKurv" required>
             <c:forEach items="${toppings}" var="tops">
-                <option>${tops.navn} ${tops.pris} DKK.</option>
+                <option>${tops.navn}, ${tops.pris} DKK.</option>
             </c:forEach>
         </select>
 
@@ -57,7 +57,7 @@
         <p>Vælg:</p>
         <select name="BotToKurv" required>
           <c:forEach items="${currentButtoms}" var="buts">
-              <option>${buts.navn} ${buts.pris} DKK.</option>
+              <option>${buts.navn}, ${buts.pris} DKK.</option>
           </c:forEach>
         </select>
 

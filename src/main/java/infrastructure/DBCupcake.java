@@ -61,11 +61,11 @@ public class DBCupcake implements TopsRepo, BotRepo {
             if (set.next()) {
                 return ParseTops(set);
             } else {
-                throw new NoCupcake();
+                throw new NoCupcake(set.toString() + " >" + id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new NoCupcake();
+            throw new NoCupcake(e.getMessage() + " >" + id);
         }
     }
 
@@ -80,11 +80,11 @@ public class DBCupcake implements TopsRepo, BotRepo {
             if (set.next()) {
                 return ParseTops(set);
             } else {
-                throw new NoCupcake();
+                throw new NoCupcake(set.toString() + " >>" + id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new NoCupcake();
+            throw new NoCupcake(e.getMessage() + " >" + id);
         }
 
     }
@@ -125,11 +125,11 @@ public class DBCupcake implements TopsRepo, BotRepo {
             if (set.next()) {
                 return ParseButs(set);
             } else {
-                throw new NoCupcake();
+                throw new NoCupcake(set.toString() + " " + id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new NoCupcake();
+            throw new NoCupcake(e.getMessage() + " " + id);
         }
     }
 
@@ -144,11 +144,11 @@ public class DBCupcake implements TopsRepo, BotRepo {
             if (set.next()) {
                 return ParseButs(set);
             } else {
-                throw new NoCupcake();
+                throw new NoCupcake(set.toString() + " "+ navn);
             }
         } catch (SQLException | NoCupcake e) {
             e.printStackTrace();
-            throw new NoCupcake();
+            throw new NoCupcake(navn + " "+ e.getMessage());
         }
     }
 

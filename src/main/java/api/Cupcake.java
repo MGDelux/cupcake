@@ -43,6 +43,12 @@ public class Cupcake {
     public Iterable<Bottoms> findAllBut() throws NoCupcake {
         return butList.findALlbuttoms();
     }
+    public Toppings getTopping(String navn) throws NoCupcake {
+        return  topList.findTop(navn);
+    }
+    public Bottoms getButtom(String navn) throws NoCupcake {
+        return butList.findBot(navn);
+    }
 
     @Override
     public String toString() {

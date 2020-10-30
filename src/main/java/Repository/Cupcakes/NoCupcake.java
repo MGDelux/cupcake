@@ -1,7 +1,7 @@
 package Repository.Cupcakes;
 
 public class NoCupcake extends Exception {
-    public NoCupcake() {
-        super("Cupcake error");
+    public NoCupcake(String cupcake) {
+        super("Cupcake error " + cupcake);
     }
 }

@@ -16,6 +16,7 @@ public class Basket extends Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        Servlet.loadCupcakes();
         render("basket", "/WEB-INF/pages/basket.jsp", req, resp);
     }
 }
