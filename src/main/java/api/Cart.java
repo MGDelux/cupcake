@@ -7,6 +7,7 @@ import domain.Bottoms.Bottoms;
 import domain.Cart.Item_cart;
 import domain.Toppings.Toppings;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +19,7 @@ public class Cart {
     private final ArrayList<Item_cart> CartItems = new ArrayList<>();
     private final Cupcake cupcake;
     private double sum;
-    private int orderID;
+    private String orderID = "";
 
     public Cart(Cupcake cupcake) {
         this.cupcake = cupcake;
@@ -33,14 +34,31 @@ public class Cart {
         return CartItems;
     }
 
-    public void testAdd(String top, String bot) throws NoCupcake {
+    public double getSum() {
+        return sum;
+    }
+
+    public void addItemIntoCart(String top, String bot) throws NoCupcake {
         int cart = CartItems.size() + 1;
         Toppings topping = cupcake.getTopping(top);
         Bottoms bottom = cupcake.getButtom(bot);
         Item_cart itemCart = new Item_cart(cart, topping, bottom);
         addCupCakeToCart(itemCart);
         System.out.println("ID " + orderID);
+        sum = calculateSum();
+        System.out.println(" = " + sum + " kr.");
+    }
 
+    private double calculateSum() {
+        double tempSum = 0;
+        for (Item_cart cart : CartItems) {
+            tempSum = tempSum + cart.getToppings().getPris();
+        }
+        for (Item_cart cart : CartItems) {
+            tempSum = tempSum + cart.getBottoms().getPris();
+        }
+        System.out.print(">" + sum);
+        return tempSum;
     }
 
     @Override

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -25,61 +26,62 @@
     <a href="${pageContext.request.contextPath}">TEST</a>
     <a class href="${pageContext.request.contextPath}/AdminPage/">Profil</a>
     <a href="${pageContext.request.contextPath}/login/">Login</a>
-    <a class="fas fa-shopping-cart" data-fa-transform="down-6" href="index.html"></a>
 </nav>
 <!-- Navigationpanel slutter/-->
 
 
 <div class="container">
     <div class="header">
-        <h1 class="tak">Tak for din ordre, håber vi ser dig igen! </h1>
-        <h2 class="ordrenr">Ordre nummer: </h2>
-        <h2 class="ordredetalje">Ordre detaljer:</h2>
+        <h1 class="ordredetalje">Ordre detaljer:</h1>
+        <a>Antal af cupcakes: ${cupcakesAntal} - total pris: ${totalSum} DDK.-</a>
     </div>
-
     <div class="container2">
-
     </div>
 
 
     <!-- Ordredetaljer starter-->
+    <form method="post">
     <div class="ordredetalje" align="center">
+        <label>Din order:</label>
         <table id="ordre" border="1" title="Ordrelinje">
             <thead>
             <tr>
-                <th>antal:</th>
-                <th>bund:</th>
-                <th>topping:</th>
-                <th>pris:</th>
+
+                <th>Cupcake: </th>
+                <th>Topping: </th>
+                <th>Bottoms: </th>
+                <th>Ændre: </th>
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${cart}" var="cartsitems">
 
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                <tr>
+                    <td>
+                           #${cartsitems.cartItem}
+                    </td>
+                    <td>
+                            ${cartsitems.toppings}
+                    </td>
+                    <td>
+                            ${cartsitems.bottoms}
+                    </td>
+                    <td align="center">
+                    <input  type="checkbox" name="DeleteButton" value="Slæt" >
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
-            <tfoot>
-
-            <tr>
-                <td>
-                <td></td>
-                </td>
-            </tr>
-            </tfoot>
 
         </table>
     </div>
-
+    </form>
 </div>
+
 
 </body>
 <fotter class="footer">
     <a> Team Jumbo Snegl: Emil, Janus og Mathias </a>
     <a href="https://github.com/MGDelux/cupcake">| Github |</a>
-    <a href="https://www.youtube.com/watch?v=YddwkMJG1Jo" class="secret">?</a>
 </fotter>
 </html>

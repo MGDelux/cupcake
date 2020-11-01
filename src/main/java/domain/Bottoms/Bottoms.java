@@ -37,10 +37,6 @@ public class Bottoms {
 
     @Override
     public String toString() {
-        return "Buttoms{" +
-                "id=" + id +
-                ", navn='" + navn + '\'' +
-                ", pris=" + pris +
-                '}';
+        return " " + navn;
     }
 }

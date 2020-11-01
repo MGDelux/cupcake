@@ -44,10 +44,10 @@ public class Item_cart {
 
     @Override
     public String toString() {
-        return "Item_cart{" +
-                "cartItem=" + cartItem +
-                ", toppings=" + toppings +
-                ", bottoms=" + bottoms;
+        return
+                cartItem +
+                " " + toppings +
+                " " + bottoms;
 
     }
 }

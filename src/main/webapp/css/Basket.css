@@ -5,7 +5,7 @@
     overflow-x: hidden;
 }
 .headerimage {
-    background: url('../images/olskercupcakes.png') no-repeat  center;;
+    background: url('images/olskercupcakes.png') no-repeat  center;;
     background-size: 100%;
     height: 430px;
     width: 100%;
@@ -19,6 +19,9 @@ body {
     background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #8e2de2, #4a00e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+.orderid{
+    padding-bottom: 25px;
 }
 
 .useremail {
@@ -63,6 +66,7 @@ body {
 }
 .headers{
     float: top;
+    padding-bottom: 25px;
 }
 
 .streng {
@@ -72,8 +76,8 @@ body {
     margin-top: 20px;
     margin-bottom: 50px;
 }
-.header {
-    position: relative;
+.container .header {
+    position: center;
     left: 70px;
 }
 

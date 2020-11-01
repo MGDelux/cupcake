@@ -37,10 +37,6 @@ public class Toppings {
 
     @Override
     public String toString() {
-        return "Toppings{" +
-                "id=" + id +
-                ", navn='" + navn + '\'' +
-                ", pris=" + pris +
-                '}';
+        return" " + navn;
     }
 }

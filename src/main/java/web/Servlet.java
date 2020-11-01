@@ -1,5 +1,6 @@
 package web;
 
+import api.Cart;
 import api.Cupcake;
 import infrastructure.DBCupcake;
 import infrastructure.Database;
@@ -14,12 +15,20 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Servlet extends HttpServlet {
-    protected static final Cupcake api;
+    protected static final Cupcake cupcakeApi;
+    protected static final Cart cartApi;
+
     static {
-        api = loadCupcakes();
+        cupcakeApi = loadCupcakes();
     }
 
+    static {
+        cartApi = cart();
+    }
 
+    private static Cart cart() {
+        return new Cart(loadCupcakes());
+    }
 
     public static Cupcake loadCupcakes() {
         Database db = new Database();
@@ -33,8 +42,8 @@ public class Servlet extends HttpServlet {
 
     protected void render(String title, String content, HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("indexNavbar",new IndexNav(req));
-        req.setAttribute("navbar",new Navbar(req));
+        req.setAttribute("indexNavbar", new IndexNav(req));
+        req.setAttribute("navbar", new Navbar(req));
         req.setAttribute("version", Cupcake.getVer());
         req.setAttribute("title", title);
         req.setAttribute("content", content);

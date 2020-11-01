@@ -1,13 +1,8 @@
 package web.pages;
 
-import Repository.Cart.CartRepo;
-import api.Cart;
 import domain.Bottoms.Bottoms;
 import Repository.Cupcakes.NoCupcake;
 import domain.Toppings.Toppings;
-import infrastructure.DBCupcake;
-import infrastructure.DBOrders;
-import infrastructure.Database;
 import web.Servlet;
 
 import javax.servlet.ServletException;
@@ -16,18 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 @WebServlet({"/products", "/products/*"})
 public class Products extends Servlet {
-    protected static final Cart api;
-    static {
-        api = cart();
-    }
-
-    private static Cart cart() {
-        return new Cart(Servlet.loadCupcakes());
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -68,7 +54,7 @@ public class Products extends Servlet {
         String bots = req.getParameter("BotToKurv");
         String[] splitbot = bots.split(",");
         System.out.println(">"+splittop[0] + "< >" +splitbot[0]+"<");
-        api.testAdd(splittop[0],splitbot[0]);
+        cartApi.addItemIntoCart(splittop[0],splitbot[0]);
         return;
     }
 
