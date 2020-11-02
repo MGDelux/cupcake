@@ -40,7 +40,8 @@ public class Item_cart {
     public void setBottoms(Bottoms bottoms) {
         this.bottoms = bottoms;
     }
-    //add sum
+
+
 
     @Override
     public String toString() {

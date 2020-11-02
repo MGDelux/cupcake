@@ -7,25 +7,12 @@
     <%@ page contentType="text/html; charset=UTF-8" %>
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
     <title>Cupcake homepage</title>
-    <style>
-        <jsp:include page="../../css/index.css"/>
-    </style>
+    <link href="<c:url value="css/index.css"/>" rel="stylesheet" />
     <p><c:if test="${sessionScope.user.email != null}">
         ${requestScope.user.email}
     </c:if></p>
     <div class="headerimage">
     </div>
-    <script type="text/javascript">
-        function changeImage(){
-            if (document.getElementById("Choko").src == "https://www.amo.dk/siteassets/2.-opskrifter/chokolade-cupcake.jpg?maxwidth=1440")
-
-                document.getElementById("Choko").src == "https://www.amo.dk/siteassets/2.-opskrifter/chokolade-cupcake.jpg?maxwidth=1440";
-
-            else {
-                document.getElementById("Choko").src == "https://cdn.discordapp.com/attachments/676385980340502529/771149601356382218/image0.jpg";
-            }
-        }
-    </script>
 </head>
 <body>
 

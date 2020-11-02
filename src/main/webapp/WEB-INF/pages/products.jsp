@@ -65,7 +65,7 @@
 
     </div>
         <div class="Addcupcake">
-            <button name="AddCupcakeToKurv" type="submit">Tilføj til kurv</button>
+            <button class="addtokurv" name="AddCupcakeToKurv" type="submit">Tilføj til kurv</button>
         </div>
 </form>
 </div>

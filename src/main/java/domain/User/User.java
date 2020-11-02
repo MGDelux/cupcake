@@ -33,8 +33,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.salt = salt;
-        this.secret = secret;
-        this.kredit = kredit;
+        this.secret = secret;        this.kredit = kredit;
     }
 
     private int id;

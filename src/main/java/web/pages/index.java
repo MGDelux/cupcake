@@ -16,6 +16,6 @@ public class index extends Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        render("cum+", "/WEB-INF/pages/index.jsp", req, resp);
+        render("index+", "/WEB-INF/pages/index.jsp", req, resp);
     }
 }

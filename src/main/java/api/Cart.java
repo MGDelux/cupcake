@@ -38,6 +38,13 @@ public class Cart {
         return sum;
     }
 
+    public double deleteSum(Item_cart sum) {
+        double tempSum = 0;
+        sum.getCartItem();
+        return 1;
+
+}
+
     public void addItemIntoCart(String top, String bot) throws NoCupcake {
         int cart = CartItems.size() + 1;
         Toppings topping = cupcake.getTopping(top);

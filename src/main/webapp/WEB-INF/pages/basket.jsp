@@ -7,9 +7,7 @@
     <%@ page contentType="text/html; charset=UTF-8" %>
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
     <title>Cupcake basket</title>
-    <style>
-        <jsp:include page="../../css/Basket.css"/>
-    </style>
+    <link href="<c:url value="css/Basket.css"/>" rel="stylesheet" />
     <p><c:if test="${sessionScope.user.email != null}">
         ${requestScope.user.email}
     </c:if></p>
@@ -39,25 +37,24 @@
     </div>
 
 
-    <!-- Ordredetaljer starter-->
-    <form method="post">
+    <!-- Ordretaljer starter-->
     <div class="ordredetalje" align="center">
         <label>Din order:</label>
         <table id="ordre" border="1" title="Ordrelinje" class="orderBorder">
             <thead>
             <tr>
 
-                <th align="center">Cupcake: </th>
-                <th align="center">Topping: </th>
-                <th align="center">Bottoms: </th>
-                <th align="center">Ændre: </th>
+                <th align="center">Cupcake:</th>
+                <th align="center">Topping:</th>
+                <th align="center">Bottoms:</th>
+                <th align="center">Ændre:</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${cart}" var="cartsitems">
                 <tr>
                     <td align="center">
-                           #${cartsitems.cartItem}
+                            #${cartsitems.cartItem}
                     </td>
                     <td align="center">
                             ${cartsitems.toppings}
@@ -66,15 +63,18 @@
                             ${cartsitems.bottoms}
                     </td>
                     <td align="center">
-                    <input  type="checkbox" name="DeleteButton" value="Slæt" >
+                        <form method="post">
+                            <input type="hidden" name="CartItemId" value="${cartsitems.cartItem}">
+                            <input type="submit" value="slet"/>
+                        </form>
                     </td>
+
                 </tr>
             </c:forEach>
             </tbody>
 
         </table>
     </div>
-    </form>
 </div>
 </body>
 <fotter class="footer">
