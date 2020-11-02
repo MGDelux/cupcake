@@ -23,9 +23,9 @@
 <!-- Navigationpanel starter /-->
 <nav class="navpanel">
     <!-- Create menu in tab /-->
-    <a href="${pageContext.request.contextPath}">TEST</a>
-    <a class href="${pageContext.request.contextPath}/AdminPage/">Profil</a>
-    <a href="${pageContext.request.contextPath}/login/">Login</a>
+    <a href="${pageContext.request.contextPath}">Home</a>
+    <a class href="${pageContext.request.contextPath}/products/">Products</a>
+    <a href="${pageContext.request.contextPath}/ProfilePage/">Profil</a>
 </nav>
 <!-- Navigationpanel slutter/-->
 
@@ -43,27 +43,26 @@
     <form method="post">
     <div class="ordredetalje" align="center">
         <label>Din order:</label>
-        <table id="ordre" border="1" title="Ordrelinje">
+        <table id="ordre" border="1" title="Ordrelinje" class="orderBorder">
             <thead>
             <tr>
 
-                <th>Cupcake: </th>
-                <th>Topping: </th>
-                <th>Bottoms: </th>
-                <th>Ændre: </th>
+                <th align="center">Cupcake: </th>
+                <th align="center">Topping: </th>
+                <th align="center">Bottoms: </th>
+                <th align="center">Ændre: </th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${cart}" var="cartsitems">
-
                 <tr>
-                    <td>
+                    <td align="center">
                            #${cartsitems.cartItem}
                     </td>
-                    <td>
+                    <td align="center">
                             ${cartsitems.toppings}
                     </td>
-                    <td>
+                    <td align="center">
                             ${cartsitems.bottoms}
                     </td>
                     <td align="center">
@@ -77,8 +76,6 @@
     </div>
     </form>
 </div>
-
-
 </body>
 <fotter class="footer">
     <a> Team Jumbo Snegl: Emil, Janus og Mathias </a>

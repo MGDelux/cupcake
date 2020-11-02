@@ -1,5 +1,6 @@
 package web.pages;
 
+import com.mysql.cj.Session;
 import domain.Cart.Item_cart;
 import web.Servlet;
 
@@ -18,11 +19,9 @@ public class Basket extends Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         ArrayList<Item_cart> itemCart = new ArrayList<>();
         try {
-
-            for (Item_cart cart : cartApi.getCartItems()) {
+            for (Item_cart cart : getCart(req).getCartItems()) {
                 itemCart.add(cart);
                 req.setAttribute("cart",itemCart);
             }
@@ -30,7 +29,7 @@ public class Basket extends Servlet {
             e.printStackTrace();
         }
         req.setAttribute("cupcakesAntal",itemCart.size());
-        req.setAttribute("totalSum",cartApi.getSum());
+        req.setAttribute("totalSum",getCart(req).getSum());
         System.out.println(itemCart);
         render("basket", "/WEB-INF/pages/basket.jsp", req, resp);
     }

@@ -10,4 +10,5 @@ import domain.Toppings.Toppings;
  **/
 public interface CartFactory {
     Item_cart GetShoppingCarts(Toppings tops, Bottoms bots);
+    Toppings getTopping(String top);
 }

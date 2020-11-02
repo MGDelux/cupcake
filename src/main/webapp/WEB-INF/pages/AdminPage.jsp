@@ -142,8 +142,8 @@
     </form>
     <form method="post">
         <div  class="kunder">
-            <label>KUNDE EMAIL:</label>
-            <input name="kunderID" type="text" value="email" required>
+            <label>KUNDE ID:</label>
+            <input name="kunderID" type="number" value="0" required>
             <label>KREDIT:</label>
             <input name="KreditToAdd" type="number" value="0" required>
             <button name="addKredit" type="submit" class="remove-button">Tilføj kredit</button>

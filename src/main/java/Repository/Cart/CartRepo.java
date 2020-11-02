@@ -9,6 +9,7 @@ import domain.Toppings.Toppings;
  **/
 public interface CartRepo extends CartFactory {
 
-    public Item_cart GetShoppingCarts(Toppings top, Bottoms bot);
+     Item_cart GetShoppingCarts(Toppings top, Bottoms bot);
+    Toppings getTopping(String top);
 
 }

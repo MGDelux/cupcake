@@ -54,8 +54,7 @@ public class Products extends Servlet {
         String bots = req.getParameter("BotToKurv");
         String[] splitbot = bots.split(",");
         System.out.println(">"+splittop[0] + "< >" +splitbot[0]+"<");
-        cartApi.addItemIntoCart(splittop[0],splitbot[0]);
-        return;
+        getCart(req).addItemIntoCart(splittop[0],splitbot[0]);
     }
 
 

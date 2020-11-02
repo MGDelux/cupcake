@@ -98,8 +98,9 @@ public class AdminPage extends Servlet {
         String kundeId = req.getParameter("kunderID");
         String kundeKredit = req.getParameter("KreditToAdd");
         try {
+            int parseID = Integer.parseInt(kundeId);
             double parseKredit = Double.parseDouble(kundeKredit);
-            loginFacade.addKredit( kundeId, parseKredit);
+            loginFacade.addKredit( parseID, parseKredit);
             } catch (NumberFormatException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

@@ -23,13 +23,10 @@ public class LoginFacade {
             return user;
         }
     }
-public void addKredit(String id,double kredit) throws LoginError, SQLException {
-        if(new DBUser(db).checkMail(id)) {
-            throw new LoginError("no email named >" + id);
-        }else {
+public void addKredit(int id,double kredit) throws LoginError, SQLException {
             new DBUser(db).addKredit(id,kredit);
         }
-}
+
     public String deleteUser(String email) throws LoginError, SQLException {
         if (new DBUser(db).checkMail(email)) {
             new DBUser(db).DeleteUser(email);

@@ -101,13 +101,13 @@ public class DBUser {
                 rs.getDouble("kredit"));
     }
 
-    public void addKredit(String id, double kredit) {
+    public void addKredit(int id, double kredit) {
         try {
             Connection conn = db.connect();
-            String SQL = "UPDATE kunde SET kredit = (?) WHERE email = (?)";
+            String SQL = "UPDATE kunde SET kredit = (?) WHERE id = (?)";
             PreparedStatement ps = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, kredit);
-            ps.setString(2, id);
+            ps.setInt(2, id);
             ps.executeUpdate();
         } catch (SQLException throwables) {
             System.out.println(throwables.getMessage());
