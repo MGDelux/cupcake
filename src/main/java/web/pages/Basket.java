@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,6 +26,7 @@ import java.util.Random;
 @WebServlet({"/basket", "/basket/*"})
 public class Basket extends Servlet {
     Database db = new Database();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -53,12 +56,13 @@ public class Basket extends Servlet {
                     if (user.getKredit() >= getCart(req).getSum()) {
                         System.out.println(user.getKredit() + " sum:" + getCart(req).getSum());
 
-                        createOrder(req,user);
+                        createOrder(req, user);
                         resp.sendRedirect(req.getContextPath() + "/order");
+                        getCart(req).getCartItems().clear();
                     } else {
                         HttpSession session = req.getSession();
-                        session.setAttribute("basketError", "Fattig røv du har ikke nok penge for denne order! (velkommen til klubben) Din nuværende kredit: ");
-                        System.out.println("Fattig røv du har ikke nok penge for denne order! (velkommen til klubben)");
+                        session.setAttribute("basketError", "" + "Du har ikke nok kredit for denne order! kontakt en adminitrator, Din nuværende kredit: ");
+                        System.out.println("wallet too empty");
                         resp.sendRedirect(req.getContextPath() + "/basket");
                     }
 
@@ -72,9 +76,17 @@ public class Basket extends Servlet {
 
     private void createOrder(HttpServletRequest request, User user) throws SQLException {
         DBOrder order = new DBOrder(db);
-        int orderID = 0;
-         orderID = getCart(request).getCartItems().size() + user.getEmail().length(); //FIX!§
-        order.createOrder(orderID,user,getCart(request).getCartItems(),getCart(request).getSum());
+        String orderID;
+        int orderidPart0 = new Random().nextInt(getCart(request).getCartItems().size() + 1000);
+        int orderidPart1 = getCart(request).getCartItems().size();
+        int orderidPart2 = user.getId();
+        String useremail = user.getEmail();
+        String[] splittop = useremail.split("@");
+        orderID = "#" + orderidPart0 + Integer.toString(orderidPart1) + Integer.toString(orderidPart2) + splittop[0];
+        HttpSession session = request.getSession();
+        session.setAttribute("OrderDetailjer", getCart(request).getCartItems());
+        session.setAttribute("OrderNummer",orderID);
+        order.createOrder(orderID, user, getCart(request).getCartItems(), getCart(request).getSum());
     }
 }
 

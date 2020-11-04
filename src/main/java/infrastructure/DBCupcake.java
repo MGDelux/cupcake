@@ -241,11 +241,6 @@ public class DBCupcake implements TopsRepo, BotRepo {
         return findtopByiD(id);
     }
 
-    @Override
-    public Toppings createToppings(String navn, Double pris) {
-        return null;
-    }
-
 
 }
 

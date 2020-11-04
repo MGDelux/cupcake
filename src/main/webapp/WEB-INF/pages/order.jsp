@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
+    <link href="<c:url value="css/Basket.css"/>" rel="stylesheet"/>
     <title>Cupcake Tak for din ordrer</title>
     <style>
         <jsp:include page="../../css/Productpage.css"/>
@@ -29,8 +30,27 @@
     <div class="header">
         <h1><strong>Vi har modtaget din ordre.</strong></h1>
         <h2 class="header2"><strong>tak for din ordre, du kan se detaljerne om din ordre forneden.</strong></h2>
-        <h2 class="ordrenr">Ordre nummer: </h2>
+        <h2 class="ordrenr">Ordre nummer: ${sessionScope.OrderNummer} </h2>
         <h2 class="ordredetalje">Ordre detaljer.</h2>
+        <div class="ordredetalje" align="center">
+        <table>
+            <thead>
+        <tr>
+            <th>Cupcakes</th>
+            <th>Top</th>
+            <th>Bund</th>
+        </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${OrderDetailjer}" var="cartsitems">
+            <tr>
+                <td align="center">#${cartsitems.cartItem}</td>
+                <td align="center">${cartsitems.toppings}</td>
+                <td align="center">${cartsitems.bottoms}</td>
+            </c:forEach>
+            </tbody>
+        </table>
+        </div>
     </div>
     <!-- headers/tekst slutter-->
 
