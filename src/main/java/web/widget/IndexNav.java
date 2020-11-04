@@ -18,7 +18,6 @@ public class IndexNav {
             new IndexNav.Item("Profil", "/profilepage", false),
             new IndexNav.Item("Admin ", "/AdminPage", true));
 
-
     public List<IndexNav.Item> GetNavBarLink() {
         String role = (String) request.getSession().getAttribute("role");
         System.out.println("!!! ROLE "+role);
