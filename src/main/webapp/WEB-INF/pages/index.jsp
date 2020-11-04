@@ -35,18 +35,8 @@
         <h1><strong>Velkommen ombord.</strong></h1>
         <h2 class="header2"><strong>Øens bedste cupcakes, vælg og bestil her</strong></h2>
         <img id="Choko" onclick="changeImage()" class="Choko" src="https://www.amo.dk/siteassets/2.-opskrifter/chokolade-cupcake.jpg?maxwidth=1440" alt="Choko cupcake">
-        <p class="brødtekst">The earliest extant description of what is now often called a cupcake was in 1796, when a recipe for "a light cake to bake in small cups" was written in American Cookery by Amelia Simmons.
-            The earliest extant documentation of the term cupcake itself was in "Seventy-five Receipts for Pastry, Cakes, and Sweetmeats" in 1828 in Eliza Leslie's Receipts cookbook.
-
-            In the early 19th century, there were two different uses for the term cup cake or cupcake. In previous centuries, before muffin tins were widely available, the cakes were often baked in individual pottery cups, ramekins, or molds and took their name from the cups they were baked in.
-            This is the use of the name that has remained, and the name of "cupcake" is now given to any small, round cake that is about the size of a teacup. While English fairy cakes vary in size more than American cupcake, they are traditionally smaller and are rarely topped with elaborate frosting.
-
-            The other kind of "cup cake" referred to a cake whose ingredients were measured by volume, using a standard-sized cup, instead of being weighed.
-            Recipes whose ingredients were measured using a standard-sized cup could also be baked in cups; however, they were more commonly baked in tins as layers or loaves.
-            In later years, when the use of volume measurements was firmly established in home kitchens, these recipes became known as 1234 cakes or quarter cakes, so called because they are made up of four ingredients: one cup of butter, two cups of sugar, three cups of flour, and four eggs.
-            They are plain yellow cakes, somewhat less rich and less expensive than pound cake, due to using about half as much butter and eggs compared to pound cake.
-
-            The names of these two major classes of cakes were intended to signal the method to the baker; "cup cake" uses a volume measurement, and "pound cake" uses a weight measurement.
+        <p class="brødtekst"> Olsker Cupcakes er en nyopstartet iværksættervirksomhed med base på Bornholm. Olskers cupcakes startede i 2020 med en vision om  at bringe lokal samfundet sammen omkring den lille søde dessert. Olsker Cupcakes sætter økologi i førersædet og har dermed fundet frem til den helt rigtige opskrift.
+            Med vores lokale råvarer og sans for kvalitet formårer vi at producere ikke mindst miljøvenlige, men også førsteklasses cupcakes til en pris som alle kan være med på.
         </p>
     </div>
 </div>
