@@ -26,8 +26,7 @@
 <article>
     <section>
         <h1> Profile </h1>
-        <p>This is the profile section. </p>
-        <p>You can see your credits and orders here. </p>
+        <p>Din profil: </p>
         <br> <br>
         <a></a>
         <div class="profilinfo" align="center">
@@ -37,15 +36,15 @@
             </c:if> </a>
             </p>
             <br>
-            <p> Credits:
-            <a><c:if test="${sessionScope.user.credits !=null}">
-                ${sessionScope.user.credits}
+            <p> Dit Kredit:
+            <a><c:if test="${sessionScope.user.kredit !=null}">
+                ${sessionScope.user.kredit} kr.
             </c:if> </a>
             </p>
             <br> <br> <br>
         </div>
         <div class="container" align="center">
-            <h3> Your Order</h3>
+            <h3>Dine ordre:</h3>
             <select name="order" id="order">
             </select>
             <br> <br> <br> <br>

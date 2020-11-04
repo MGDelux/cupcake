@@ -21,6 +21,7 @@ public class Item_cart {
         return cartItem;
     }
 
+
     public void setCartItem(int cartItem) {
         this.cartItem = cartItem;
     }
@@ -50,5 +51,14 @@ public class Item_cart {
                 " " + toppings +
                 " " + bottoms;
 
+    }
+
+    public double getPris(Item_cart itemToDelete) {
+       double tempGetSumToDelete = 0;
+      Toppings topToDelete = itemToDelete.getToppings();
+      Bottoms botToDelete = itemToDelete.getBottoms();
+       tempGetSumToDelete = topToDelete.getPris() + botToDelete.getPris();
+        System.out.println("Sum to be deleted:" +tempGetSumToDelete);
+      return tempGetSumToDelete;
     }
 }

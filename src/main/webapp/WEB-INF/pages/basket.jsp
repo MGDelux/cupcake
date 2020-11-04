@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%@ page contentType="text/html; charset=UTF-8" %>
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
-    <title>Cupcake basket</title>
-    <link href="<c:url value="css/Basket.css"/>" rel="stylesheet" />
+    <title>Cupcake cart</title>
+    <link href="<c:url value="css/Basket.css"/>" rel="stylesheet"/>
     <p><c:if test="${sessionScope.user.email != null}">
         ${requestScope.user.email}
     </c:if></p>
@@ -23,7 +23,7 @@
     <!-- Create menu in tab /-->
     <a href="${pageContext.request.contextPath}">Home</a>
     <a class href="${pageContext.request.contextPath}/products/">Products</a>
-    <a href="${pageContext.request.contextPath}/ProfilePage/">Profil</a>
+    <a href="${pageContext.request.contextPath}/profilepage/">Profil</a>
 </nav>
 <!-- Navigationpanel slutter/-->
 
@@ -46,7 +46,7 @@
 
                 <th align="center">Cupcake:</th>
                 <th align="center">Topping:</th>
-                <th align="center">Bottoms:</th>
+                <th align="center">Bottom:</th>
                 <th align="center">Ændre:</th>
             </tr>
             </thead>
@@ -54,7 +54,7 @@
             <c:forEach items="${cart}" var="cartsitems">
                 <tr>
                     <td align="center">
-                            #${cartsitems.cartItem}
+                        #${cartsitems.cartItem}
                     </td>
                     <td align="center">
                             ${cartsitems.toppings}
@@ -65,7 +65,7 @@
                     <td align="center">
                         <form method="post">
                             <input type="hidden" name="CartItemId" value="${cartsitems.cartItem}">
-                            <input type="submit" value="slet"/>
+                            <input type="submit" value="slet" name="delteOrderLine"/>
                         </form>
                     </td>
 
@@ -76,6 +76,18 @@
         </table>
     </div>
 </div>
+<div class="container2">
+</div>
+<div class="Addcupcake" align="center">
+    <form method="post">
+        <div class="error-text"><c:if test="${sessionScope.basketError != null}">
+            ${sessionScope.basketError} ${sessionScope.user.kredit}
+        </c:if></div>
+        <button class="addtokurv" name="CompleteOrder" type="submit">Køb</button>
+    </form>
+</div>
+
+
 </body>
 <fotter class="footer">
     <a> Team Jumbo Snegl: Emil, Janus og Mathias </a>

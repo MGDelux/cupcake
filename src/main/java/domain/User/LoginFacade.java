@@ -19,6 +19,8 @@ public class LoginFacade {
         } else {
             byte[] tempSalt = User.genereateSalt();
             User user = new User(0, email, role, tempSalt, User.calculateSecret(tempSalt, password), kredit);
+            System.out.println(User.byteArrayToHex(user.getSalt()));
+            System.out.println(User.byteArrayToHex(user.getSecret()));
             new DBUser(db).createUser(user);
             return user;
         }

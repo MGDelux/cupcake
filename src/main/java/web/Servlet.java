@@ -2,6 +2,7 @@ package web;
 
 import api.Cart;
 import api.Cupcake;
+import domain.User.User;
 import infrastructure.DBCupcake;
 import infrastructure.Database;
 import web.widget.IndexNav;
@@ -25,11 +26,21 @@ public class Servlet extends HttpServlet {
     protected static Cart getCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
-        if(cart == null) {
+        if (cart == null) {
             cart = new Cart(cupcakeApi);
             session.setAttribute("cart", cart);
         }
         return cart;
+    }
+
+    protected static User getUser(HttpServletRequest request, HttpServletResponse response, String errorMsgIfNull) throws IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            session.setAttribute("loggedIn",errorMsgIfNull);
+            response.sendRedirect(request.getContextPath() + "/login/");
+        }
+        return user;
     }
 
     public static Cupcake loadCupcakes() {

@@ -25,7 +25,7 @@
                 <input type="password" name="password" value="password" required>
             </div>
             <div class="forgot-pass">
-                <a href="lostpassword.jsp">Glemt dit kodeord?</a></div>
+                <a class="spacer"  type="hidden"> -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  </a></div>
             <div class="btn">
                 <div class="inner">
                 </div>
@@ -35,6 +35,9 @@
                 Ny Bruger? <a href="${pageContext.request.contextPath}/register/">opret en bruger nu!</a></div>
             <div class="error-text"> <c:if test="${requestScope.error != null}">
                 ${requestScope.error}
+            </c:if></div>
+            <div class="error-text"> <c:if test="${sessionScope.loggedin != true}">
+                ${sessionScope.loggedIn}
             </c:if></div>
         </form>
     </div>

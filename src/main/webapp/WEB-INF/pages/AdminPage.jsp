@@ -146,7 +146,7 @@
             <input name="kunderID" type="number" value="0" required>
             <label>KREDIT:</label>
             <input name="KreditToAdd" type="number" value="0" required>
-            <button name="addKredit" type="submit" class="remove-button">Tilføj kredit</button>
+            <button name="addKredit" type="submit" class="remove-button">Set kredit</button>
 
         </div>
     </form>

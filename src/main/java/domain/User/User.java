@@ -28,7 +28,7 @@ public class User {
         PASSWORD_FACTORY = factory;
     }
 
-    public User(int id,String email, String role, byte[] salt, byte[] secret, double kredit) {
+    public User(int id, String email, String role, byte[] salt, byte[] secret, double kredit) {
         this.id = id;
         this.email = email;
         this.role = role;

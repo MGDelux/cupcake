@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class DBUser {
     private final Database db;
 
-    public DBUser(Database db) throws LoginError, SQLException {
+    public DBUser(Database db)  {
         this.db = db;
     }
 

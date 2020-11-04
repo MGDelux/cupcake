@@ -1,4 +1,5 @@
 package web.pages;
+
 import Repository.User.LoginError;
 import Repository.Cupcakes.NoCupcake;
 import domain.Bottoms.Bottoms;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,41 +22,51 @@ import java.util.ArrayList;
 public class AdminPage extends Servlet {
     Cupcake cupcake = loadCupcakes();
     LoginFacade loginFacade = new LoginFacade();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        LoginFacade loginFacade = new LoginFacade();
-        ArrayList<Toppings> toppings = new ArrayList<>();
-        ArrayList<Bottoms> buttoms = new ArrayList<>();
-        ArrayList<User> users = new ArrayList<>();
-        setUp(req, resp);
-        try {
-            for (Toppings tops : cupcake.findAllTop()) {
-                toppings.add(tops);
-            }
-            for (Bottoms buts : cupcake.findAllBut()) {
-                buttoms.add(buts);
-            }
-            for (User u : loginFacade.getAllUsers()) {
-                users.add(u);
-            }
-            req.setAttribute("buttoms", buttoms);
-            req.setAttribute("toppings", toppings);
-            req.setAttribute("cupcakes", cupcake);
-            req.setAttribute("users", users);
+        if (getUser(req, resp, "need to be logged in") != null) {
+            if (getUser(req, resp, "admin error").getRole().toLowerCase().equals("admin")) {
+                LoginFacade loginFacade = new LoginFacade();
+                ArrayList<Toppings> toppings = new ArrayList<>();
+                ArrayList<Bottoms> buttoms = new ArrayList<>();
+                ArrayList<User> users = new ArrayList<>();
+                setUp(req, resp);
+                try {
+                    for (Toppings tops : cupcake.findAllTop()) {
+                        toppings.add(tops);
+                    }
+                    for (Bottoms buts : cupcake.findAllBut()) {
+                        buttoms.add(buts);
+                    }
+                    for (User u : loginFacade.getAllUsers()) {
+                        users.add(u);
+                    }
+                    req.setAttribute("buttoms", buttoms);
+                    req.setAttribute("toppings", toppings);
+                    req.setAttribute("cupcakes", cupcake);
+                    req.setAttribute("users", users);
 
-            log(req, "admin page");
-            render("admin page", "/WEB-INF/pages/AdminPage.jsp", req, resp);
+                    log(req, "admin page");
+                    render("admin page", "/WEB-INF/pages/AdminPage.jsp", req, resp);
 
-        } catch (NoCupcake noCupcake) {
-            resp.sendError(500, noCupcake.getMessage());
-            System.out.println(noCupcake.getMessage());
-        } catch (LoginError loginError) {
-            resp.sendError(500, loginError.getMessage());
-            System.out.println(loginError.getMessage());
-        } catch (SQLException throwables) {
-            resp.sendError(500, throwables.getMessage());
-            System.out.println(throwables.getMessage());
+                } catch (NoCupcake noCupcake) {
+                    resp.sendError(500, noCupcake.getMessage());
+                    System.out.println(noCupcake.getMessage());
+                } catch (LoginError loginError) {
+                    resp.sendError(500, loginError.getMessage());
+                    System.out.println(loginError.getMessage());
+                } catch (SQLException throwables) {
+                    resp.sendError(500, throwables.getMessage());
+                    System.out.println(throwables.getMessage());
+                }
+            }else {
+                HttpSession session = req.getSession();
+                resp.sendRedirect(req.getContextPath()+"/login/");
+                session.setAttribute("loggedIn","ADMIN ONLY PAGE PLEASE SIGN IN AS ADMIN");
+
+            }
         }
     }
 
@@ -77,13 +89,13 @@ public class AdminPage extends Servlet {
             System.out.println("create user");
             createUser(req, resp);
         }
-        if (req.getParameter("addKredit") !=null){
-            addkredit(req,resp);
+        if (req.getParameter("addKredit") != null) {
+            addkredit(req, resp);
         }
-        if (req.getParameter("deleteUser") !=null){
+        if (req.getParameter("deleteUser") != null) {
             String kundeId = req.getParameter("kunderIDToDelete");
             try {
-                System.out.println("delete user >" +kundeId);
+                System.out.println("delete user >" + kundeId);
                 loginFacade.deleteUser(kundeId);
             } catch (LoginError loginError) {
                 loginError.printStackTrace();
@@ -100,14 +112,15 @@ public class AdminPage extends Servlet {
         try {
             int parseID = Integer.parseInt(kundeId);
             double parseKredit = Double.parseDouble(kundeKredit);
-            loginFacade.addKredit( parseID, parseKredit);
-            } catch (NumberFormatException e) {
+            loginFacade.addKredit(parseID, parseKredit);
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (LoginError loginError) {
             loginError.printStackTrace();
         }
+
     }
 
     private void createUser(HttpServletRequest req, HttpServletResponse resp) {
@@ -117,7 +130,7 @@ public class AdminPage extends Servlet {
         String kundeKredit = req.getParameter("kunderKredt");
         try {
             double parseInt = Double.parseDouble(kundeKredit);
-           loginFacade.createUser(email,password,role,parseInt);
+            loginFacade.createUser(email, password, role, parseInt);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (LoginError loginError) {

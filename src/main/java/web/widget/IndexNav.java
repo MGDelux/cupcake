@@ -13,9 +13,9 @@ public class IndexNav {
         this.request = request;
     }
     private final List<IndexNav.Item> navLinks = List.of(
-            new IndexNav.Item("Home", "/", false),
-            new IndexNav.Item("Products", "/products/", false),
-            new IndexNav.Item("Login", "/login", false),
+            new IndexNav.Item("Hjem", "/", false),
+            new IndexNav.Item("Cupcakes", "/products/", false),
+            new IndexNav.Item("Profil", "/profilepage", false),
             new IndexNav.Item("Admin ", "/AdminPage", true));
 
 

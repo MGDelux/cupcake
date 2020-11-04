@@ -14,11 +14,10 @@ public class Navbar {
     }
 
     private final List<Item> navLinks = List.of(
-            new Item("Home", "/", false),
-            new Item("Products", "/products/", false),
+            new Item("Hjem", "/", false),
             new Item("Admin ", "/AdminPage",true),
-            new Item("Login","/login",false),
-            new Item("basket","/basket",false));
+            new Item("Profil","/profilepage",false),
+            new Item("Kurv","/basket",false));
 
     public List<Item> GetNavBarLink() {
         String role = (String) request.getSession().getAttribute("role");

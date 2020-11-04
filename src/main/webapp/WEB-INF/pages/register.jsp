@@ -36,7 +36,7 @@
                 <button type="submit">Register</button>
             </div>
             <div class="signup-link">
-                Allerede en bruger? <a href="WEB-INF/index.jsp">klik her.</a></div>
+                Allerede en bruger? <a href="${pageContext.request.contextPath}/login/">klik her.</a></div>
             <div class="error-text"> <c:if x="${requestScope.error!= null}">
                 ${requestScope.error}
             </c:if></div>

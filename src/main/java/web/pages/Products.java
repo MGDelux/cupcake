@@ -19,7 +19,6 @@ public class Products extends Servlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         setUp(req, resp);
-        System.out.println(req.getPathInfo());
         ArrayList<Toppings> currentToppings = new ArrayList<>();
         ArrayList<Bottoms> currentButtoms = new ArrayList<>();
         try {
@@ -53,7 +52,6 @@ public class Products extends Servlet {
         String[] splittop = top.split(",");
         String bots = req.getParameter("BotToKurv");
         String[] splitbot = bots.split(",");
-        System.out.println(">"+splittop[0] + "< >" +splitbot[0]+"<");
         getCart(req).addItemIntoCart(splittop[0],splitbot[0]);
     }
 
