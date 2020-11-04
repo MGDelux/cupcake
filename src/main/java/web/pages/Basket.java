@@ -37,7 +37,7 @@ public class Basket extends Servlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            User user = getUser(req, resp, "test");
+            User user = getUser(req, resp, "log ind for at ændre i din kurv ");
             if (req.getParameter("delteOrderLine") != null) {
                 int id = Integer.parseInt(req.getParameter("CartItemId"));
                Item_cart c = getCart(req).getCartItem(id);
