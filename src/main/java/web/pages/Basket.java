@@ -1,8 +1,6 @@
 package web.pages;
 
-import com.mysql.cj.Session;
 import domain.Cart.Item_cart;
-import domain.User.LoginFacade;
 import domain.User.User;
 import infrastructure.DBOrder;
 import infrastructure.Database;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -30,7 +26,7 @@ public class Basket extends Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        ArrayList<Item_cart> itemCart = getCart(req).getCartItems();
+        ArrayList<Item_cart> itemCart = getCart(req).getItemCarts();
         req.setAttribute("cart", itemCart);
         req.setAttribute("cupcakesAntal", itemCart.size());
         req.setAttribute("totalSum", getCart(req).getSum());
@@ -44,11 +40,11 @@ public class Basket extends Servlet {
             User user = getUser(req, resp, "test");
             if (req.getParameter("delteOrderLine") != null) {
                 int id = Integer.parseInt(req.getParameter("CartItemId"));
-                Item_cart c = getCart(req).getCartItems().get(id);
-                if (!getCart(req).getCartItems().removeIf(i -> i.getCartItem() == id)) {
+               Item_cart c = getCart(req).getCartItem(id);
+
+                if (!getCart(req).getItemCarts().removeIf(i -> i.getCartItem() == id)) {
                     System.out.println("error");
                 }
-                getCart(req).ifCartItem(c); //temp
                 getCart(req).deleteSum(c);
                 resp.sendRedirect(req.getContextPath() + "/basket");
             } else if (req.getParameter("CompleteOrder") != null) {
@@ -58,7 +54,6 @@ public class Basket extends Servlet {
 
                         createOrder(req, user);
                         resp.sendRedirect(req.getContextPath() + "/order");
-                        getCart(req).getCartItems().clear();
                     } else {
                         HttpSession session = req.getSession();
                         session.setAttribute("basketError", "" + "Du har ikke nok kredit for denne order! kontakt en adminitrator, Din nuværende kredit: ");
@@ -77,16 +72,16 @@ public class Basket extends Servlet {
     private void createOrder(HttpServletRequest request, User user) throws SQLException {
         DBOrder order = new DBOrder(db);
         String orderID;
-        int orderidPart0 = new Random().nextInt(getCart(request).getCartItems().size() + 1000);
-        int orderidPart1 = getCart(request).getCartItems().size();
+        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 1000);
+        int orderidPart1 = getCart(request).getItemCarts().size();
         int orderidPart2 = user.getId();
         String useremail = user.getEmail();
         String[] splittop = useremail.split("@");
         orderID = "#" + orderidPart0 + Integer.toString(orderidPart1) + Integer.toString(orderidPart2) + splittop[0];
         HttpSession session = request.getSession();
-        session.setAttribute("OrderDetailjer", getCart(request).getCartItems());
+        session.setAttribute("OrderDetailjer", getCart(request).getItemCarts());
         session.setAttribute("OrderNummer",orderID);
-        order.createOrder(orderID, user, getCart(request).getCartItems(), getCart(request).getSum());
+        order.createOrder(orderID, user, getCart(request).getItemCarts(), getCart(request).getSum());
     }
 }
 

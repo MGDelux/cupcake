@@ -86,7 +86,8 @@
         <button class="addtokurv" name="CompleteOrder" type="submit">Køb</button>
     </form>
 </div>
-
+<div class="container2">
+</div>
 
 </body>
 <fotter class="footer">

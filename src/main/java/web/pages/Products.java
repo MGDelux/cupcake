@@ -47,7 +47,7 @@ public class Products extends Servlet {
         resp.sendRedirect(req.getContextPath() + "/products/");
     }
 
-    private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake {
+    private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake { //refactor
         String top = req.getParameter("TopToKurv");
         String[] splittop = top.split(",");
         String bots = req.getParameter("BotToKurv");

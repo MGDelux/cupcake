@@ -7,12 +7,13 @@ import domain.Toppings.Toppings;
  * CREATED BY mathi @ 30-10-2020 - 09:10
  **/
 public class Item_cart {
+    private static int counter = 0;
     int cartItem;
     Toppings toppings;
     Bottoms bottoms;
 
-    public Item_cart(int cartItem, Toppings toppings, Bottoms bottoms) {
-        this.cartItem = cartItem;
+    public Item_cart(Toppings toppings, Bottoms bottoms) {
+        this.cartItem = counter++;
         this.toppings = toppings;
         this.bottoms = bottoms;
     }
@@ -43,22 +44,18 @@ public class Item_cart {
     }
 
 
-
     @Override
     public String toString() {
-        return
-                cartItem +
-                " " + toppings +
-                " " + bottoms;
+        return cartItem + " " + toppings + " " + bottoms;
 
     }
 
     public double getPris(Item_cart itemToDelete) {
-       double tempGetSumToDelete = 0;
-      Toppings topToDelete = itemToDelete.getToppings();
-      Bottoms botToDelete = itemToDelete.getBottoms();
-       tempGetSumToDelete = topToDelete.getPris() + botToDelete.getPris();
-        System.out.println("Sum to be deleted:" +tempGetSumToDelete);
-      return tempGetSumToDelete;
+        double tempGetSumToDelete = 0;
+        Toppings topToDelete = itemToDelete.getToppings();
+        Bottoms botToDelete = itemToDelete.getBottoms();
+        tempGetSumToDelete = topToDelete.getPris() + botToDelete.getPris();
+        System.out.println("Sum to be deleted:" + tempGetSumToDelete);
+        return tempGetSumToDelete;
     }
 }

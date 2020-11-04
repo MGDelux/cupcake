@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * CREATED BY mathi @ 30-10-2020 - 09:08
  **/
 public class Cart {
-    private final ArrayList<Item_cart> CartItems = new ArrayList<>();
+    private final ArrayList<Item_cart> itemCarts = new ArrayList<>();
     private final Cupcake cupcake;
     private double sum;
     private String orderID = "";
@@ -21,17 +21,17 @@ public class Cart {
     }
 
     private void addCupCakeToCart(Item_cart itemcart) {
-        CartItems.add(itemcart); }
+        itemCarts.add(itemcart); }
 
-    public ArrayList<Item_cart> getCartItems() {
-        return CartItems;
+    public ArrayList<Item_cart> getItemCarts() {
+        return itemCarts;
     }
     public Item_cart getCartItem (int id){
-        return CartItems.get(id);
+        return itemCarts.get(id);
     }
     public void ifCartItem(Item_cart c){
-        if (CartItems.contains(c)){
-            CartItems.remove(c);
+        if (itemCarts.contains(c)){
+            itemCarts.remove(c);
         }
     }
 
@@ -50,20 +50,19 @@ public class Cart {
 }
 
     public void addItemIntoCart(String top, String bot) throws NoCupcake {
-        int cart = CartItems.size();
         Toppings topping = cupcake.getTopping(top);
         Bottoms bottom = cupcake.getButtom(bot);
-        Item_cart itemCart = new Item_cart(cart, topping, bottom);
+        Item_cart itemCart = new Item_cart(topping, bottom);
         addCupCakeToCart(itemCart);
         sum = calculateSum();
     }
 
     private double calculateSum() {
         double tempSum = 0;
-        for (Item_cart cart : CartItems) {
+        for (Item_cart cart : itemCarts) {
             tempSum = tempSum + cart.getToppings().getPris();
         }
-        for (Item_cart cart : CartItems) {
+        for (Item_cart cart : itemCarts) {
             tempSum = tempSum + cart.getBottoms().getPris();
         }
         System.out.print(">" + sum);
@@ -73,7 +72,7 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "CartItems=" + CartItems +
+                "CartItems=" + itemCarts +
                 '}';
     }
 }

@@ -27,44 +27,47 @@
 
 <div class="container">
     <!-- headers/tekst starter-->
-    <div class="header">
+    <div align="center">
         <h1><strong>Vi har modtaget din ordre.</strong></h1>
         <h2 class="header2"><strong>tak for din ordre, du kan se detaljerne om din ordre forneden.</strong></h2>
         <h2 class="ordrenr">Ordre nummer: ${sessionScope.OrderNummer} </h2>
-        <h2 class="ordredetalje">Ordre detaljer.</h2>
-        <div class="ordredetalje" align="center">
-        <table>
+        <h2 class="ordredetalje">Ordre detaljer:</h2>
+        <!-- Ordretaljer starter-->
+    </div>
+    <div class="ordredetalje" align="center">
+        <label>Din order:</label>
+        <table id="ordre" border="1" title="Ordrelinje" class="orderBorder">
             <thead>
-        <tr>
-            <th>Cupcakes</th>
-            <th>Top</th>
-            <th>Bund</th>
-        </tr>
+            <tr>
+
+                <th align="center">Cupcake:</th>
+                <th align="center">Topping:</th>
+                <th align="center">Bottom:</th>
+            </tr>
             </thead>
             <tbody>
-            <c:forEach items="${OrderDetailjer}" var="cartsitems">
-            <tr>
-                <td align="center">#${cartsitems.cartItem}</td>
-                <td align="center">${cartsitems.toppings}</td>
-                <td align="center">${cartsitems.bottoms}</td>
+            <c:forEach items="${cart}" var="cartsitems">
+                <tr>
+                    <td align="center">
+                        #${cartsitems.cartItem}
+                    </td>
+                    <td align="center">
+                            ${cartsitems.toppings}
+                    </td>
+                    <td align="center">
+                            ${cartsitems.bottoms}
+                    </td>
+
+                </tr>
             </c:forEach>
             </tbody>
+
         </table>
-        </div>
-    </div>
-    <!-- headers/tekst slutter-->
-
-    <!-- Ordredetaljer starter-->
-    <div>
-
+        <a href="${pageContext.request.contextPath}/"  target="_blank"><input class="backbutton" type="button" value="Tilbage til forsiden"></a>
 
     </div>
-    <!-- Ordredetaljer slutter-->
-
     <!-- "bestil ordre" button /-->
-    <div class="bestil">
-        <a href="index.html" target="_blank"><input class="button" type="button" value="Tilbage til forsiden"></a>
-    </div>
+
     <!-- "bestil ordre" button slutter/-->
 </div>
 </body>

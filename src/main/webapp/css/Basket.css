@@ -190,6 +190,30 @@ background: black;
 .ordredetalje {
     position: center;
 }
+.ordredetalje .backbutton {
+    margin:0px auto;
+    align-content: center;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 10);
+    padding: 12px;
+    width: 20%;
+    text-align: center;
+    font-size: 17px;
+    margin-top: 20px;
+}
+.backbutton {
+    margin:0px auto;
+    align-content: center;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 10);
+    padding: 12px;
+    width: 20%;
+    text-align: center;
+    font-size: 17px;
+    margin-top: 20px;
+}
 
 
 
