@@ -18,6 +18,7 @@
 
 <!-- Banner logo i top slutter /-->
 
+
 <!-- Navigationpanel starter /-->
 <nav class="navpanel">
     <!-- Create menu in tab /-->

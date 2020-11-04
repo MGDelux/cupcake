@@ -28,6 +28,7 @@
 </nav>
 <!-- Navigationpanel slutter/-->
 
+
 <div class="container" align="center">
     <!-- headers/tekst starter-->
     <div class="headers">
