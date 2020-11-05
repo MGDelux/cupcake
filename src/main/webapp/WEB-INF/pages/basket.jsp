@@ -11,6 +11,7 @@
     <p><c:if test="${sessionScope.user.email != null}">
         ${requestScope.user.email}
     </c:if></p>
+
 </head>
 <body>
 <!-- Banner logo i top" /-->
@@ -24,6 +25,9 @@
     <a href="${pageContext.request.contextPath}">Home</a>
     <a class href="${pageContext.request.contextPath}/products/">Products</a>
     <a href="${pageContext.request.contextPath}/profilepage/">Profil</a>
+    <a><c:if test="${sessionScope.user.email !=null}">
+        ${sessionScope.user.email}
+    </c:if> </a>
 </nav>
 <!-- Navigationpanel slutter/-->
 

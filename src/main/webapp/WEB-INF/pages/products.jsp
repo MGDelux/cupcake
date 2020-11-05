@@ -25,9 +25,10 @@
     <c:forEach items="${requestScope.navbar.GetNavBarLink()}" var="navLink">
   <a href="<c:url value="${navLink.url}"/>">${navLink.name} <c:if test="${navLink.active}"></c:if> </a>
     </c:forEach>
-    <a class="userMail" href="${pageContext.request.contextPath}/profilepage/"><c:if test="${sessionScope.loggedIn != null}">
+
+    <a><c:if test="${sessionScope.user.email !=null}">
         ${sessionScope.user.email}
-    </c:if></a>
+    </c:if> </a>
 </nav>
 <!-- Navigationpanel slutter/-->
 

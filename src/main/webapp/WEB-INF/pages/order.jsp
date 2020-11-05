@@ -19,6 +19,9 @@
 <!-- Navigationpanel starter /-->
 <nav class="navpanel">
     <a class="fas fa-home" href="${pageContext.request.contextPath}" ></a>
+    <a><c:if test="${sessionScope.user.email !=null}">
+        ${sessionScope.user.email}
+    </c:if> </a>
 
 </nav>
 <!-- Navigationpanel slutter/-->
