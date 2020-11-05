@@ -6,6 +6,7 @@ import domain.Cart.Item_cart;
 import domain.Toppings.Toppings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * CREATED BY mathi @ 30-10-2020 - 09:08
@@ -14,8 +15,6 @@ public class Cart {
     private final ArrayList<Item_cart> itemCarts = new ArrayList<>();
     private final Cupcake cupcake;
     private double sum;
-    private String orderID = "";
-
     public Cart(Cupcake cupcake) {
         this.cupcake = cupcake;
     }
@@ -23,29 +22,23 @@ public class Cart {
     private void addCupCakeToCart(Item_cart itemcart) {
         itemCarts.add(itemcart); }
 
-    public ArrayList<Item_cart> getItemCarts() {
+    public List<Item_cart> getItemCarts() {
         return itemCarts;
     }
     public Item_cart getCartItem (int id){
         return itemCarts.get(id);
     }
-    public void ifCartItem(Item_cart c){
-        if (itemCarts.contains(c)){
-            itemCarts.remove(c);
-        }
-    }
-
     public double getSum() {
         return sum;
     }
 
-    public double deleteSum(Item_cart xl) {
-       double l = xl.getPris(xl);
-        System.out.println("PRIS OF CUPCAKE TO BE DELETED "+ l);
+    public double deleteSum(Item_cart cart) {
+       double pris = cart.getPris(cart);
+        System.out.println("PRIS OF CUPCAKE TO BE DELETED "+ pris);
         System.out.println("CURRENT TOTAL SUM: " + sum);
-        sum = sum - l;
-        System.out.println("SUM IS NOW: " +sum + " ("+sum+"-"+l+")");
-       return l;
+        sum = sum - pris;
+        System.out.println("SUM IS NOW: " +sum + " ("+sum+"-"+pris+")");
+       return pris;
 
 }
 
