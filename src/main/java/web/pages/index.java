@@ -26,7 +26,6 @@ public class index extends Servlet {
                 HttpSession session = req.getSession();
                 session.invalidate();
                 resp.sendRedirect(req.getContextPath() + "");
-
             } else {
                // resp.sendRedirect(req.getContextPath() + "/login");
 
