@@ -1,10 +1,9 @@
 # Cupcake
 
-#by gruppe Jumbo Snegl 
+###by gruppe Jumbo Snegl ####
 <Emil,Janus,Mathias>
+@Tenz331 @Janussr
 
 ## Dokumentation
-
-Her kan man beskrive hvad projektet består af og hvordan man kan installere det på localhost og på en produktionsserver.
-
+Hvis du ser dette som en 2 semester Programmer på CPH brug ikke vores spaghetti kode :^)
 

@@ -36,6 +36,7 @@ public class Products extends Servlet {
         }
     }
 
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getParameter("AddCupcakeToKurv") != null) {
             try {
