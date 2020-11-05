@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database {
     private final String URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=CET";
     private final String USER = "root";
-    private final String PASS = "root";
+    private final String PASS = "Fej69gfx";
     public Database() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

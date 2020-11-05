@@ -153,7 +153,7 @@
     <form method="post">
         <div  class="kunder">
             <input name="kunderIDToDelete" type="text" value="email" required>
-            <button name="deleteUser" type="submit" class="remove-button">Remove User by id</button>
+            <button name="deleteUser" type="submit" class="remove-button">Remove User by Email</button>
 
         </div>
     </form>
