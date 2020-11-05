@@ -60,7 +60,7 @@
             </tbody>
 
         </table>
-        <a href="${pageContext.request.contextPath}/"  target="_blank"><input class="backbutton" type="button" value="Tilbage til forsiden"></a>
+        <a href="${pageContext.request.contextPath}/profilepage/"><input class="backbutton" type="button" value="Tilbage"></a>
 
     </div>
     <!-- "bestil ordre" button /-->

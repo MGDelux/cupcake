@@ -117,9 +117,9 @@ public class DBOrder {
 
     private GetOrderContent GetOrderContent(ResultSet set) throws SQLException {
         return new GetOrderContent(
-                set.getString("orders.OrderId"),
-                set.getString("orders.OrderPrice"),
-                set.getInt("orders.OrderDate"));
+                set.getString("orderContent.Top"),
+                set.getString("orderContent.Bottom"),
+                set.getInt("orderContent.cupcake"));
     }
 
 }
