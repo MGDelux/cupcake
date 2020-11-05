@@ -23,7 +23,6 @@
             ${sessionScope.user.email} - ${sessionScope.user.role}
         </c:if> </a>
     </div>
-
 </head>
 <body>
 <div align="center">
