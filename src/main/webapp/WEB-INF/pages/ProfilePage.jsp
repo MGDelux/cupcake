@@ -14,8 +14,8 @@
         <jsp:include page="../../css/ProfilePage.css"/>
     </style>
     <div class="topnav">
-        <a class="active" href="${pageContext.request.contextPath}/products/">Product page</a>
-        <a href="#${pageContext.request.contextPath}">Index</a>
+        <a class="active" href="${pageContext.request.contextPath}/products/">Cupcakes</a>
+        <a href="${pageContext.request.contextPath}">Hjem</a>
         <a href="#signout">Log ud</a>
         <a><c:if test="${sessionScope.user.email !=null}">
             ${sessionScope.user.email}
