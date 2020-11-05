@@ -33,6 +33,14 @@ body {
 .useremail .a:hover {
     color: #6C00D8;
 }
+.navpanel .logger {
+    background:transparent ;
+    border: none !important;
+    font-size:0;
+    float: right;
+    margin-top: 10px;
+}
+
 
 .navpanel {
     border: 1px solid #000000;
