@@ -115,6 +115,26 @@ public class DBCupcake implements TopsRepo, BotRepo {
     }
 
     @Override
+    public Toppings findBotById(int id) throws NoCupcake {
+        try (Connection conn = db.connect()) {
+            String SQL = "SELECT * FROM buttoms where id = ?";
+            var smt = conn.prepareStatement(SQL);
+            smt.setInt(1, id);
+            smt.executeQuery();
+            ResultSet set = smt.getResultSet();
+            if (set.next()) {
+                return ParseTops(set);
+            } else {
+                throw new NoCupcake(set.toString() + " >>" + id);
+            }
+        } catch (SQLException | NoCupcake e) {
+            e.printStackTrace();
+            throw new NoCupcake(e.getMessage() + " >" + id);
+        }
+
+    }
+
+    @Override
     public Bottoms findBut(int id) throws NoCupcake {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM buttoms where id = ?";
@@ -149,21 +169,6 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException | NoCupcake e) {
             e.printStackTrace();
             throw new NoCupcake(navn + " "+ e.getMessage());
-        }
-    }
-
-    public boolean checkMail(String email) {
-        try {
-            Connection conn = db.connect();
-            PreparedStatement ps = conn.prepareStatement("select * from kunde WHERE email = ?");
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return true;
-            } else return false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return false;
         }
     }
 

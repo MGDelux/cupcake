@@ -17,27 +17,27 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Servlet extends HttpServlet {
-    protected static final Cupcake cupcakeApi;
+    protected static final Cupcake CUPCAKE;
 
     static {
-        cupcakeApi = loadCupcakes();
+        CUPCAKE = loadCupcakes();
     }
 
     protected static Cart getCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart(cupcakeApi);
-            session.setAttribute("cart", cart);
+        Cart cartAPI = (Cart) session.getAttribute("cart");
+        if (cartAPI == null) {
+            cartAPI = new Cart(CUPCAKE);
+            session.setAttribute("cart", cartAPI);
         }
-        return cart;
+        return cartAPI;
     }
 
     protected static User getUser(HttpServletRequest request, HttpServletResponse response, String errorMsgIfNull) throws IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            session.setAttribute("loggedIn",errorMsgIfNull);
+            session.setAttribute("loggedIn", errorMsgIfNull);
             response.sendRedirect(request.getContextPath() + "/login/");
         }
         return user;

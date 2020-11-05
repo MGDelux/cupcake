@@ -39,7 +39,7 @@ public class Products extends Servlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getParameter("AddCupcakeToKurv") != null) {
             try {
-                sumitBotsTilKurv(req, resp);
+                summitToCart(req, resp);
             } catch (NoCupcake noCupcake) {
                 noCupcake.printStackTrace();
             }
@@ -47,7 +47,7 @@ public class Products extends Servlet {
         resp.sendRedirect(req.getContextPath() + "/products/");
     }
 
-    private void sumitBotsTilKurv(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake { //refactor
+    private void summitToCart(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake { //refactor
         String top = req.getParameter("TopToKurv");
         String[] splittop = top.split(",");
         String bots = req.getParameter("BotToKurv");

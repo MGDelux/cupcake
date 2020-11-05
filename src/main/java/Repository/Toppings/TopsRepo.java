@@ -8,4 +8,5 @@ public interface TopsRepo extends TopFactory {
     Toppings findTop(String id) throws NoCupcake;
     Toppings findtopByiD(int id) throws NoCupcake;
     Toppings createTop(String navn,double pris);
+    Toppings findBotById(int id) throws NoCupcake;
 }

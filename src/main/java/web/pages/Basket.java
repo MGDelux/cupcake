@@ -1,6 +1,7 @@
 package web.pages;
 
 import domain.Cart.Item_cart;
+import domain.Order.CreateOrders;
 import domain.User.User;
 import infrastructure.DBOrder;
 import infrastructure.Database;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -26,7 +27,7 @@ public class Basket extends Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        ArrayList<Item_cart> itemCart = getCart(req).getItemCarts();
+        List<Item_cart> itemCart = getCart(req).getItemCarts();
         req.setAttribute("cart", itemCart);
         req.setAttribute("cupcakesAntal", itemCart.size());
         req.setAttribute("totalSum", getCart(req).getSum());
@@ -70,18 +71,17 @@ public class Basket extends Servlet {
     }
 
     private void createOrder(HttpServletRequest request, User user) throws SQLException {
-        DBOrder order = new DBOrder(db);
         String orderID;
-        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 1000);
+        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 9999);
         int orderidPart1 = getCart(request).getItemCarts().size();
         int orderidPart2 = user.getId();
-        String useremail = user.getEmail();
-        String[] splittop = useremail.split("@");
-        orderID = "#" + orderidPart0 + Integer.toString(orderidPart1) + Integer.toString(orderidPart2) + splittop[0];
+        orderID = "#" + orderidPart0 + Integer.toString(orderidPart1) + Integer.toString(orderidPart2);
         HttpSession session = request.getSession();
         session.setAttribute("OrderDetailjer", getCart(request).getItemCarts());
         session.setAttribute("OrderNummer",orderID);
-        order.createOrder(orderID, user, getCart(request).getItemCarts(), getCart(request).getSum());
+        CreateOrders createOrders = new CreateOrders(orderID,getCart(request).getItemCarts());
+        DBOrder enterOrder = new DBOrder(db);
+        enterOrder.createOrder(orderID,user, createOrders,getCart(request).getSum());
     }
 }
 

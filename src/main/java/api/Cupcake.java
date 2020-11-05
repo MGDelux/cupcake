@@ -27,7 +27,6 @@ public class Cupcake {
     public Toppings removeTopping(int id) throws NoCupcake {
         return topList.deleteTop(id);
     }
-
     public Bottoms removeButtom(int id) throws NoCupcake {
         return butList.deleteBut(id);
     }
@@ -43,9 +42,18 @@ public class Cupcake {
     public Iterable<Bottoms> findAllBut() throws NoCupcake {
         return butList.findALlbuttoms();
     }
+
     public Toppings getTopping(String navn) throws NoCupcake {
-        return  topList.findTop(navn);
+        return topList.findTop(navn);
     }
+
+    public Toppings getToppingById(int id) throws NoCupcake {
+        return topList.findtopByiD(id);
+    }
+    public Toppings getBottomById(int id) throws NoCupcake {
+        return topList.findBotById(id);
+    }
+
     public Bottoms getButtom(String navn) throws NoCupcake {
         return butList.findBot(navn);
     }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%@ page contentType="text/html; charset=UTF-8" %>
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
-    <title>Cupcake cart</title>
+    <title>Cupcake cartAPI</title>
     <link href="<c:url value="css/Basket.css"/>" rel="stylesheet"/>
     <p><c:if test="${sessionScope.user.email != null}">
         ${requestScope.user.email}

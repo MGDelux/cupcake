@@ -45,9 +45,31 @@
         </div>
         <div class="container" align="center">
             <h3>Dine ordre:</h3>
-            <select name="order" id="order">
-            </select>
-            <br> <br> <br> <br>
+            <table border="1">
+                <thead>
+                <tr>
+                    <td>ID:</td>
+                    <td>Order Pris:</td>
+                    <td>Dato:</td>
+                    <td>Order Detailer:</td>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${Order}" var="order">
+                    <tr>
+                        <td>${order.orderId}</td>
+                        <td>${order.orderPrice} ddk.-</td>
+                        <td>${order.orderDate}</td>
+                        <td align="center">
+                            <form method="post">
+                                <input type="hidden" name="idStuff" value="${order.orderId}">
+                                <input  type="submit" value="Detailer" name="delteOrderLine"/>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
         </form>
 
