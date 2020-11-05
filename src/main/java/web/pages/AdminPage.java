@@ -20,24 +20,22 @@ import java.util.ArrayList;
 
 @WebServlet({"/AdminPage", "/AdminPage/*"})
 public class AdminPage extends Servlet {
-    Cupcake cupcake = loadCupcakes();
-    LoginFacade loginFacade = new LoginFacade();
-
+LoginFacade loginFacade = new LoginFacade();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         if (getUser(req, resp, "need to be logged in") != null) {
-            if (getUser(req, resp, "admin error").getRole().toLowerCase().equals("admin")) {
+            if (getUser(req, resp, "admin error").getRole().equals("admin")) {
                 LoginFacade loginFacade = new LoginFacade();
                 ArrayList<Toppings> toppings = new ArrayList<>();
                 ArrayList<Bottoms> buttoms = new ArrayList<>();
                 ArrayList<User> users = new ArrayList<>();
                 setUp(req, resp);
                 try {
-                    for (Toppings tops : cupcake.findAllTop()) {
+                    for (Toppings tops : loadCupcakes().findAllTop()) {
                         toppings.add(tops);
                     }
-                    for (Bottoms buts : cupcake.findAllBut()) {
+                    for (Bottoms buts : loadCupcakes().findAllBut()) {
                         buttoms.add(buts);
                     }
                     for (User u : loginFacade.getAllUsers()) {
@@ -45,7 +43,7 @@ public class AdminPage extends Servlet {
                     }
                     req.setAttribute("buttoms", buttoms);
                     req.setAttribute("toppings", toppings);
-                    req.setAttribute("cupcakes", cupcake);
+                    req.setAttribute("cupcakes", loadCupcakes());
                     req.setAttribute("users", users);
 
                     log(req, "admin page");
@@ -69,11 +67,11 @@ public class AdminPage extends Servlet {
             }
         }
     }
-
+@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         System.out.println("post");
         if (req.getParameter("removetoppingidbutton") != null) {
-            removeTopping(req, resp);
+            removeTopping(req);
         }
         if (req.getParameter("addtoppingbutton") != null) {
             addTopping(req, resp);
@@ -83,14 +81,14 @@ public class AdminPage extends Servlet {
         }
         if (req.getParameter("removeBut") != null) {
             System.out.println("remove buttom");
-            removeButtom(req, resp);
+            removeButtom(req);
         }
         if (req.getParameter("createNewUser") != null) {
             System.out.println("create user");
-            createUser(req, resp);
+            createUser(req);
         }
         if (req.getParameter("addKredit") != null) {
-            addkredit(req, resp);
+            addkredit(req);
         }
         if (req.getParameter("deleteUser") != null) {
             String kundeId = req.getParameter("kunderIDToDelete");
@@ -106,9 +104,9 @@ public class AdminPage extends Servlet {
         resp.sendRedirect(req.getContextPath() + "/AdminPage");
     }
 
-    private void addkredit(HttpServletRequest req, HttpServletResponse resp) {
-        String kundeId = req.getParameter("kunderID");
-        String kundeKredit = req.getParameter("KreditToAdd");
+    private void addkredit(HttpServletRequest request) {
+        String kundeId = request.getParameter("kunderID");
+        String kundeKredit = request.getParameter("KreditToAdd");
         try {
             int parseID = Integer.parseInt(kundeId);
             double parseKredit = Double.parseDouble(kundeKredit);
@@ -123,7 +121,7 @@ public class AdminPage extends Servlet {
 
     }
 
-    private void createUser(HttpServletRequest req, HttpServletResponse resp) {
+    private void createUser(HttpServletRequest req) {
         String email = req.getParameter("kunderEmail");
         String role = req.getParameter("kundeRole");
         String password = req.getParameter("kunderPassword");
@@ -171,7 +169,7 @@ public class AdminPage extends Servlet {
 
     }
 
-    protected void removeTopping(HttpServletRequest req, HttpServletResponse resp) {
+    protected void removeTopping(HttpServletRequest req) {
         String nytop = req.getParameter("removeToppingid");
         int parseInt = Integer.parseInt(nytop);
         try {
@@ -182,7 +180,7 @@ public class AdminPage extends Servlet {
         }
     }
 
-    protected void removeButtom(HttpServletRequest req, HttpServletResponse resp) {
+    protected void removeButtom(HttpServletRequest req) {
         String nytop = req.getParameter("removeButId");
         System.out.println("remvoe " + nytop);
         int parseInt = Integer.parseInt(nytop);
