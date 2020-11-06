@@ -11,3 +11,4 @@ Bruger til teste:
 *Normal bruger: bruger@mail.com - Password: 1234
 *admin bruger: admin@mail.com admin
 ### WEBPAGE: http://165.232.77.202:8080/projektskabelon-1.0-SNAPSHOT/
+### Check Releases for Rapport og .war fil
