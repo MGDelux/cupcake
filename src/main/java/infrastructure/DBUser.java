@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class DBUser {
     private final Database db;
 
-    public DBUser(Database db)  {
+    public DBUser(Database db) {
         this.db = db;
     }
 
@@ -101,7 +101,7 @@ public class DBUser {
                 rs.getDouble("kredit"));
     }
 
-    public void addKredit(int id, double kredit) {
+    public void setKredit(int id, double kredit) {
         try {
             Connection conn = db.connect();
             String SQL = "UPDATE kunde SET kredit = (?) WHERE id = (?)";
@@ -125,5 +125,18 @@ public class DBUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+
+    public double getkredit(int id) throws SQLException {
+        double kredit = 0;
+        Connection conn = db.connect();
+        PreparedStatement ps = conn.prepareStatement("select kredit from kunde WHERE id = ?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+           kredit = rs.getDouble("kunde.kredit");
+        }
+        return kredit;
     }
 }

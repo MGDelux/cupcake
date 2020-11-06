@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: mathi
@@ -63,7 +63,7 @@
                         <td align="center">
                             <form method="post">
                                 <input type="hidden" name="idStuff" value="${order.orderId}">
-                                <input  type="submit" value="Detailer" name="delteOrderLine"/>
+                                <input  type="submit" value="Detailer" name="CheckDetails"/>
                             </form>
                         </td>
                     </tr>

@@ -16,15 +16,6 @@ public class CreateOrders {
         this.orderId = orderId;
         this.cart = cart;
     }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
     public List<Item_cart> getCart() {
         return cart;
     }

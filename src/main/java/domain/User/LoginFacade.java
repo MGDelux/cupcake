@@ -25,9 +25,14 @@ public class LoginFacade {
             return user;
         }
     }
-public void addKredit(int id,double kredit) throws LoginError, SQLException {
-            new DBUser(db).addKredit(id,kredit);
-        }
+
+    public double getKredit(int id) throws SQLException {
+        return new DBUser(db).getkredit(id);
+    }
+
+    public void addKredit(int id, double kredit) {
+        new DBUser(db).setKredit(id, kredit);
+    }
 
     public String deleteUser(String email) throws LoginError, SQLException {
         if (new DBUser(db).checkMail(email)) {
@@ -37,7 +42,14 @@ public void addKredit(int id,double kredit) throws LoginError, SQLException {
         }
         return email;
     }
+
     public Iterable<User> getAllUsers() throws LoginError, SQLException {
-       return new DBUser(db).findAllUsers();
+        return new DBUser(db).findAllUsers();
+    }
+
+    public void deletekredit(int id, double kredit) throws SQLException {
+        double userKredit = getKredit(id);
+        kredit = userKredit - kredit;
+        new DBUser(db).setKredit(id, kredit);
     }
 }

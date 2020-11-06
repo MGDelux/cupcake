@@ -22,7 +22,7 @@ public class DBOrder {
         this.db = db;
     }
 
-    public void createOrder(String orderId, User user, CreateOrders createOrders, double pris) throws SQLException {
+    public void createOrder(String orderId, User user, CreateOrders createOrders, double pris)  {
 
         System.out.println("CREATING ORDER: \n ID:" + orderId + " User: " + user.getId() + " Items: " + createOrders.getCart() + "\n pris: " + pris);
         opretOrder(orderId, user, pris);
@@ -59,6 +59,20 @@ public class DBOrder {
         }
     }
 
+    public List<String> getAllOrders() throws SQLException {
+        ArrayList<String> users = new ArrayList<>();
+        try (Connection conn = db.connect()) {
+            String SQLQ = "SELECT orderId FROM orders;";
+            var smt = conn.prepareStatement(SQLQ);
+            smt.executeQuery();
+            ResultSet set = smt.getResultSet();
+            while (set.next()) {
+                users.add(set.getString("orders.Orderid"));
+            }
+        }
+        return users;
+    }
+
     public List<String> getuserOrdersId(int userId) throws SQLException {
         ArrayList<String> createOrders = new ArrayList<>();
         try (Connection conn = db.connect()) {
@@ -92,6 +106,48 @@ public class DBOrder {
         }
         return null;
     }
+
+    public GetOrders getAllUserOrders() {
+        try (Connection conn = db.connect()) {
+            String SQLQ = "SELECT * FROM orders;";
+            var smt = conn.prepareStatement(SQLQ);
+            smt.executeQuery();
+            ResultSet set = smt.getResultSet();
+            while (set.next()) {
+                return (GetOrders(set));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void removeOrder(String orderId) {
+        try (Connection conn = db.connect()) {
+            String sql = "DELETE FROM orders WHERE OrderId = ?;";
+            var smt = conn.prepareStatement(sql);
+            smt.setString(1,orderId);
+            smt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void removeOrderContent(String orderId) {
+        try (Connection conn = db.connect()) {
+            String sql = "DELETE FROM ordercontent WHERE OrderId = ?;";
+            var smt = conn.prepareStatement(sql);
+            smt.setString(1,orderId);
+            smt.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
     public GetOrders loadUserOrders(String orderId) {
         try (Connection conn = db.connect()) {
             String SQLQ = "SELECT * FROM orders WHERE OrderId = ?;";
@@ -108,9 +164,11 @@ public class DBOrder {
         }
         return null;
     }
+
     private GetOrders GetOrders(ResultSet set) throws SQLException {
         return new GetOrders(
                 set.getString("orders.OrderId"),
+                set.getInt("orders.UserId"),
                 set.getDouble("orders.OrderPrice"),
                 set.getTimestamp("orders.OrderDate"));
     }
@@ -121,6 +179,7 @@ public class DBOrder {
                 set.getString("orderContent.Bottom"),
                 set.getInt("orderContent.cupcake"));
     }
+
 
 }
 

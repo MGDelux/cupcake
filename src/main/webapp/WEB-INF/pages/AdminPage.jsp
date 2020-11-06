@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="domain.Toppings.Toppings" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: mathi
@@ -17,8 +17,7 @@
     </style>
     <div class="topnav">
         <a class="active" href="${pageContext.request.contextPath}/products/">Produkter</a>
-        <a href="#${pageContext.request.contextPath}">Hjem</a>
-        <a href="#signout">Log ud</a>
+        <a href="#${pageContext.request.contextPath}/">Hjem</a>
         <a><c:if test="${sessionScope.user.email !=null}">
             ${sessionScope.user.email} - ${sessionScope.user.role}
         </c:if> </a>
@@ -156,6 +155,34 @@
 
         </div>
     </form>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Order Nr.</th>
+            <th>Bruger id:</th>
+            <th>Total pris:</th>
+            <th>Dato:</th>
+            <th>Details</th>
+      </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${userOrders}" var="orders">
+            <tr>
+                <td>${orders.orderId}</td>
+                <td>${orders.userId}</td>
+                <td>${orders.orderPrice}</td>
+                <td>${orders.orderDate}</td>
+                <td align="center">
+                    <form method="post">
+                        <input type="hidden" name="idStuff" value="${orders.orderId}">
+                        <input  type="submit" value="Detailer" name="CheckDetails"/>
+                        <input  type="submit" value="Slet order and content" name="sletDetails"/>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

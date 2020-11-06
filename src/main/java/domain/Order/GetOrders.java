@@ -7,11 +7,13 @@ import java.sql.Timestamp;
  **/
 public class GetOrders {
     String orderId;
+    int userId;
     double orderPrice;
     Timestamp orderDate;
 
-    public GetOrders(String orderId, double orderPrice, Timestamp orderDate) {
+    public GetOrders(String orderId, int userId, double orderPrice, Timestamp orderDate) {
         this.orderId = orderId;
+        this.userId = userId;
         this.orderPrice = orderPrice;
         this.orderDate = orderDate;
     }
@@ -20,16 +22,12 @@ public class GetOrders {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public int getUserId() {
+        return userId;
     }
 
     public double getOrderPrice() {
         return orderPrice;
-    }
-
-    public void setOrderPrice(double orderPrice) {
-        this.orderPrice = orderPrice;
     }
 
     public Timestamp getOrderDate() {

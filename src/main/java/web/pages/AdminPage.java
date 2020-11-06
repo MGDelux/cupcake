@@ -3,9 +3,12 @@ package web.pages;
 import Repository.User.LoginError;
 import Repository.Cupcakes.NoCupcake;
 import domain.Bottoms.Bottoms;
+import domain.Order.GetOrders;
 import domain.Toppings.Toppings;
 import domain.User.LoginFacade;
 import domain.User.User;
+import infrastructure.DBOrder;
+import infrastructure.Database;
 import web.Servlet;
 import api.*;
 
@@ -17,10 +20,15 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet({"/AdminPage", "/AdminPage/*"})
 public class AdminPage extends Servlet {
-LoginFacade loginFacade = new LoginFacade();
+    LoginFacade loginFacade = new LoginFacade();
+    String contextPath;
+    Database db = new Database();
+    final DBOrder dbo = new DBOrder(db);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -30,8 +38,10 @@ LoginFacade loginFacade = new LoginFacade();
                 ArrayList<Toppings> toppings = new ArrayList<>();
                 ArrayList<Bottoms> buttoms = new ArrayList<>();
                 ArrayList<User> users = new ArrayList<>();
+                ArrayList<GetOrders> userOrders = new ArrayList<>();
                 setUp(req, resp);
-                try {
+
+                try { //refactor to not use for each loops redundant and takes a longer time :(
                     for (Toppings tops : loadCupcakes().findAllTop()) {
                         toppings.add(tops);
                     }
@@ -41,6 +51,11 @@ LoginFacade loginFacade = new LoginFacade();
                     for (User u : loginFacade.getAllUsers()) {
                         users.add(u);
                     }
+                    List<String> usersInDB = dbo.getAllOrders();
+                    for (String s : usersInDB) {
+                        userOrders.add(dbo.loadUserOrders(s));
+                    }
+                    req.setAttribute("userOrders", userOrders);
                     req.setAttribute("buttoms", buttoms);
                     req.setAttribute("toppings", toppings);
                     req.setAttribute("cupcakes", loadCupcakes());
@@ -49,59 +64,78 @@ LoginFacade loginFacade = new LoginFacade();
                     log(req, "admin page");
                     render("admin page", "/WEB-INF/pages/AdminPage.jsp", req, resp);
 
-                } catch (NoCupcake noCupcake) {
+                } catch (NoCupcake | LoginError | SQLException noCupcake) {
                     resp.sendError(500, noCupcake.getMessage());
                     System.out.println(noCupcake.getMessage());
-                } catch (LoginError loginError) {
-                    resp.sendError(500, loginError.getMessage());
-                    System.out.println(loginError.getMessage());
-                } catch (SQLException throwables) {
-                    resp.sendError(500, throwables.getMessage());
-                    System.out.println(throwables.getMessage());
                 }
-            }else {
+            } else {
                 HttpSession session = req.getSession();
-                resp.sendRedirect(req.getContextPath()+"/login/");
-                session.setAttribute("loggedIn","ADMIN ONLY PAGE PLEASE SIGN IN AS ADMIN");
+                resp.sendRedirect(req.getContextPath() + "/login/");
+                session.setAttribute("loggedIn", "ADMIN ONLY PAGE PLEASE SIGN IN AS ADMIN");
 
             }
         }
     }
-@Override
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        contextPath = "/AdminPage";
         System.out.println("post");
+        HttpSession ses = req.getSession();
+        if (req.getParameter("CheckDetails") != null) {
+            String id;
+            id = req.getParameter("idStuff");
+            ses.setAttribute("UserOrderDetailId", id);
+            contextPath = "/orderDetails/";
+        }
         if (req.getParameter("removetoppingidbutton") != null) {
+            contextPath = "/AdminPage";
             removeTopping(req);
         }
+        if (req.getParameter("sletDetails") != null) {
+            contextPath = "/AdminPage";
+            removeOrder(req);
+        }
         if (req.getParameter("addtoppingbutton") != null) {
+            contextPath = "/AdminPage";
             addTopping(req, resp);
         }
         if (req.getParameter("add-button") != null) {
+            contextPath = "/AdminPage";
             addButtom(req, resp);
         }
         if (req.getParameter("removeBut") != null) {
+            contextPath = "/AdminPage";
             System.out.println("remove buttom");
             removeButtom(req);
         }
         if (req.getParameter("createNewUser") != null) {
+            contextPath = "/AdminPage";
             System.out.println("create user");
             createUser(req);
         }
         if (req.getParameter("addKredit") != null) {
+            contextPath = "/AdminPage";
             addkredit(req);
         }
         if (req.getParameter("deleteUser") != null) {
             String kundeId = req.getParameter("kunderIDToDelete");
             try {
+                contextPath = "/AdminPage";
                 System.out.println("delete user >" + kundeId);
                 loginFacade.deleteUser(kundeId);
-            } catch (LoginError loginError) {
+            } catch (LoginError | SQLException loginError) {
                 loginError.printStackTrace();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
             }
         }
-        resp.sendRedirect(req.getContextPath() + "/AdminPage");
+        resp.sendRedirect(req.getContextPath() + contextPath);
+    }
+
+    private void removeOrder(HttpServletRequest request) {
+        String orderId = request.getParameter("idStuff");
+        dbo.removeOrder(orderId);
+        dbo.removeOrderContent(orderId);
+
     }
 
     private void addkredit(HttpServletRequest request) {
@@ -113,10 +147,6 @@ LoginFacade loginFacade = new LoginFacade();
             loginFacade.addKredit(parseID, parseKredit);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (LoginError loginError) {
-            loginError.printStackTrace();
         }
 
     }
@@ -129,10 +159,8 @@ LoginFacade loginFacade = new LoginFacade();
         try {
             double parseInt = Double.parseDouble(kundeKredit);
             loginFacade.createUser(email, password, role, parseInt);
-        } catch (SQLException throwables) {
+        } catch (SQLException | LoginError throwables) {
             throwables.printStackTrace();
-        } catch (LoginError loginError) {
-            loginError.printStackTrace();
         }
     }
 

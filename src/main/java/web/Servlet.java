@@ -51,6 +51,7 @@ public class Servlet extends HttpServlet {
 
     protected void setUp(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
     }
 
     protected void render(String title, String content, HttpServletRequest req, HttpServletResponse resp)

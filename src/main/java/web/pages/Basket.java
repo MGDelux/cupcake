@@ -2,6 +2,7 @@ package web.pages;
 
 import domain.Cart.Item_cart;
 import domain.Order.CreateOrders;
+import domain.User.LoginFacade;
 import domain.User.User;
 import infrastructure.DBOrder;
 import infrastructure.Database;
@@ -22,7 +23,8 @@ import java.util.Random;
  **/
 @WebServlet({"/basket", "/basket/*"})
 public class Basket extends Servlet {
-    Database db = new Database();
+   final Database db = new Database();
+   final LoginFacade facade = new LoginFacade();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -69,18 +71,16 @@ public class Basket extends Servlet {
 
         }
     }
-
     private void createOrder(HttpServletRequest request, User user) throws SQLException {
         String orderID;
-        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 9999);
-        int orderidPart1 = getCart(request).getItemCarts().size();
-        int orderidPart2 = user.getId();
-        orderID = "#" + orderidPart0 + Integer.toString(orderidPart1) + Integer.toString(orderidPart2);
+        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 9999);int orderidPart1 = getCart(request).getItemCarts().size();int orderidPart2 = user.getId();
+        orderID = "#" + orderidPart0 + (orderidPart1) + (orderidPart2);
         HttpSession session = request.getSession();
         session.setAttribute("OrderDetailjer", getCart(request).getItemCarts());
         session.setAttribute("OrderNummer",orderID);
         CreateOrders createOrders = new CreateOrders(orderID,getCart(request).getItemCarts());
         DBOrder enterOrder = new DBOrder(db);
+        facade.deletekredit(user.getId(),getCart(request).getSum());
         enterOrder.createOrder(orderID,user, createOrders,getCart(request).getSum());
     }
 }
