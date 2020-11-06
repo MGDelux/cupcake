@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class Login extends Servlet {
     private  String email;
     private  String password;
-    private LoginFacade loginFacade = new LoginFacade();
+    private final LoginFacade loginFacade = new LoginFacade();
     private User user;
 
     @Override

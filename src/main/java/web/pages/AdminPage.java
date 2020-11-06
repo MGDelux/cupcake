@@ -64,7 +64,7 @@ public class AdminPage extends Servlet {
                     log(req, "admin page");
                     render("admin page", "/WEB-INF/pages/AdminPage.jsp", req, resp);
 
-                } catch (NoCupcake | LoginError | SQLException noCupcake) {
+                } catch (NoCupcake | SQLException noCupcake) {
                     resp.sendError(500, noCupcake.getMessage());
                     System.out.println(noCupcake.getMessage());
                 }
@@ -109,7 +109,7 @@ public class AdminPage extends Servlet {
             System.out.println("remove buttom");
             removeButtom(req);
         }
-        if (req.getParameter("createNewUser") != null) {
+        if (req.getParameter("createnewuser") != null) {
             contextPath = "/AdminPage";
             System.out.println("create user");
             createUser(req);
@@ -152,10 +152,10 @@ public class AdminPage extends Servlet {
     }
 
     private void createUser(HttpServletRequest req) {
-        String email = req.getParameter("kunderEmail");
-        String role = req.getParameter("kundeRole");
-        String password = req.getParameter("kunderPassword");
-        String kundeKredit = req.getParameter("kunderKredt");
+        String email = req.getParameter("kunderemail");
+        String role = req.getParameter("kunderole");
+        String password = req.getParameter("kunderpassword");
+        String kundeKredit = req.getParameter("kunderkredt");
         try {
             double parseInt = Double.parseDouble(kundeKredit);
             loginFacade.createUser(email, password, role, parseInt);

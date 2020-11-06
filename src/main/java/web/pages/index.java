@@ -15,7 +15,13 @@ import java.io.IOException;
 @WebServlet("")
 public class index extends Servlet {
     @Override
+    protected void setUp(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        super.setUp(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+
             throws ServletException, IOException {
         render("index+", "/WEB-INF/pages/index.jsp", req, resp);
     }

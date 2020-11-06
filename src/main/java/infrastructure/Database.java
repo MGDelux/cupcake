@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private final String URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=CET";
-    private final String USER = "root";
-    private final String PASS = "Fej69gfx";
+    private final String URL = "jdbc:mysql://localhost/cupcake?serverTimezone=CET";
+    private final String USER = "cupcake";
+    private final String PASS = "pass";
     public Database() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

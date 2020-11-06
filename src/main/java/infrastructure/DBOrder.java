@@ -32,7 +32,7 @@ public class DBOrder {
 
     public void opretOrder(String orderId, User user, double pris) {
         try (Connection conn = db.connect()) {
-            String SQLQ = "INSERT INTO Orders (orderId,UserId,OrderPrice) VALUES (?,?,?)";
+            String SQLQ = "INSERT INTO orders (orderId,UserId,OrderPrice) VALUES (?,?,?)";
             var smt = conn.prepareStatement(SQLQ);
             smt.setString(1, orderId);
             smt.setInt(2, user.getId());
@@ -46,7 +46,7 @@ public class DBOrder {
     public void enterOrderContent(String orderID, List<Item_cart> cartList) {
         try (Connection conn = db.connect()) {
             for (Item_cart c : cartList) {
-                String SQLQ = "INSERT INTO ordercontent (OrderId,Top,Bottom,Cupcake) VALUES (?,?,?,?);";
+                String SQLQ = "INSERT INTO orderContent (OrderId,Top,Bottom,Cupcake) VALUES (?,?,?,?);";
                 var smt = conn.prepareStatement(SQLQ);
                 smt.setString(1, orderID);
                 smt.setString(2, c.getToppings().getNavn());
@@ -137,7 +137,7 @@ public class DBOrder {
 
     public void removeOrderContent(String orderId) {
         try (Connection conn = db.connect()) {
-            String sql = "DELETE FROM ordercontent WHERE OrderId = ?;";
+            String sql = "DELETE FROM orderContent WHERE OrderId = ?;";
             var smt = conn.prepareStatement(sql);
             smt.setString(1,orderId);
             smt.execute();

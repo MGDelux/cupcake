@@ -43,7 +43,7 @@ public class LoginFacade {
         return email;
     }
 
-    public Iterable<User> getAllUsers() throws LoginError, SQLException {
+    public Iterable<User> getAllUsers(){
         return new DBUser(db).findAllUsers();
     }
 
@@ -51,5 +51,9 @@ public class LoginFacade {
         double userKredit = getKredit(id);
         kredit = userKredit - kredit;
         new DBUser(db).setKredit(id, kredit);
+    }
+    public double refreshKredit(int id) throws SQLException {
+       return new DBUser(db).getkredit(id);
+
     }
 }

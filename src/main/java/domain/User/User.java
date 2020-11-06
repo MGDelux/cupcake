@@ -82,6 +82,10 @@ public class User {
         return salt;
     }
 
+    public void setKredit(double kredit) {
+        this.kredit = kredit;
+    }
+
     public static byte[] calculateSecret(byte[] salt, String password) {
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt,
                 PASSWORD_ITTERATIONS,

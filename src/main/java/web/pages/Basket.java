@@ -73,6 +73,7 @@ public class Basket extends Servlet {
     }
     private void createOrder(HttpServletRequest request, User user) throws SQLException {
         String orderID;
+        User use= (User) request.getSession().getAttribute("user");
         int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 9999);int orderidPart1 = getCart(request).getItemCarts().size();int orderidPart2 = user.getId();
         orderID = "#" + orderidPart0 + (orderidPart1) + (orderidPart2);
         HttpSession session = request.getSession();
@@ -82,6 +83,8 @@ public class Basket extends Servlet {
         DBOrder enterOrder = new DBOrder(db);
         facade.deletekredit(user.getId(),getCart(request).getSum());
         enterOrder.createOrder(orderID,user, createOrders,getCart(request).getSum());
+        use.setKredit(facade.refreshKredit(use.getId()));
+
     }
 }
 

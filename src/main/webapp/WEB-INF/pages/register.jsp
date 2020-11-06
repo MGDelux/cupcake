@@ -1,4 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
+
 <!--@author Mathias .css snips from: CodingNepal -->
 
 <html lang="en" dir="ltr">

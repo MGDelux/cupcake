@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="domain.Toppings.Toppings" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -17,7 +18,7 @@
     </style>
     <div class="topnav">
         <a class="active" href="${pageContext.request.contextPath}/products/">Produkter</a>
-        <a href="#${pageContext.request.contextPath}/">Hjem</a>
+        <a href="${pageContext.request.contextPath}/">Hjem</a>
         <a><c:if test="${sessionScope.user.email !=null}">
             ${sessionScope.user.email} - ${sessionScope.user.role}
         </c:if> </a>
@@ -27,7 +28,7 @@
 <div align="center">
     <!-- table  Buttom laves/-->
     <h1>Admin page</h1>
-        <h3>Buttoms</h3>
+        <h3>Buttoms:</h3>
         <table id="buttom" border="1" title="">
             <thead>
             <!-- table rows id,name og pris laves/-->
@@ -66,8 +67,7 @@
         </div>
     </form>
         <!-- Hele table Buttoms slutter/-->
-        <h3>Toppings+
-        </h3>
+        <h3>Toppings:</h3>
         <table border="1">
             <thead>
             <tr>
@@ -152,7 +152,7 @@
         <div  class="kunder">
             <input name="kunderIDToDelete" type="text" value="email" required>
             <button name="deleteUser" type="submit" class="remove-button">Remove User by Email</button>
-
+            <h3>Orders:</h3>
         </div>
     </form>
     <table border="1">
