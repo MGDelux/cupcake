@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%@ page contentType="text/html; charset=UTF-8" %>
     <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
     <title>Cupcake homepage</title>
     <link href="<c:url value="css/index.css"/>" rel="stylesheet"/>
@@ -38,15 +40,12 @@
     <!-- headers/tekst starter-->
     <div class="headers">
         <h1><strong>Velkommen ombord.</strong></h1>
-        <h2 class="header2"><strong>Ã˜ens bedste cupcakes, vÃ¦lg og bestil her</strong></h2>
+        <h2 class="header2"><strong>Øens bedste cupcakes vælg og bestil her</strong></h2>
         <img id="Choko" onclick="changeImage()" class="Choko"
              src="https://www.amo.dk/siteassets/2.-opskrifter/chokolade-cupcake.jpg?maxwidth=1440" alt="Choko cupcake">
         <br>
-        <p class="brÃ¸dtekst"> Olsker Cupcakes er en nyopstartet ivÃ¦rksÃ¦ttervirksomhed med base pÃ¥ Bornholm. Olskers
-            cupcakes startede i 2020 med en vision om at bringe lokal samfundet sammen omkring den lille sÃ¸de dessert.
-            Olsker Cupcakes sÃ¦tter Ã¸kologi i fÃ¸rersÃ¦det og har dermed fundet frem til den helt rigtige opskrift.
-            Med vores lokale rÃ¥varer og sans for kvalitet formÃ¥rer vi at producere ikke mindst miljÃ¸venlige, men ogsÃ¥
-            fÃ¸rsteklasses cupcakes til en pris som alle kan vÃ¦re med pÃ¥.
+        <p class="brødtekst"> Olsker Cupcakes er en nyopstartet iværksættervirksomhed med base på Bornholm. Olskers cupcakes startede i 2020 med en vision om  at bringe lokal samfundet sammen omkring den lille søde dessert. Olsker Cupcakes sætter økologi i førersædet og har dermed fundet frem til den helt rigtige opskrift.
+            Med vores lokale råvarer og sans for kvalitet formårer vi at producere ikke mindst miljøvenlige, men også førsteklasses cupcakes til en pris som alle kan være med på.
             <br><br><br><br>
         </p>
     </div>
