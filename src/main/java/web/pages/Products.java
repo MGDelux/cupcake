@@ -67,6 +67,8 @@ public class Products extends Servlet {
         }
         resp.sendRedirect(req.getContextPath() + "/products/");
     }
+
+
    private void logout(HttpServletRequest req, HttpServletResponse resp){
        try {
            if (getUser(req, resp, "Logged ud. ") != null) {
