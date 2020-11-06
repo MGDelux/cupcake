@@ -45,14 +45,40 @@ public class ProfilePage extends Servlet {
 
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession ses  = req.getSession();
+        if (req.getParameter("idStuff") != null) {
+            userOrderDetail(req, resp);
 
-        id = req.getParameter("idStuff").toString();
-        ses.setAttribute("UserOrderDetailId", id);
-            resp.sendRedirect(req.getContextPath() + "/orderDetails/");
+        }
+        if (req.getParameter("logger") != null) {
+            logout(req, resp);
+
+        }
+    }
+
+   private void userOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+       HttpSession ses  = req.getSession();
+
+       id = req.getParameter("idStuff").toString();
+       ses.setAttribute("UserOrderDetailId", id);
+       resp.sendRedirect(req.getContextPath() + "/orderDetails/");
+   }
+
+    private void logout(HttpServletRequest req, HttpServletResponse resp){
+        try {
+            if (getUser(req, resp, "Logged ud. ") != null) {
+                HttpSession session = req.getSession();
+                session.invalidate();
+                resp.sendRedirect(req.getContextPath() + "/");
+            } else {
+                // resp.sendRedirect(req.getContextPath() + "/login");
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

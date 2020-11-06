@@ -10,17 +10,22 @@
 <html>
 <head>
     <title>Profile page</title>
+    <script src="https://kit.fontawesome.com/e79609ac4a.js" crossorigin="anonymous"></script>
     <style>
         <jsp:include page="../../css/ProfilePage.css"/>
     </style>
-    <div class="topnav">
+    <nav class="topnav">
         <a class="active" href="${pageContext.request.contextPath}/products/">Cupcakes</a>
         <a href="${pageContext.request.contextPath}">Hjem</a>
-        <a href="#signout">Log ud</a>
         <a><c:if test="${sessionScope.user.email !=null}">
             ${sessionScope.user.email}
         </c:if> </a>
-    </div>
+        <form method="post" >
+            <button type="hidden" style="outline: 0;" class="logger" name="logger">
+                <i class="fas fa-key"></i> Login/logout
+            </button>
+        </form>
+    </nav>
 </head>
 <body>
 <article>

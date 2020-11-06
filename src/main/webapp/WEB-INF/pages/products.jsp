@@ -31,7 +31,11 @@
     <a><c:if test="${sessionScope.user.email !=null}">
         ${sessionScope.user.email}
     </c:if> </a>
-    <a class="fas fa-key" href="${pageContext.request.contextPath}/login/" ></a>
+    <form method="post" >
+        <button type="hidden" style="outline: 0;" class="logger" name="logger">
+            <i class="fas fa-key"></i> Login/logout
+        </button>
+    </form>
 </nav>
 <!-- Navigationpanel slutter/-->
 

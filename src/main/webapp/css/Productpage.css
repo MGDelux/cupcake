@@ -51,12 +51,17 @@ body {
     text-align: center;
     font-size: 17px;
 }
-
+.navpanel .logger {
+    background:transparent ;
+    border: none !important;
+    font-size:0;
+    float: right;
+    margin-top: 15px;
+}
 
 .navpanel .fas {
     float: right;
     margin-left: 25px;
-    font-size: 25px;
     height: 30px;
     vertical-align: middle;
     color: white;

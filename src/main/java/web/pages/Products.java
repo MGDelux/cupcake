@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -39,6 +40,25 @@ public class Products extends Servlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getParameter("AddCupcakeToKurv") != null) {
+            addCupCake(req, resp);
+
+        }
+        if (req.getParameter("logger") != null) {
+            logout(req, resp);
+
+        }
+    }
+
+    private void summitToCart(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake { //refactor
+        String top = req.getParameter("TopToKurv");
+        String[] splittop = top.split(",");
+        String bots = req.getParameter("BotToKurv");
+        String[] splitbot = bots.split(",");
+        getCart(req).addItemIntoCart(splittop[0], splitbot[0]);
+    }
+
+    private void addCupCake(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        if (req.getParameter("AddCupcakeToKurv") != null) {
             try {
                 summitToCart(req, resp);
             } catch (NoCupcake noCupcake) {
@@ -47,15 +67,21 @@ public class Products extends Servlet {
         }
         resp.sendRedirect(req.getContextPath() + "/products/");
     }
+   private void logout(HttpServletRequest req, HttpServletResponse resp){
+       try {
+           if (getUser(req, resp, "Logged ud. ") != null) {
+               HttpSession session = req.getSession();
+               session.invalidate();
+               resp.sendRedirect(req.getContextPath() + "/");
+           } else {
+               // resp.sendRedirect(req.getContextPath() + "/login");
 
-    private void summitToCart(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake { //refactor
-        String top = req.getParameter("TopToKurv");
-        String[] splittop = top.split(",");
-        String bots = req.getParameter("BotToKurv");
-        String[] splitbot = bots.split(",");
-        getCart(req).addItemIntoCart(splittop[0],splitbot[0]);
-    }
+           }
 
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+   }
 
-}
 

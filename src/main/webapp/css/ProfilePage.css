@@ -2,7 +2,8 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins;
+    overflow-x: hidden;
 }
 
 body {
@@ -16,7 +17,21 @@ body {
 .topnav {
     border: 1px solid #000000;
     background-color: rgba(0, 0, 0, 0.14);
-    overflow: hidden;
+}
+.topnav .logger {
+     background:transparent ;
+     border: none !important;
+     float: right;
+     margin-top: 10px;
+    font-size: 0;
+ }
+.topnav .fas {
+    float: right;
+    margin-left: 25px;
+    font-size: 25px;
+    height: 30px;
+    vertical-align: middle;
+    color: white;
 }
 
 .topnav a {

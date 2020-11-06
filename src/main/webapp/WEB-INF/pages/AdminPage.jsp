@@ -125,17 +125,17 @@
     <form method="post">
         <div  class="kunder">
             <label>email:</label>
-            <input name="kunderEmail"value="email" type="email"required>
+            <input name="kunderemail"value="email" type="email"required>
             <label>role:</label>
-            <select name="kundeRole" required>
+            <select name="kunderole" required>
                 <option>customer</option>
                 <option>admin</option>
             </select>
             <label>password:</label>
-            <input name="kunderPassword" value="password" type="password"required>
+            <input name="kunderpassword" value="password" type="password"required>
             <label>kredit:</label>
-            <input name="kunderKredt" type="number" value="0" required>
-            <button name="createNewUser" type="submit" class="add-button">Add new user</button>
+            <input name="kunderkredt" type="number" value="0" required>
+            <button name="createnewuser" type="submit" class="add-button">add new user</button>
         </div>
     </form>
     <form method="post">
