@@ -30,7 +30,7 @@ public class LoginFacade {
         return new DBUser(db).getkredit(id);
     }
 
-    public void addKredit(int id, double kredit) {
+    public void addKredit(int id, double kredit) throws SQLException {
         new DBUser(db).setKredit(id, kredit);
     }
 
@@ -43,7 +43,7 @@ public class LoginFacade {
         return email;
     }
 
-    public Iterable<User> getAllUsers(){
+    public Iterable<User> getAllUsers() throws SQLException {
         return new DBUser(db).findAllUsers();
     }
 

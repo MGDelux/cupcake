@@ -22,7 +22,7 @@ public class Order extends Servlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         System.out.println(req.getSession().getAttributeNames());
-        HashMap<Integer,Item_cart> itemCart = getCart(req).getItemCarts();
+        Map<Integer,Item_cart> itemCart = getCart(req).getItemCarts();
         ArrayList<Item_cart> itemCarts = new ArrayList<>();
         for (Map.Entry<Integer, Item_cart> entery : itemCart.entrySet()) {
             itemCarts.add(entery.getValue());

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet({"/products", "/products/*"})
@@ -32,12 +33,12 @@ public class Products extends Servlet {
             req.setAttribute("toppings", currentToppings);
             req.setAttribute("currentButtoms", currentButtoms);
             render("index test", "/WEB-INF/pages/products.jsp", req, resp);
-        } catch (NoCupcake cupcake) {
+        } catch (NoCupcake | SQLException cupcake) {
             cupcake.printStackTrace();
         }
     }
 
-
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getParameter("AddCupcakeToKurv") != null) {
             addCupCake(req, resp);
@@ -49,7 +50,7 @@ public class Products extends Servlet {
         }
     }
 
-    private void summitToCart(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake { //refactor
+    private void submitToCart(HttpServletRequest req, HttpServletResponse resp) throws NoCupcake, SQLException { //refactor
         String top = req.getParameter("TopToKurv");
         String[] splittop = top.split(",");
         String bots = req.getParameter("BotToKurv");
@@ -60,8 +61,8 @@ public class Products extends Servlet {
     private void addCupCake(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getParameter("AddCupcakeToKurv") != null) {
             try {
-                summitToCart(req, resp);
-            } catch (NoCupcake noCupcake) {
+                submitToCart(req, resp);
+            } catch (NoCupcake | SQLException noCupcake) {
                 noCupcake.printStackTrace();
             }
         }
@@ -69,21 +70,18 @@ public class Products extends Servlet {
     }
 
 
-   private void logout(HttpServletRequest req, HttpServletResponse resp){
-       try {
-           if (getUser(req, resp, "Logged ud. ") != null) {
-               HttpSession session = req.getSession();
-               session.invalidate();
-               resp.sendRedirect(req.getContextPath() + "/");
-           } else {
-               // resp.sendRedirect(req.getContextPath() + "/login");
+    private void logout(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            if (getUser(req, resp, "Logged ud. ") != null) {
+                HttpSession session = req.getSession();
+                session.invalidate();
+                resp.sendRedirect(req.getContextPath() + "/");
+            }
 
-           }
-
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-   }
-   }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 

@@ -13,10 +13,7 @@ import java.sql.SQLException;
 
 @WebServlet({"/login", "/login/*"})
 public class Login extends Servlet {
-    private  String email;
-    private  String password;
     private final LoginFacade loginFacade = new LoginFacade();
-    private User user;
 
     @Override
     protected void doGet(HttpServletRequest req,HttpServletResponse resp)
@@ -25,12 +22,13 @@ public class Login extends Servlet {
         log(req,"Login page");
         render("login page","/WEB-INF/pages/login.jsp",req,resp);
     }
+    @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
           throws IOException, ServletException {
-      email = req.getParameter("email");
-      password = req.getParameter("password");
+      String email = req.getParameter("email");
+      String password = req.getParameter("password");
       try {
-          user = loginFacade.login(email, password);
+        User user = loginFacade.login(email, password);
           req.getSession().setAttribute("user",user);
           req.getSession().setAttribute("role",user.getRole());
           req.getSession().setAttribute("loggedIn",true);

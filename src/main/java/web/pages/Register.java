@@ -14,10 +14,8 @@ import java.sql.SQLException;
 
 @WebServlet({"/register", "/register/*"})
 public class Register extends Servlet {
-    private String email;
-    private String password;
-    private LoginFacade loginFacade = new LoginFacade();
-    private User user;
+    private final LoginFacade loginFacade = new LoginFacade();
+    User user;
 
     @Override
     protected void doGet(HttpServletRequest req,HttpServletResponse resp)
@@ -28,17 +26,17 @@ public class Register extends Servlet {
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        email = req.getParameter("email1");
-        password = req.getParameter("password1");
+        String  email = req.getParameter("email1");
+        String password = req.getParameter("password1");
         try {
             user = loginFacade.createUser(email,password,"customer",0);
             req.getSession().setAttribute("user",user);
             resp.sendRedirect(req.getContextPath()+"");
             log(req,"New user registered "+ user.getEmail());
             return;
-        } catch (LoginError | SQLException loginError) {
-            req.setAttribute("error", loginError.getMessage());
-            System.out.println("error "+ loginError.getMessage());
+        } catch (LoginError | SQLException e) {
+            req.setAttribute("error", e.getMessage());
+            System.out.println("error "+ e.getMessage());
             doGet(req,resp);
             return;
         }

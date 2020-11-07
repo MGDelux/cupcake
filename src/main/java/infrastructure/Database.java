@@ -19,4 +19,7 @@ public class Database {
     public Connection connect() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASS);
     }
+    public void closeConnection() throws SQLException{
+        DriverManager.getConnection(URL, USER, PASS).close();
+    }
 }

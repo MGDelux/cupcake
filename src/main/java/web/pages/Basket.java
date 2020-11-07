@@ -47,7 +47,6 @@ public class Basket extends Servlet {
             User user = getUser(req, resp, "log ind for at ændre i din kurv ");
             if (req.getParameter("delteOrderLine") != null) {
                 int id = Integer.parseInt(req.getParameter("CartItemId"));
-                Item_cart c = getCart(req).getCartItem(id);
                 try {
                     getCart(req).deleteSum(getCart(req).getItemCarts().get(id));
                     getCart(req).getItemCarts().remove(id);
@@ -55,11 +54,9 @@ public class Basket extends Servlet {
                     e.printStackTrace();
                 }
                 resp.sendRedirect(req.getContextPath() + "/basket");
-            } else if (req.getParameter("CompleteOrder") != null) {
-                if (getUser(req, resp, "Du skal være logget ind for at kunde foresætte dit køb") != null) {
+            } else if (req.getParameter("CompleteOrder") != null && (getUser(req, resp, "Du skal være logget ind for at kunde foresætte dit køb") != null)) {
                     if (user.getKredit() >= getCart(req).getSum()) {
                         System.out.println(user.getKredit() + " sum:" + getCart(req).getSum());
-
                         createOrder(req, user);
                         resp.sendRedirect(req.getContextPath() + "/order");
                     } else {
@@ -68,8 +65,6 @@ public class Basket extends Servlet {
                         System.out.println("wallet too empty");
                         resp.sendRedirect(req.getContextPath() + "/basket");
                     }
-
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();

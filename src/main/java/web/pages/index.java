@@ -25,16 +25,13 @@ public class index extends Servlet {
             throws ServletException, IOException {
         render("index+", "/WEB-INF/pages/index.jsp", req, resp);
     }
-
+ @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             if (getUser(req, resp, "Logged ud. ") != null) {
                 HttpSession session = req.getSession();
                 session.invalidate();
                 resp.sendRedirect(req.getContextPath() + "");
-            } else {
-               // resp.sendRedirect(req.getContextPath() + "/login");
-
             }
 
         } catch (IOException e) {

@@ -5,16 +5,15 @@ import domain.Bottoms.Bottoms;
 import domain.Cart.Item_cart;
 import domain.Toppings.Toppings;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * CREATED BY mathi @ 30-10-2020 - 09:08
  **/
 public class Cart {
-    private static int counter = 0;
+    private  int counter = 0;
     private final HashMap<Integer, Item_cart> itemCarts = new HashMap<>();
     private final Cupcake cupcake;
     private double sum;
@@ -23,7 +22,7 @@ public class Cart {
         this.cupcake = cupcake;
     }
 
-    public HashMap<Integer, Item_cart> getItemCarts() {
+    public Map<Integer, Item_cart> getItemCarts() {
         return itemCarts;
     }
 
@@ -52,7 +51,7 @@ public class Cart {
 
     }
 
-    public void addItemIntoCart(String top, String bot) throws NoCupcake {
+    public void addItemIntoCart(String top, String bot) throws NoCupcake, SQLException {
         counter++;
         Toppings topping = cupcake.getTopping(top);
         Bottoms bottom = cupcake.getButtom(bot);

@@ -13,7 +13,7 @@ public class DBUser {
         this.db = db;
     }
 
-    public boolean checkMail(String email) {
+    public boolean checkMail(String email) throws SQLException {
         try {
             Connection conn = db.connect();
             PreparedStatement ps = conn.prepareStatement("select * from kunde WHERE email = ?");
@@ -25,10 +25,12 @@ public class DBUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
+        }finally {
+            db.closeConnection();
         }
     }
 
-    public User login(String email, String password) throws LoginError {
+    public User login(String email, String password) throws LoginError, SQLException {
         try {
             Connection conn = db.connect();
             String SQL = "SELECT * FROM kunde " + "WHERE email=?";
@@ -51,10 +53,12 @@ public class DBUser {
             }
         } catch (SQLException e) {
             throw new LoginError("Error: " + e);
+        }finally {
+            db.closeConnection();
         }
     }
 
-    public void createUser(User user) throws LoginError {
+    public void createUser(User user) throws LoginError, SQLException {
         try {
             Connection conn = db.connect();
             String SQL = "INSERT INTO kunde (email, role, salt,secret, kredit) VALUES (?, ?, ?,?,?)";
@@ -71,10 +75,12 @@ public class DBUser {
             user.setId(id);
         } catch (SQLException ex) {
             throw new LoginError(ex.getMessage());
+        }finally {
+            db.closeConnection();
         }
     }
 
-    public ArrayList<User> findAllUsers() {
+    public ArrayList<User> findAllUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<>();
         try (Connection conn = db.connect()) {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM kunde;", Statement.RETURN_GENERATED_KEYS);
@@ -87,6 +93,8 @@ public class DBUser {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return users;
+        }finally {
+            db.closeConnection();
         }
     }
 
@@ -101,7 +109,7 @@ public class DBUser {
                 rs.getDouble("kredit"));
     }
 
-    public void setKredit(int id, double kredit) {
+    public void setKredit(int id, double kredit) throws SQLException {
         try {
             Connection conn = db.connect();
             String SQL = "UPDATE kunde SET kredit = (?) WHERE id = (?)";
@@ -112,10 +120,12 @@ public class DBUser {
         } catch (SQLException throwables) {
             System.out.println(throwables.getMessage());
             throwables.printStackTrace();
+        }finally {
+            db.closeConnection();
         }
     }
 
-    public void DeleteUser(String email) {
+    public void DeleteUser(String email) throws SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "DELETE FROM kunde WHERE email = ?";
             var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -124,6 +134,8 @@ public class DBUser {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            db.closeConnection();
         }
     }
 

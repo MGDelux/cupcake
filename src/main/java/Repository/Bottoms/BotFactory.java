@@ -3,8 +3,8 @@ package Repository.Bottoms;
 import Repository.Cupcakes.NoCupcake;
 import domain.Bottoms.Bottoms;
 
-public interface BotFactory {
-    Bottoms createButtom(String navn, Double pris);
+import java.sql.SQLException;
 
-    Bottoms deleteBut(int id) throws NoCupcake;
+public interface BotFactory {
+    Bottoms deleteBut(int id) throws NoCupcake, SQLException;
 }

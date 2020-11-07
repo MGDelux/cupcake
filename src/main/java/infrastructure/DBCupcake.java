@@ -17,7 +17,7 @@ public class DBCupcake implements TopsRepo, BotRepo {
     }
 
     @Override
-    public Iterable<Toppings> findAllTops() throws NoCupcake {
+    public Iterable<Toppings> findAllTops() throws SQLException {
         ArrayList<Toppings> toppings = new ArrayList<>();
         try (Connection conn = db.connect()) {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM toppings;");
@@ -30,11 +30,13 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return toppings;
+        }finally {
+            db.closeConnection();
         }
     }
 
     @Override
-    public Iterable<Bottoms> findALlbuttoms() throws NoCupcake {
+    public Iterable<Bottoms> findALlbuttoms() throws SQLException {
         ArrayList<Bottoms> buttoms = new ArrayList<>();
         try (Connection conn = db.connect()) {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM buttoms;");
@@ -47,11 +49,13 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return buttoms;
+        }finally {
+            db.closeConnection();
         }
     }
 
     @Override
-    public Toppings findTop(String id) throws NoCupcake {
+    public Toppings findTop(String id) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM toppings where navn = ?";
             var smt = conn.prepareStatement(SQL);
@@ -66,11 +70,13 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new NoCupcake(e.getMessage() + " >" + id);
+        }finally {
+            db.closeConnection();
         }
     }
 
     @Override
-    public Toppings findtopByiD(int id) throws NoCupcake {
+    public Toppings findtopByiD(int id) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM toppings where id = ?";
             var smt = conn.prepareStatement(SQL);
@@ -85,12 +91,14 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new NoCupcake(e.getMessage() + " >" + id);
+        }finally {
+            db.closeConnection();
         }
 
     }
 
     @Override
-    public Toppings createTop(String navn, double pris) {
+    public Toppings createTop(String navn, double pris) throws SQLException, NoCupcake {
         int topid;
         try (Connection conn = db.connect()) {
             String sql = "INSERT INTO toppings (navn, pris) VALUES (?, ?)";
@@ -111,11 +119,13 @@ public class DBCupcake implements TopsRepo, BotRepo {
             return findtopByiD(topid);
         } catch (NoCupcake noCupcake) {
             throw new RuntimeException("ARRG DB ERROR");
+        } finally {
+            db.closeConnection();
         }
     }
 
     @Override
-    public Toppings findBotById(int id) throws NoCupcake {
+    public Toppings findBotById(int id) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM buttoms where id = ?";
             var smt = conn.prepareStatement(SQL);
@@ -130,12 +140,14 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException | NoCupcake e) {
             e.printStackTrace();
             throw new NoCupcake(e.getMessage() + " >" + id);
+        }finally {
+            db.closeConnection();
         }
 
     }
 
     @Override
-    public Bottoms findBut(int id) throws NoCupcake {
+    public Bottoms findBut(int id) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM buttoms where id = ?";
             var smt = conn.prepareStatement(SQL);
@@ -150,11 +162,13 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new NoCupcake(e.getMessage() + " " + id);
+        }finally {
+            db.closeConnection();
         }
     }
 
     @Override
-    public Bottoms findBot(String navn) throws NoCupcake {
+    public Bottoms findBot(String navn) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "SELECT * FROM buttoms where navn = ?";
             var smt = conn.prepareStatement(SQL);
@@ -169,12 +183,14 @@ public class DBCupcake implements TopsRepo, BotRepo {
         } catch (SQLException | NoCupcake e) {
             e.printStackTrace();
             throw new NoCupcake(navn + " "+ e.getMessage());
+        }finally {
+            db.closeConnection();
         }
     }
 
 
     @Override
-    public Bottoms CreateBut(String navn, double pris) {
+    public Bottoms CreateBut(String navn, double pris) throws SQLException {
         int newid;
         try (Connection conn = db.connect()) {
             String sql = "INSERT INTO buttoms (navn, pris) VALUES (?, ?)";
@@ -193,8 +209,10 @@ public class DBCupcake implements TopsRepo, BotRepo {
         }
         try {
             return findBut(newid);
-        } catch (NoCupcake noCupcake) {
+        } catch (NoCupcake | SQLException noCupcake) {
             throw new RuntimeException("ARRG DB ERROR");
+        }finally {
+            db.closeConnection();
         }
     }
 
@@ -213,12 +231,7 @@ public class DBCupcake implements TopsRepo, BotRepo {
     }
 
     @Override
-    public Bottoms createButtom(String navn, Double pris) {
-        return null;
-    }
-
-    @Override
-    public Bottoms deleteBut(int id) throws NoCupcake {
+    public Bottoms deleteBut(int id) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "DELETE FROM buttoms WHERE id = ?";
             var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -227,13 +240,15 @@ public class DBCupcake implements TopsRepo, BotRepo {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            db.closeConnection();
         }
         return findBut(id);
     }
 
 
     @Override
-    public Toppings deleteTop(int id) throws NoCupcake {
+    public Toppings deleteTop(int id) throws NoCupcake, SQLException {
         try (Connection conn = db.connect()) {
             String SQL = "DELETE FROM toppings WHERE id = ?";
             var smt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);

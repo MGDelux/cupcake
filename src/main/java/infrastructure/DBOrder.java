@@ -24,7 +24,7 @@ public class DBOrder {
         this.db = db;
     }
 
-    public void createOrder(String orderId, User user, CreateOrders createOrders, double pris)  {
+    public void createOrder(String orderId, User user, CreateOrders createOrders, double pris) throws SQLException {
 
         System.out.println("CREATING ORDER: \n ID:" + orderId + " User: " + user.getId() + " Items: " + createOrders.getCart() + "\n pris: " + pris);
         opretOrder(orderId, user, pris);
@@ -32,7 +32,7 @@ public class DBOrder {
     }
 
 
-    public void opretOrder(String orderId, User user, double pris) {
+    public void opretOrder(String orderId, User user, double pris) throws SQLException {
         try (Connection conn = db.connect()) {
             String SQLQ = "INSERT INTO orders (orderId,UserId,OrderPrice) VALUES (?,?,?)";
             var smt = conn.prepareStatement(SQLQ);
@@ -42,10 +42,12 @@ public class DBOrder {
             smt.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            db.closeConnection();
         }
     }
 
-    public void enterOrderContent(String orderID, HashMap<Integer,Item_cart> cartList) {
+    public void enterOrderContent(String orderID, Map<Integer,Item_cart> cartList) throws SQLException {
         try (Connection conn = db.connect()) {
             for (Map.Entry<Integer, Item_cart> entry: cartList.entrySet()) {
                 String SQLQ = "INSERT INTO orderContent (OrderId,Top,Bottom,Cupcake) VALUES (?,?,?,?);";
@@ -58,6 +60,8 @@ public class DBOrder {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            db.closeConnection();
         }
     }
 
@@ -71,6 +75,9 @@ public class DBOrder {
             while (set.next()) {
                 users.add(set.getString("orders.Orderid"));
             }
+        }
+        finally {
+            db.closeConnection();
         }
         return users;
     }
@@ -87,10 +94,13 @@ public class DBOrder {
                 createOrders.add(set.getString("Orders.OrderId"));
             }
         }
+        finally {
+            db.closeConnection();
+        }
         return createOrders;
     }
 
-    public ArrayList<GetOrderContent> getOrderContent(String orderId) {
+    public ArrayList<GetOrderContent> getOrderContent(String orderId) throws SQLException {
         ArrayList<GetOrderContent> orders = new ArrayList<>();
         try (Connection conn = db.connect()) {
             String SQLQ = "SELECT * FROM orderContent WHERE OrderId = ?;";
@@ -106,10 +116,13 @@ public class DBOrder {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        finally {
+            db.closeConnection();
+        }
         return null;
     }
 
-    public GetOrders getAllUserOrders() {
+    public GetOrders getAllUserOrders() throws SQLException {
         try (Connection conn = db.connect()) {
             String SQLQ = "SELECT * FROM orders;";
             var smt = conn.prepareStatement(SQLQ);
@@ -122,10 +135,13 @@ public class DBOrder {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        finally {
+            db.closeConnection();
+        }
         return null;
     }
 
-    public void removeOrder(String orderId) {
+    public void removeOrder(String orderId) throws SQLException {
         try (Connection conn = db.connect()) {
             String sql = "DELETE FROM orders WHERE OrderId = ?;";
             var smt = conn.prepareStatement(sql);
@@ -135,9 +151,12 @@ public class DBOrder {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        finally {
+            db.closeConnection();
+        }
     }
 
-    public void removeOrderContent(String orderId) {
+    public void removeOrderContent(String orderId) throws SQLException {
         try (Connection conn = db.connect()) {
             String sql = "DELETE FROM orderContent WHERE OrderId = ?;";
             var smt = conn.prepareStatement(sql);
@@ -147,10 +166,13 @@ public class DBOrder {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        finally {
+            db.closeConnection();
+        }
     }
 
 
-    public GetOrders loadUserOrders(String orderId) {
+    public GetOrders loadUserOrders(String orderId) throws SQLException {
         try (Connection conn = db.connect()) {
             String SQLQ = "SELECT * FROM orders WHERE OrderId = ?;";
             var smt = conn.prepareStatement(SQLQ);
@@ -163,6 +185,8 @@ public class DBOrder {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            db.closeConnection();
         }
         return null;
     }

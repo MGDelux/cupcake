@@ -21,20 +21,19 @@ import java.util.List;
  **/
 @WebServlet({"/profilepage", "/profilepage/*"})
 public class ProfilePage extends Servlet {
-    String id;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ArrayList<GetOrders> userOrders = new ArrayList<>();
-        if(getUser(req,resp,"Log ind for at se din profil! ")!=null) {
+        if (getUser(req, resp, "Log ind for at se din profil! ") != null) {
             Database db = new Database();
             DBOrder dbo = new DBOrder(db);
             try {
-                List<String> x = dbo.getuserOrdersId(getUser(req,resp,"error in getting user infomation").getId());
-                for (String s:x){
+                List<String> x = dbo.getuserOrdersId(getUser(req, resp, "error in getting user infomation").getId());
+                for (String s : x) {
                     userOrders.add(dbo.loadUserOrders(s));
                 }
-                req.setAttribute("Order",userOrders);
+                req.setAttribute("Order", userOrders);
                 System.out.println(userOrders);
                 System.out.println(x.toString());
             } catch (SQLException throwables) {
@@ -58,23 +57,20 @@ public class ProfilePage extends Servlet {
     }
 
 
-   private void userOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       HttpSession ses  = req.getSession();
+    private void userOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession ses = req.getSession();
+        String id;
+        id = req.getParameter("idStuff").toString();
+        ses.setAttribute("UserOrderDetailId", id);
+        resp.sendRedirect(req.getContextPath() + "/orderDetails/");
+    }
 
-       id = req.getParameter("idStuff").toString();
-       ses.setAttribute("UserOrderDetailId", id);
-       resp.sendRedirect(req.getContextPath() + "/orderDetails/");
-   }
-
-    private void logout(HttpServletRequest req, HttpServletResponse resp){
+    private void logout(HttpServletRequest req, HttpServletResponse resp) {
         try {
             if (getUser(req, resp, "Logged ud. ") != null) {
                 HttpSession session = req.getSession();
                 session.invalidate();
                 resp.sendRedirect(req.getContextPath() + "/");
-            } else {
-                // resp.sendRedirect(req.getContextPath() + "/login");
-
             }
 
         } catch (IOException e) {

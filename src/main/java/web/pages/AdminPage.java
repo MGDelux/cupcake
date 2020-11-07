@@ -24,9 +24,8 @@ import java.util.List;
 
 @WebServlet({"/AdminPage", "/AdminPage/*"})
 public class AdminPage extends Servlet {
-    LoginFacade loginFacade = new LoginFacade();
-    String contextPath;
-    Database db = new Database();
+    final LoginFacade loginFacade = new LoginFacade();
+    final Database db = new Database();
     final DBOrder dbo = new DBOrder(db);
 
     @Override
@@ -34,7 +33,6 @@ public class AdminPage extends Servlet {
             throws ServletException, IOException {
         if (getUser(req, resp, "need to be logged in") != null) {
             if (getUser(req, resp, "admin error").getRole().equals("admin")) {
-                LoginFacade loginFacade = new LoginFacade();
                 ArrayList<Toppings> toppings = new ArrayList<>();
                 ArrayList<Bottoms> buttoms = new ArrayList<>();
                 ArrayList<User> users = new ArrayList<>();
@@ -79,6 +77,7 @@ public class AdminPage extends Servlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String contextPath;
         contextPath = "/AdminPage";
         System.out.println("post");
         HttpSession ses = req.getSession();
@@ -94,7 +93,11 @@ public class AdminPage extends Servlet {
         }
         if (req.getParameter("sletDetails") != null) {
             contextPath = "/AdminPage";
-            removeOrder(req);
+            try {
+                removeOrder(req);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         if (req.getParameter("addtoppingbutton") != null) {
             contextPath = "/AdminPage";
@@ -131,7 +134,7 @@ public class AdminPage extends Servlet {
         resp.sendRedirect(req.getContextPath() + contextPath);
     }
 
-    private void removeOrder(HttpServletRequest request) {
+    private void removeOrder(HttpServletRequest request) throws SQLException {
         String orderId = request.getParameter("idStuff");
         dbo.removeOrder(orderId);
         dbo.removeOrderContent(orderId);
@@ -145,7 +148,7 @@ public class AdminPage extends Servlet {
             int parseID = Integer.parseInt(kundeId);
             double parseKredit = Double.parseDouble(kundeKredit);
             loginFacade.addKredit(parseID, parseKredit);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | SQLException e) {
             e.printStackTrace();
         }
 
@@ -159,7 +162,7 @@ public class AdminPage extends Servlet {
         try {
             double parseInt = Double.parseDouble(kundeKredit);
             loginFacade.createUser(email, password, role, parseInt);
-        } catch (SQLException | LoginError throwables) {
+        } catch (LoginError | SQLException throwables) {
             throwables.printStackTrace();
         }
     }
@@ -172,7 +175,7 @@ public class AdminPage extends Servlet {
             Cupcake cupcake = loadCupcakes();
             double nyprisCheck = Double.parseDouble(nypris);
             cupcake.createTopsList(nytop, nyprisCheck);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | SQLException | NoCupcake e) {
             req.setAttribute("error", e.getMessage());
             System.out.println("error" + e.getMessage());
             doGet(req, resp);
@@ -188,7 +191,7 @@ public class AdminPage extends Servlet {
             Cupcake cupcake = loadCupcakes();
             double nyprisCheck = Double.parseDouble(nypris);
             cupcake.createButtomsList(nytop, nyprisCheck);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | SQLException e) {
             req.setAttribute("error", e.getMessage());
             System.out.println("error" + e.getMessage());
             doGet(req, resp);
@@ -203,7 +206,7 @@ public class AdminPage extends Servlet {
         try {
             Cupcake cupcake = loadCupcakes();
             cupcake.removeTopping(parseInt);
-        } catch (NoCupcake noCupcake) {
+        } catch (NoCupcake | SQLException noCupcake) {
             noCupcake.printStackTrace();
         }
     }
@@ -217,7 +220,7 @@ public class AdminPage extends Servlet {
 
             Cupcake cupcake = loadCupcakes();
             cupcake.removeButtom(parseInt);
-        } catch (NoCupcake noCupcake) {
+        } catch (NoCupcake | SQLException noCupcake) {
             noCupcake.printStackTrace();
         }
     }
