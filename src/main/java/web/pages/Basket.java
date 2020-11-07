@@ -48,8 +48,8 @@ public class Basket extends Servlet {
             if (req.getParameter("delteOrderLine") != null) {
                 int id = Integer.parseInt(req.getParameter("CartItemId"));
                 Item_cart c = getCart(req).getCartItem(id);
-                getCart(req).deleteSum(c);
                 try {
+                    getCart(req).deleteSum(getCart(req).getItemCarts().get(id));
                     getCart(req).getItemCarts().remove(id);
                 } catch (Exception e) {
                     e.printStackTrace();

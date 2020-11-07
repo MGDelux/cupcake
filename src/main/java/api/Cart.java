@@ -41,6 +41,9 @@ public class Cart {
 
     public double deleteSum(Item_cart cart) {
         double pris = 0;
+        Double top = cart.getToppings().getPris();
+        Double bot = cart.getBottoms().getPris();
+        pris = pris + top + bot;
         System.out.println("PRIS OF CUPCAKE TO BE DELETED " + pris);
         System.out.println("CURRENT TOTAL SUM: " + sum);
         sum = sum - pris;
