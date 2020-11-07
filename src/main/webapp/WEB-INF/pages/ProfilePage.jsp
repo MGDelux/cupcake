@@ -31,7 +31,7 @@
 <body>
 <article>
     <section>
-        <h1> Profile </h1>
+        <h1> Profil side </h1>
         <p>Din profil: </p>
         <br> <br>
         <a></a>
@@ -42,7 +42,7 @@
             </c:if> </a>
             </p>
             <br>
-            <p> Dit Kredit:
+            <p> Din Kredit:
             <a><c:if test="${sessionScope.user.kredit !=null}">
                 ${sessionScope.user.kredit} kr.
             </c:if> </a>
@@ -50,14 +50,14 @@
             <br> <br> <br>
         </div>
         <div class="container" align="center">
-            <h3>Dine ordre:</h3>
+            <h3>Dine ordrer:</h3>
             <table border="1">
                 <thead>
                 <tr>
                     <td>ID:</td>
-                    <td>Order Pris:</td>
+                    <td>Ordrer Pris:</td>
                     <td>Dato:</td>
-                    <td>Order Detailer:</td>
+                    <td>Ordrer Detaljer:</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -69,7 +69,7 @@
                         <td align="center">
                             <form method="post">
                                 <input type="hidden" name="idStuff" value="${order.orderId}">
-                                <input  type="submit" value="Detailer" name="CheckDetails"/>
+                                <input  type="submit" value="Detaljer" name="CheckDetails"/>
                             </form>
                         </td>
                     </tr>

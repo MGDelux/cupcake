@@ -27,14 +27,14 @@
 <body>
 <div align="center">
     <!-- table  Buttom laves/-->
-    <h1>Admin page</h1>
-        <h3>Buttoms:</h3>
+    <h1>Admin side</h1>
+        <h3>Cupcake bund:</h3>
         <table id="buttom" border="1" title="">
             <thead>
             <!-- table rows id,name og pris laves/-->
             <tr>
                 <th>id:</th>
-                <th>name:</th>
+                <th>navn:</th>
                 <th>pris:</th>
             </tr>
             <!-- table rows slutter/-->
@@ -54,20 +54,20 @@
         </table>
         <form method="post">
         <div class="buttons-buttom">
-            <input name="buttomName" type="text" value="Buttom navn" required>
+            <input name="buttomName" type="text" value="Bund navn" required>
             <input name="buttomPris" type="number" value="0" required>
-            <button type="submit" name="add-button" class="add-button">Add buttom</button>
+            <button type="submit" name="add-button" class="add-button">Tilføj bund</button>
         </div>
         </form>
     <form method="post">
         <div class="buttons-buttom" align="center">
             <label>ID: </label>
             <input name="removeButId" type="number" value="0" required >
-            <button type="submit" name="removeBut" class="remove-button">Remove buttom</button>
+            <button type="submit" name="removeBut" class="remove-button">Slet bund</button>
         </div>
     </form>
         <!-- Hele table Buttoms slutter/-->
-        <h3>Toppings:</h3>
+        <h3>Cupcake topping:</h3>
         <table border="1">
             <thead>
             <tr>
@@ -90,14 +90,14 @@
         <div  class="buttons-toppings">
             <input name="topping" type="text" required value="Topping navn">
             <input name="toppingPris" type="number" required value="0">
-            <button name="addtoppingbutton" type="submit" class="add-button">Add topping</button>
+            <button name="addtoppingbutton" type="submit" class="add-button">Tilføj topping</button>
         </div>
             </form>
     <form method="post">
         <div class="buttons-toppings">
             <label>ID: </label>
             <input name="removeToppingid" type="number" value="0"  required>
-            <button  name="removetoppingidbutton"type="submit" class="remove-button">Remove topping</button>
+            <button  name="removetoppingidbutton"type="submit" class="remove-button">Slet topping</button>
         </div>
     </form>
         <h3>Kunder
@@ -107,7 +107,7 @@
         <tr>
             <th>id</th>
             <th>email</th>
-            <th>role</th>
+            <th>rolle</th>
             <th>kredit</th>
         </tr>
         </thead>
@@ -126,16 +126,16 @@
         <div  class="kunder">
             <label>email:</label>
             <input name="kunderemail"value="email" type="email"required>
-            <label>role:</label>
+            <label>rolle:</label>
             <select name="kunderole" required>
                 <option>customer</option>
                 <option>admin</option>
             </select>
-            <label>password:</label>
+            <label>adgangskode:</label>
             <input name="kunderpassword" value="password" type="password"required>
             <label>kredit:</label>
             <input name="kunderkredt" type="number" value="0" required>
-            <button name="createnewuser" type="submit" class="add-button">add new user</button>
+            <button name="createnewuser" type="submit" class="add-button">Tilføj ny bruger</button>
         </div>
     </form>
     <form method="post">
@@ -144,25 +144,25 @@
             <input name="kunderID" type="number" value="0" required>
             <label>KREDIT:</label>
             <input name="KreditToAdd" type="number" value="0" required>
-            <button name="addKredit" type="submit" class="remove-button">Set kredit</button>
+            <button name="addKredit" type="submit" class="remove-button">Tilføj kredit</button>
 
         </div>
     </form>
     <form method="post">
         <div  class="kunder">
             <input name="kunderIDToDelete" type="text" value="email" required>
-            <button name="deleteUser" type="submit" class="remove-button">Remove User by Email</button>
-            <h3>Orders:</h3>
+            <button name="deleteUser" type="submit" class="remove-button">Slet bruger via email</button>
+            <h3>Ordrer:</h3>
         </div>
     </form>
     <table border="1">
         <thead>
         <tr>
-            <th>Order Nr.</th>
+            <th>Ordrer Nr.</th>
             <th>Bruger id:</th>
             <th>Total pris:</th>
             <th>Dato:</th>
-            <th>Details</th>
+            <th>Detaljer</th>
       </tr>
         </thead>
         <tbody>
@@ -175,8 +175,8 @@
                 <td align="center">
                     <form method="post">
                         <input type="hidden" name="idStuff" value="${orders.orderId}">
-                        <input  type="submit" value="Detailer" name="CheckDetails"/>
-                        <input  type="submit" value="Slet order and content" name="sletDetails"/>
+                        <input  type="submit" value="Detaljer" name="CheckDetails"/>
+                        <input  type="submit" value="Slet ordrer og indhold" name="sletDetails"/>
                     </form>
                 </td>
             </tr>
