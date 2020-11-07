@@ -52,7 +52,7 @@
     <form method="post">
     <div class="bestillingTOP">
         <img class="topimage" src="../images/toppings.jpg" alt="error">
-        <h1>Toppings</h1>
+        <h1>Topping</h1>
         <p>Vælg:</p>
         <select id="TopToKurv" name="TopToKurv" required>
             <c:forEach items="${toppings}" var="tops">
@@ -63,7 +63,7 @@
     </div>
     <div class="bestillingBUT">
         <img class="topimage" src="../images/lowers.jpg" alt="error">
-        <h1 class="text">Buttoms</h1>
+        <h1 class="text">Bund</h1>
         <p>Vælg:</p>
         <select name="BotToKurv" required>
           <c:forEach items="${currentButtoms}" var="buts">

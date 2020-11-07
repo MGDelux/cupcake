@@ -37,7 +37,7 @@
 
 <div class="container">
     <div class="header">
-        <h1 class="ordredetalje">Ordre detaljer:</h1>
+        <h1 class="ordredetalje">Ordrer detaljer:</h1>
         <a>Antal af cupcakes: ${cupcakesAntal} - total pris: ${totalSum} DDK.-</a>
     </div>
     <div class="container2">
@@ -52,7 +52,7 @@
             <tr>
 <th>t</th>
                 <th align="center">Topping:</th>
-                <th align="center">Bottom:</th>
+                <th align="center">Bund:</th>
                 <th align="center">Ændre:</th>
             </tr>
             </thead>
