@@ -58,11 +58,14 @@ body {
     float: right;
     margin-top: 15px;
 }
-
+.navpanel .logger:hover{
+    cursor: pointer
+}
 
 .navpanel .fas {
     float: right;
     margin-left: 25px;
+    font-size: 25px;
     height: 30px;
     vertical-align: middle;
     color: white;

@@ -25,6 +25,9 @@ body {
      margin-top: 10px;
     font-size: 0;
  }
+.topnav .logger:hover{
+    cursor: pointer
+}
 .topnav .fas {
     float: right;
     margin-left: 25px;
@@ -32,6 +35,9 @@ body {
     height: 30px;
     vertical-align: middle;
     color: white;
+}
+.topnav .fas:hover{
+    cursor: pointer
 }
 
 .topnav a {

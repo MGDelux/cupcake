@@ -40,6 +40,15 @@ body {
     float: right;
     margin-top: 10px;
 }
+.navpanel .logger:hover{
+    cursor: pointer
+}
+.navpanel .logger:hover{
+    cursor: pointer
+}
+.navpanel button:hover{
+    cursor: pointer
+}
 
 
 .navpanel {
@@ -69,6 +78,12 @@ body {
     height: 30px;
     vertical-align: middle;
     color: white;
+}
+.navpanel .fas:hover{
+    cursor: pointer
+}
+.fas:hover{
+    cursor: pointer
 }
 .headers{
     float: top;

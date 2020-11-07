@@ -3,6 +3,7 @@ package domain.Order;
 import domain.Cart.Item_cart;
 import domain.User.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -10,17 +11,26 @@ import java.util.List;
  **/
 public class CreateOrders {
     String orderId;
-    List<Item_cart> cart;
+    HashMap<Integer,Item_cart> cart = new HashMap<>();
 
-    public CreateOrders(String orderId, List<Item_cart> cart) {
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public CreateOrders(String orderId, HashMap<Integer, Item_cart> cart) {
         this.orderId = orderId;
         this.cart = cart;
     }
-    public List<Item_cart> getCart() {
+
+    public HashMap<Integer, Item_cart> getCart() {
         return cart;
     }
 
-    public void setCart(List<Item_cart> cart) {
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setCart(HashMap<Integer, Item_cart> cart) {
         this.cart = cart;
     }
 }

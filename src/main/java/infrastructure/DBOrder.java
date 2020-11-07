@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CREATED BY mathi @ 03-11-2020 - 12:10
@@ -43,15 +45,15 @@ public class DBOrder {
         }
     }
 
-    public void enterOrderContent(String orderID, List<Item_cart> cartList) {
+    public void enterOrderContent(String orderID, HashMap<Integer,Item_cart> cartList) {
         try (Connection conn = db.connect()) {
-            for (Item_cart c : cartList) {
+            for (Map.Entry<Integer, Item_cart> entry: cartList.entrySet()) {
                 String SQLQ = "INSERT INTO orderContent (OrderId,Top,Bottom,Cupcake) VALUES (?,?,?,?);";
                 var smt = conn.prepareStatement(SQLQ);
                 smt.setString(1, orderID);
-                smt.setString(2, c.getToppings().getNavn());
-                smt.setString(3, c.getBottoms().getNavn());
-                smt.setInt(4, c.getCartItem());
+                smt.setString(2, entry.getValue().getToppings().getNavn());
+                smt.setString(3, entry.getValue().getBottoms().getNavn());
+                smt.setInt(4, entry.getValue().getCartItem());
                 smt.executeUpdate();
             }
         } catch (SQLException throwables) {

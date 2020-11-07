@@ -7,7 +7,7 @@ import domain.Toppings.Toppings;
  * CREATED BY mathi @ 30-10-2020 - 09:10
  **/
 public class Item_cart {
-    private static int counter = 0;
+    private static int counter = 1;
     int cartItem;
     Toppings toppings;
     Bottoms bottoms;
@@ -22,6 +22,9 @@ public class Item_cart {
         return cartItem;
     }
 
+    public static int getCounter() {
+        return counter;
+    }
 
     public void setCartItem(int cartItem) {
         this.cartItem = cartItem;
@@ -50,12 +53,4 @@ public class Item_cart {
 
     }
 
-    public double getPris(Item_cart itemToDelete) {
-        double tempGetSumToDelete = 0;
-        Toppings topToDelete = itemToDelete.getToppings();
-        Bottoms botToDelete = itemToDelete.getBottoms();
-        tempGetSumToDelete = topToDelete.getPris() + botToDelete.getPris();
-        System.out.println("Sum to be deleted:" + tempGetSumToDelete);
-        return tempGetSumToDelete;
-    }
 }

@@ -15,22 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * CREATED BY mathi @ 29-10-2020 - 19:29
  **/
 @WebServlet({"/basket", "/basket/*"})
 public class Basket extends Servlet {
-   final Database db = new Database();
-   final LoginFacade facade = new LoginFacade();
+    final Database db = new Database();
+    final LoginFacade facade = new LoginFacade();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Item_cart> itemCart = getCart(req).getItemCarts();
-        req.setAttribute("cart", itemCart);
+        HashMap<Integer, Item_cart> itemCart = new HashMap<>();
+        ArrayList<Item_cart> itemCarts = new ArrayList<>();
+        itemCart.putAll(getCart(req).getItemCarts());
+        for (Map.Entry<Integer, Item_cart> entery : itemCart.entrySet()) {
+            itemCarts.add(entery.getValue());
+        }
+        req.setAttribute("cart", itemCarts);
         req.setAttribute("cupcakesAntal", itemCart.size());
         req.setAttribute("totalSum", getCart(req).getSum());
         System.out.println(itemCart);
@@ -43,12 +47,13 @@ public class Basket extends Servlet {
             User user = getUser(req, resp, "log ind for at ændre i din kurv ");
             if (req.getParameter("delteOrderLine") != null) {
                 int id = Integer.parseInt(req.getParameter("CartItemId"));
-               Item_cart c = getCart(req).getCartItem(id);
-
-                if (!getCart(req).getItemCarts().removeIf(i -> i.getCartItem() == id)) {
-                    System.out.println("error");
-                }
+                Item_cart c = getCart(req).getCartItem(id);
                 getCart(req).deleteSum(c);
+                try {
+                    getCart(req).getItemCarts().remove(id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 resp.sendRedirect(req.getContextPath() + "/basket");
             } else if (req.getParameter("CompleteOrder") != null) {
                 if (getUser(req, resp, "Du skal være logget ind for at kunde foresætte dit køb") != null) {
@@ -71,18 +76,21 @@ public class Basket extends Servlet {
 
         }
     }
+
     private void createOrder(HttpServletRequest request, User user) throws SQLException {
         String orderID;
-        User use= (User) request.getSession().getAttribute("user");
-        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 9999);int orderidPart1 = getCart(request).getItemCarts().size();int orderidPart2 = user.getId();
+        User use = (User) request.getSession().getAttribute("user");
+        int orderidPart0 = new Random().nextInt(getCart(request).getItemCarts().size() + 9999);
+        int orderidPart1 = getCart(request).getItemCarts().size();
+        int orderidPart2 = user.getId();
         orderID = "#" + orderidPart0 + (orderidPart1) + (orderidPart2);
         HttpSession session = request.getSession();
         session.setAttribute("OrderDetailjer", getCart(request).getItemCarts());
-        session.setAttribute("OrderNummer",orderID);
-        CreateOrders createOrders = new CreateOrders(orderID,getCart(request).getItemCarts());
+        session.setAttribute("OrderNummer", orderID);
+        CreateOrders createOrders = new CreateOrders(orderID, getCart(request).getItemCarts());
         DBOrder enterOrder = new DBOrder(db);
-        facade.deletekredit(user.getId(),getCart(request).getSum());
-        enterOrder.createOrder(orderID,user, createOrders,getCart(request).getSum());
+        facade.deletekredit(user.getId(), getCart(request).getSum());
+        enterOrder.createOrder(orderID, user, createOrders, getCart(request).getSum());
         use.setKredit(facade.refreshKredit(use.getId()));
 
     }

@@ -50,7 +50,7 @@
         <table id="ordre" border="1" title="Ordrelinje" class="orderBorder">
             <thead>
             <tr>
-
+<th>t</th>
                 <th align="center">Topping:</th>
                 <th align="center">Bottom:</th>
                 <th align="center">Ændre:</th>
@@ -59,6 +59,7 @@
             <tbody>
             <c:forEach items="${cart}" var="cartsitems">
                 <tr>
+                    <td>${cartsitems.cartItem}</td>
                     <td align="center">
                             ${cartsitems.toppings}
                     </td>
