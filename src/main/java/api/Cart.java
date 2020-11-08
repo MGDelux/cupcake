@@ -14,7 +14,7 @@ import java.util.Map;
  **/
 public class Cart {
     private  int counter = 0;
-    private final HashMap<Integer, Item_cart> itemCarts = new HashMap<>();
+    private HashMap<Integer, Item_cart> itemCarts = new HashMap<>();
     private final Cupcake cupcake;
     private double sum;
 
