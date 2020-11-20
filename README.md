@@ -10,5 +10,5 @@ Hvis du ser dette som en 2 semester Programmør på CPH brug ikke vores spaghett
 #### Bruger til teste:
 * Normal bruger: bruger@mail.com - Password: 1234
 * admin bruger: admin@mail.com - Password: admin
-### WEBPAGE: http://www.jumbosnegl.team/projektskabelon-1.0-SNAPSHOT/
-
+### WEBPAGE: http://www.jumbosnegl.team/projektskabelon-1.0-SNAPSHOT/ - OFFLINE
+## http://solidcode.xyz/
