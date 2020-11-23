@@ -28,9 +28,8 @@ public class Basket extends Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        HashMap<Integer, Item_cart> itemCart = new HashMap<>();
         ArrayList<Item_cart> itemCarts = new ArrayList<>();
-        itemCart.putAll(getCart(req).getItemCarts());
+        HashMap<Integer, Item_cart> itemCart = new HashMap<>(getCart(req).getItemCarts());
         for (Map.Entry<Integer, Item_cart> entery : itemCart.entrySet()) {
             itemCarts.add(entery.getValue());
         }

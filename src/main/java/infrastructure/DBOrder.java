@@ -25,7 +25,6 @@ public class DBOrder {
     }
 
     public void createOrder(String orderId, User user, CreateOrders createOrders, double pris) throws SQLException {
-
         System.out.println("CREATING ORDER: \n ID:" + orderId + " User: " + user.getId() + " Items: " + createOrders.getCart() + "\n pris: " + pris);
         opretOrder(orderId, user, pris);
         enterOrderContent(orderId, createOrders.getCart());

@@ -16,9 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CREATED BY mathi @ 29-10-2020 - 19:29
- **/
 @WebServlet({"/profilepage", "/profilepage/*"})
 public class ProfilePage extends Servlet {
     @Override

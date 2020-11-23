@@ -17,7 +17,6 @@ public class User {
     private static final int PASSWORD_ITTERATIONS = 65536;
     private static final int PASSWORD_LENGTH = 256; //32 bytes
     private static final SecretKeyFactory PASSWORD_FACTORY;
-
     static {
         SecretKeyFactory factory = null;
         try {
@@ -33,7 +32,8 @@ public class User {
         this.email = email;
         this.role = role;
         this.salt = salt;
-        this.secret = secret;        this.kredit = kredit;
+        this.secret = secret;
+        this.kredit = kredit;
     }
 
     private int id;
